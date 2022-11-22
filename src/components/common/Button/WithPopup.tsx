@@ -1,18 +1,12 @@
 import React, { ButtonHTMLAttributes } from 'react';
-import styled, {
-  CSSProperties,
-  DefaultTheme,
-  FlattenInterpolation,
-  ThemeProps
-} from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 import usePopup from './hooks/usePopup';
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, CustomCSS {
   children: React.ReactNode;
   popup: React.ReactNode;
   width?: CSSProperties['width'];
   height?: CSSProperties['height'];
-  css?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
 
 const Container = styled.span<{
@@ -29,9 +23,7 @@ const Container = styled.span<{
   `}
 `;
 
-const StyledButton = styled.button<{
-  css?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
-}>`
+const StyledButton = styled.button<CustomCSS>`
   ${({ css }) => css || ''}
   width: 100%;
   height: 100%;
