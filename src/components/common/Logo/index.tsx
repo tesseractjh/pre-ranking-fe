@@ -1,24 +1,31 @@
 import styled from 'styled-components';
 import { ReactComponent as LogoIcon } from '@assets/icons/logo.svg';
 import pxToRem from '@utils/pxToRem';
+import logoSize from './constants/logoSize';
 
-const Container = styled.span`
+type Size = 'sm' | 'md' | 'lg';
+
+interface Props {
+  size?: Size;
+}
+
+const Container = styled.span<{ size?: Size }>`
   ${({ theme }) => theme.mixin.inlineFlex()}
   padding: ${pxToRem(6)};
-  font-weight: 700;
-  font-size: ${pxToRem(24)};
+  font-weight: ${({ size }) => logoSize[size ?? 'md'].fontWeight};
+  font-size: ${({ size }) => pxToRem(logoSize[size ?? 'md'].fontSize)};
 
   & > svg {
-    width: ${pxToRem(28)};
-    height: ${pxToRem(28)};
-    margin-right: ${pxToRem(12)};
+    width: ${({ size }) => pxToRem(logoSize[size ?? 'md'].svgWidth)};
+    height: ${({ size }) => pxToRem(logoSize[size ?? 'md'].svgHeight)};
+    margin-right: ${({ size }) => pxToRem(logoSize[size ?? 'md'].marginRight)};
     fill: ${({ theme }) => theme.color.PURPLE_700};
   }
 `;
 
-function Logo() {
+function Logo({ size }: Props) {
   return (
-    <Container>
+    <Container size={size}>
       <LogoIcon />
       프리랭킹
     </Container>
