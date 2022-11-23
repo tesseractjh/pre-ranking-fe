@@ -27,3 +27,6 @@ export const inlineFlexColumn = getFlex({
   display: 'inline-flex',
   flexDirection: 'column'
 });
+export const shadow = (color?: string, others?: string) => `
+  box-shadow: ${others ?? '0 2px 20px'} ${color ?? 'rgb(0 0 0 / 20%)'};
+`;
