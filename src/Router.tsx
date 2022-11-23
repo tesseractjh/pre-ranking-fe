@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import Layout from '@components/common/Layout';
+import Layout from '@components/common/Layout/Main';
+import Login from '@pages/Login';
 
 function Router() {
   return (
@@ -9,7 +10,8 @@ function Router() {
         <Route path="predict" element={<div>개별 예측 페이지</div>} />
         <Route path="profile" element={<div>프로필 페이지</div>} />
       </Route>
-      <Route path="/login" element={<div>로그인 페이지</div>} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<div>회원가입 페이지</div>} />
     </Routes>
   );
 }
