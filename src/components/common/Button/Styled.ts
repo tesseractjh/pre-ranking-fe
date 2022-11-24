@@ -10,6 +10,23 @@ const AnimationFadeIn = keyframes`
   }
 `;
 
+export const Medium = css`
+  padding: ${pxToRem(8, 10)};
+  border-radius: ${pxToRem(6)};
+  background-color: ${({ theme }) => theme.color.PURPLE_500};
+  font-weight: 600;
+  font-size: ${pxToRem(16)};
+  color: ${({ theme }) => theme.color.WHITE};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.PURPLE_400};
+  }
+
+  &:active {
+    background-color: ${({ theme }) => theme.color.PURPLE_600};
+  }
+`;
+
 export const HoverToolTip = (content: string) => css`
   position: relative;
 
