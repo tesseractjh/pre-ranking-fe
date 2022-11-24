@@ -16,11 +16,21 @@ export const signup = async (params: Params) => {
 };
 
 export const checkDuplicateUserName = async (userName: string) => {
-  const { data } = await instance.get<boolean>(`/user_name?value=${userName}`);
-  return data;
+  try {
+    const { data } = await instance.get<boolean>(
+      `/user_name?value=${userName}`
+    );
+    return data;
+  } catch {
+    return alert('서버 에러!');
+  }
 };
 
 export const checkDuplicateEmail = async (email: string) => {
-  const { data } = await instance.get<boolean>(`/email?value=${email}`);
-  return data;
+  try {
+    const { data } = await instance.get<boolean>(`/email?value=${email}`);
+    return data;
+  } catch {
+    return alert('서버 에러!');
+  }
 };
