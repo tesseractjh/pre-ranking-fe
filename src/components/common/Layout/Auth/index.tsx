@@ -3,12 +3,12 @@ import pxToRem from '@utils/pxToRem';
 import styled from 'styled-components';
 
 interface Props {
-  title: string;
+  title: React.ReactNode;
   children: React.ReactNode;
 }
 
 const Wrapper = styled.div`
-  ${({ theme }) => theme.mixin.flex()}
+  ${({ theme }) => theme.mixin.flexColumn()}
   width: 100vw;
   height: 100vh;
 `;
@@ -16,32 +16,32 @@ const Wrapper = styled.div`
 const Container = styled.div`
   width: ${pxToRem(400)};
   padding: ${pxToRem(20)};
+  margin-top: ${pxToRem(30)};
   border-radius: ${pxToRem(20)};
   ${({ theme }) => theme.mixin.shadow()}
 `;
 
 const Title = styled.h1`
-  margin-bottom: ${pxToRem(20)};
+  ${({ theme }) => theme.mixin.flex()}
+  padding-bottom: ${pxToRem(10)};
+  margin-bottom: ${pxToRem(30)};
   border-bottom: 1px solid ${({ theme }) => theme.color.GRAY_200};
-  text-align: center;
-`;
-
-const TitleText = styled.strong`
-  display: inline-block;
-  width: 100%;
-  margin: ${pxToRem(40, 0, 10)};
   font-weight: 700;
   font-size: ${pxToRem(24)};
+
+  & > svg {
+    width: ${pxToRem(20)};
+    height: ${pxToRem(20)};
+    margin-right: ${pxToRem(16)};
+  }
 `;
 
 function AuthLayout({ title, children }: Props) {
   return (
     <Wrapper>
+      <Logo size="lg" />
       <Container>
-        <Title>
-          <Logo size="lg" />
-          <TitleText>{title}</TitleText>
-        </Title>
+        <Title>{title}</Title>
         {children}
       </Container>
     </Wrapper>
