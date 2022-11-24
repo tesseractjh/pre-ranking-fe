@@ -34,12 +34,12 @@ function Login() {
   return (
     <Container>
       <LoginButton
-        href={`${import.meta.env.VITE_API_URL}/auth/kakao`}
+        href={`${import.meta.env.VITE_SERVER_URL}/auth/kakao`}
         css={KakaoLoginButtonStyle}
       >
         <img src={KakaoLoginImage} alt="카카오 로그인" />
       </LoginButton>
-      <LoginButton href={`${import.meta.env.VITE_API_URL}/auth/google`}>
+      <LoginButton href={`${import.meta.env.VITE_SERVER_URL}/auth/google`}>
         <img src={GoogleLoginImage} alt="구글 로그인" />
       </LoginButton>
     </Container>
