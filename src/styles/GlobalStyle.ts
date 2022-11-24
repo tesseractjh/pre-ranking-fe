@@ -53,7 +53,7 @@ const GlobalStyle = createGlobalStyle`
   /* custom */
 
   html {
-    ${({ theme }) => theme.color.BLACK};
+    color: ${({ theme }) => theme.color.BLACK};
     font-size: 62.5%;
   }
 
