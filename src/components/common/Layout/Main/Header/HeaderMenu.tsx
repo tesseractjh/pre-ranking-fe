@@ -1,4 +1,4 @@
-import Button, { HoverToolTip } from '@components/common/Button';
+import { Link } from 'react-router-dom';
 import styled, {
   css,
   DefaultTheme,
@@ -9,7 +9,8 @@ import { ReactComponent as BellIcon } from '@assets/icons/bell.svg';
 import { ReactComponent as UserIcon } from '@assets/icons/user.svg';
 import { ReactComponent as LoginIcon } from '@assets/icons/login.svg';
 import pxToRem from '@utils/pxToRem';
-import { Link } from 'react-router-dom';
+import { HoverToolTip } from '@components/common/Button';
+import ButtonWithPopup from '@components/common/Button/ButtonWithPopup';
 
 const Container = styled.ul`
   ${({ theme }) => theme.mixin.flex('space-between', 'center', pxToRem(10))}
@@ -59,24 +60,24 @@ function HeaderMenu() {
   return (
     <Container>
       <MenuItem>
-        <Button.WithPopup
+        <ButtonWithPopup
           width="100%"
           height="100%"
           css={ButtonStyle('알림')}
           popup={<div>팝업 - 알림목록</div>}
         >
           <BellIcon />
-        </Button.WithPopup>
+        </ButtonWithPopup>
       </MenuItem>
       <MenuItem>
-        <Button.WithPopup
+        <ButtonWithPopup
           width="100%"
           height="100%"
           css={ButtonStyle('내 정보')}
           popup={<div>팝업메뉴</div>}
         >
           <UserIcon />
-        </Button.WithPopup>
+        </ButtonWithPopup>
       </MenuItem>
       <MenuItem>
         <LinkButton to="/login" $css={ButtonStyle('로그인')}>

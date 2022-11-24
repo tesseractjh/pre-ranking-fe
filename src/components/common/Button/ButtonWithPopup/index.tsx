@@ -1,6 +1,7 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes } from 'react';
+import React from 'react';
 import styled, { CSSProperties } from 'styled-components';
-import usePopup from './hooks/usePopup';
+import usePopup from '../hooks/usePopup';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, CustomCSS {
   children: React.ReactNode;
@@ -29,7 +30,7 @@ const StyledButton = styled.button<CustomCSS>`
   height: 100%;
 `;
 
-function WithPopup({
+function ButtonWithPopup({
   width,
   height,
   css,
@@ -50,4 +51,4 @@ function WithPopup({
   );
 }
 
-export default React.memo(WithPopup);
+export default React.memo(ButtonWithPopup);
