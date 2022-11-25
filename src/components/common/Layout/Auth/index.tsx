@@ -11,6 +11,12 @@ const Wrapper = styled.div`
   ${({ theme }) => theme.mixin.flexColumn()}
   width: 100vw;
   height: 100vh;
+
+  ${({ theme }) =>
+    theme.media.mobile(`
+    min-width: ${pxToRem(375)};
+    padding: ${pxToRem(0, 40)};
+  `)}
 `;
 
 const Container = styled.div`
@@ -19,6 +25,13 @@ const Container = styled.div`
   margin-top: ${pxToRem(30)};
   border-radius: ${pxToRem(20)};
   ${({ theme }) => theme.mixin.shadow()}
+
+  ${({ theme }) =>
+    theme.media.mobile(`
+    width: 100%;
+    margin-top: ${pxToRem(20)};
+    border-radius: ${pxToRem(12)};
+  `)}
 `;
 
 const Title = styled.h1`
@@ -34,6 +47,18 @@ const Title = styled.h1`
     height: ${pxToRem(20)};
     margin-right: ${pxToRem(16)};
   }
+
+  ${({ theme }) =>
+    theme.media.mobile(`
+    margin-bottom: ${pxToRem(20)};
+    font-size: ${pxToRem(20)};
+
+    & > svg {
+      width: ${pxToRem(16)};
+      height: ${pxToRem(16)};
+      margin-right: ${pxToRem(12)};
+    }
+  `)}
 `;
 
 function AuthLayout({ title, children }: Props) {

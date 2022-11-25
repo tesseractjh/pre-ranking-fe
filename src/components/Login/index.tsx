@@ -10,14 +10,20 @@ const Container = styled.ul`
 
 const LoginButton = styled.a<CustomCSS>`
   display: inline-block;
-  width: 250px;
-  height: 62px;
+  width: ${pxToRem(250)};
+  height: ${pxToRem(60)};
 
   & > img {
     width: 100%;
-    height: 60px;
+    height: 100%;
     object-fit: cover;
   }
+
+  ${({ theme }) =>
+    theme.media.mobile(`
+      width: ${pxToRem(200)};
+      height: ${pxToRem(48)};
+  `)}
 
   ${({ css }) => css || ''}
 `;
@@ -26,8 +32,17 @@ const KakaoLoginButtonStyle = css`
   padding: ${pxToRem(4)};
 
   & > img {
-    height: 52px;
+    height: ${pxToRem(52)};
   }
+
+  ${({ theme }) =>
+    theme.media.mobile(`
+    padding: ${pxToRem(3)};
+
+    & > img {
+      height: ${pxToRem(42)};
+    }
+  `)}
 `;
 
 function Login() {

@@ -17,8 +17,7 @@ function useSignup() {
     formState: { errors }
   } = useForm({
     mode: 'onChange',
-    defaultValues: { userName: '', email },
-    delayError: 300
+    defaultValues: { userName: '', email }
   });
 
   const onSubmit = handleSubmit((data) => {

@@ -7,6 +7,11 @@ import useSignup from './hooks/useHandleSignup';
 const Container = styled.form`
   ${({ theme }) => theme.mixin.flexColumn('flex-start', 'stretch', pxToRem(10))}
   padding: ${pxToRem(0, 10, 10)};
+
+  ${({ theme }) =>
+    theme.media.mobile(`
+    gap: ${pxToRem(6)};
+  `)}
 `;
 
 function Signup() {

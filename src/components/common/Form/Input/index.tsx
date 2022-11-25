@@ -18,6 +18,12 @@ const Label = styled.label`
   margin-bottom: ${pxToRem(10)};
   font-weight: 700;
   font-size: ${pxToRem(16)};
+
+  ${({ theme }) =>
+    theme.media.mobile(`
+    margin-bottom: ${pxToRem(8)};
+    font-size: ${pxToRem(14)};
+  `)}
 `;
 
 const StyledInput = styled.input<{ hasError: boolean }>`
@@ -31,6 +37,15 @@ const StyledInput = styled.input<{ hasError: boolean }>`
   &::placeholder {
     font-size: ${pxToRem(16)};
   }
+
+  ${({ theme }) =>
+    theme.media.mobile(`
+    font-size: ${pxToRem(14)};
+
+    &::placeholder {
+      font-size: ${pxToRem(13)};
+    }
+  `)}
 `;
 
 const ErrorMessage = styled.strong`
@@ -41,6 +56,12 @@ const ErrorMessage = styled.strong`
   font-weight: 600;
   font-size: ${pxToRem(14)};
   color: ${({ theme }) => theme.color.RED_500};
+
+  ${({ theme }) =>
+    theme.media.mobile(`
+    height: ${pxToRem(12)};
+    font-size: ${pxToRem(12)};
+  `)}
 `;
 
 function Input({ id, label, errorMessage, register, ...props }: Props) {
