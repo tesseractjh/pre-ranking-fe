@@ -22,7 +22,8 @@ export const checkDuplicateUserName = async (userName: string) => {
     );
     return data;
   } catch {
-    return alert('서버 에러!');
+    alert('서버 에러!');
+    return false;
   }
 };
 
@@ -31,6 +32,7 @@ export const checkDuplicateEmail = async (email: string) => {
     const { data } = await instance.get<boolean>(`/email?value=${email}`);
     return data;
   } catch {
-    return alert('서버 에러!');
+    alert('서버 에러!');
+    return false;
   }
 };
