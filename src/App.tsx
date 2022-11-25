@@ -7,7 +7,14 @@ import GlobalStyle from '@styles/GlobalStyle';
 import theme from '@styles/theme';
 import Router from './Router';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 0,
+      refetchOnWindowFocus: false
+    }
+  }
+});
 
 function App() {
   return (
