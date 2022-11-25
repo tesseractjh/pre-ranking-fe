@@ -8,11 +8,19 @@ function useQuery(...params: Parameters<typeof useReactQuery>) {
 
   return useReactQuery(queryKey, queryFn, {
     onError: (error) => {
-      if (
-        !error ||
-        !(error instanceof AxiosError) ||
-        !error?.response?.data?.error
-      ) {
+      if (!error || !(error instanceof AxiosError)) {
+        alert('알 수 없는 오류가 발생했습니다!');
+        return;
+      }
+
+      const { code } = error;
+
+      if (code === 'ERR_NETWORK') {
+        alert('서버에 연결할 수 없습니다!');
+        return;
+      }
+
+      if (!error?.response?.data?.error) {
         alert('알 수 없는 오류가 발생했습니다!');
         return;
       }
@@ -24,7 +32,9 @@ function useQuery(...params: Parameters<typeof useReactQuery>) {
         alert('권한이 없습니다!');
       }
 
-      navigate(redirect);
+      if (redirect) {
+        navigate(redirect);
+      }
     },
     ...options
   });
