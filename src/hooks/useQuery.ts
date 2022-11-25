@@ -15,9 +15,15 @@ function useQuery(...params: Parameters<typeof useReactQuery>) {
 
       const { code } = error;
 
-      if (code === 'ERR_NETWORK') {
-        alert('서버에 연결할 수 없습니다!');
-        return;
+      switch (code) {
+        case 'ERR_NETWORK':
+          alert('서버에 연결할 수 없습니다!');
+          return;
+        case 'ECONNABORTED':
+          alert('연결 시간이 초과되었습니다!');
+          return;
+        default:
+          break;
       }
 
       if (!error?.response?.data?.error) {

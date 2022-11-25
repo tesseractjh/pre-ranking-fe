@@ -11,12 +11,14 @@ import { ReactComponent as LoginIcon } from '@assets/icons/login.svg';
 import pxToRem from '@utils/pxToRem';
 import { HoverToolTip } from '@components/common/Button';
 import ButtonWithPopup from '@components/common/Button/ButtonWithPopup';
+import useHeaderMenu from './hooks/useHeaderMenu';
 
 const Container = styled.ul`
   ${({ theme }) => theme.mixin.flex('space-between', 'center', pxToRem(10))}
 `;
 
-const MenuItem = styled.li`
+const MenuItem = styled.li<{ isHidden?: boolean }>`
+  ${({ isHidden }) => isHidden && 'display: none;'}
   width: 40px;
   height: 40px;
 `;
@@ -57,9 +59,11 @@ const LinkButton = styled(Link)<{
 `;
 
 function HeaderMenu() {
+  const isLoggedIn = useHeaderMenu();
+
   return (
     <Container>
-      <MenuItem>
+      <MenuItem isHidden={!isLoggedIn}>
         <ButtonWithPopup
           width="100%"
           height="100%"
@@ -69,7 +73,7 @@ function HeaderMenu() {
           <BellIcon />
         </ButtonWithPopup>
       </MenuItem>
-      <MenuItem>
+      <MenuItem isHidden={!isLoggedIn}>
         <ButtonWithPopup
           width="100%"
           height="100%"
@@ -79,7 +83,7 @@ function HeaderMenu() {
           <UserIcon />
         </ButtonWithPopup>
       </MenuItem>
-      <MenuItem>
+      <MenuItem isHidden={isLoggedIn}>
         <LinkButton to="/login" $css={ButtonStyle('로그인')}>
           <LoginIcon />
         </LinkButton>
