@@ -1,5 +1,4 @@
-import API from '@api/index';
-import useQuery from '@hooks/useQuery';
+import useAccessToken from '@hooks/queries/useAccessToken';
 import Error from '../Fallback/Error';
 import Loading from '../Fallback/Loading';
 
@@ -8,13 +7,7 @@ interface Props {
 }
 
 function AuthRoute({ children }: Props) {
-  const { isLoading, isError } = useQuery(
-    ['accessToken'],
-    API.user.getAccessToken,
-    {
-      staleTime: 10 * 1000
-    }
-  );
+  const { isLoading, isError } = useAccessToken();
 
   if (isLoading) {
     return <Loading />;
