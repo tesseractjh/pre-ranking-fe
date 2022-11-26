@@ -1,11 +1,11 @@
 import type { ButtonHTMLAttributes } from 'react';
-import React from 'react';
+import React, { useRef } from 'react';
 import styled, { CSSProperties } from 'styled-components';
-import usePopup from '../hooks/usePopup';
+import usePopup from './hooks/usePopup';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, CustomCSS {
   children: React.ReactNode;
-  popup: React.ReactNode;
+  popup: React.ForwardRefExoticComponent<React.RefAttributes<HTMLDivElement>>;
   width?: CSSProperties['width'];
   height?: CSSProperties['height'];
 }
@@ -35,18 +35,26 @@ function ButtonWithPopup({
   height,
   css,
   children,
-  popup,
+  popup: Popup,
   onClick,
   ...props
 }: Props) {
-  const { isOpen, handleClick } = usePopup(onClick);
+  const button = useRef<HTMLButtonElement>(null);
+  const popup = useRef<HTMLDivElement>(null);
+  const { isHidden, handleClick } = usePopup(popup, button, onClick);
 
   return (
     <Container $width={width} $height={height}>
-      <StyledButton css={css} type="button" {...props} onClick={handleClick}>
+      <StyledButton
+        css={css}
+        type="button"
+        {...props}
+        onClick={handleClick}
+        ref={button}
+      >
         {children}
       </StyledButton>
-      {isOpen && popup}
+      {!isHidden && <Popup ref={popup} />}
     </Container>
   );
 }

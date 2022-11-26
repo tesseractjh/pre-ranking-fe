@@ -12,6 +12,8 @@ import pxToRem from '@utils/pxToRem';
 import { HoverToolTip } from '@components/common/Button';
 import ButtonWithPopup from '@components/common/Button/ButtonWithPopup';
 import useHeaderMenu from './hooks/useHeaderMenu';
+import NotificationPopup from './NotificationPopup';
+import UserMenuPopup from './UserMenuPopup';
 
 const Container = styled.ul`
   ${({ theme }) => theme.mixin.flex('space-between', 'center', pxToRem(10))}
@@ -68,7 +70,7 @@ function HeaderMenu() {
           width="100%"
           height="100%"
           css={ButtonStyle('알림')}
-          popup={<div>팝업 - 알림목록</div>}
+          popup={NotificationPopup}
         >
           <BellIcon />
         </ButtonWithPopup>
@@ -78,7 +80,7 @@ function HeaderMenu() {
           width="100%"
           height="100%"
           css={ButtonStyle('내 정보')}
-          popup={<div>팝업메뉴</div>}
+          popup={UserMenuPopup}
         >
           <UserIcon />
         </ButtonWithPopup>
