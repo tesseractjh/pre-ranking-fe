@@ -1,10 +1,25 @@
-import { useQuery as useReactQuery } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
+import type {
+  QueryFunction,
+  QueryKey,
+  UseQueryOptions
+} from '@tanstack/react-query';
+import {
+  useQuery as useReactQuery,
+  useQueryClient
+} from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 
-function useQuery(...params: Parameters<typeof useReactQuery>) {
-  const [queryKey, queryFn, options] = params;
+function useQuery(
+  queryKey: QueryKey,
+  queryFn: QueryFunction<APIResponse>,
+  options?: Omit<
+    UseQueryOptions<APIResponse, unknown, APIResponse, QueryKey>,
+    'queryFn' | 'queryKey'
+  >
+) {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   return useReactQuery(queryKey, queryFn, {
     onError: (error) => {
@@ -32,17 +47,26 @@ function useQuery(...params: Parameters<typeof useReactQuery>) {
       }
 
       const { status } = error.response;
-      const { redirect } = error.response.data.error;
+      const { message, redirect } = error.response.data.error;
 
       if (status === 401) {
         alert('권한이 없습니다!');
+      } else {
+        alert(message);
       }
 
       if (redirect) {
         navigate(redirect);
       }
     },
-    ...options
+    ...options,
+    onSuccess: (data) => {
+      const { accessToken } = data;
+      if (accessToken) {
+        queryClient.setQueryData(['accessToken'], accessToken);
+      }
+      options?.onSuccess?.(data);
+    }
   });
 }
 
