@@ -10,4 +10,6 @@ declare global {
   };
 
   type Params = Record<string, unknown>;
+
+  type APIResponse<T = Record<string, unknown>> = T & { accessToken?: string };
 }
