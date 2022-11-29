@@ -7,6 +7,7 @@ interface Props extends CustomCSS {
 }
 
 const Container = styled.div<CustomCSS>`
+  overflow: hidden;
   position: absolute;
   top: calc(100% + ${pxToRem(4)});
   right: 0;

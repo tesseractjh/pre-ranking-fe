@@ -10,8 +10,11 @@ const Container = styled.header<{ isScrolled: boolean }>`
   z-index: 100;
   width: 100%;
   height: 60px;
+  border-bottom: 1px solid transparent;
+  background-color: ${({ theme }) => theme.color.WHITE};
+
   ${({ isScrolled, theme }) =>
-    isScrolled ? `border-bottom: 1px solid ${theme.color.GRAY_200};` : ''}
+    isScrolled ? `border-color: ${theme.color.GRAY_200};` : ''}
 `;
 
 const Flex = styled.div`

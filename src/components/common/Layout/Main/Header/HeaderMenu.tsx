@@ -9,6 +9,7 @@ import { ReactComponent as BellIcon } from '@assets/icons/bell.svg';
 import { ReactComponent as UserIcon } from '@assets/icons/user.svg';
 import { ReactComponent as LoginIcon } from '@assets/icons/login.svg';
 import pxToRem from '@utils/pxToRem';
+import useNotification from '@hooks/queries/useNotification';
 import { HoverToolTip } from '@components/common/Button';
 import ButtonWithPopup from '@components/common/Button/ButtonWithPopup';
 import useHeaderMenu from './hooks/useHeaderMenu';
@@ -21,11 +22,12 @@ const Container = styled.ul`
 
 const MenuItem = styled.li<{ isHidden?: boolean }>`
   ${({ isHidden }) => isHidden && 'display: none;'}
+  position: relative;
   width: 40px;
   height: 40px;
 `;
 
-const ButtonStyle = (tooltip: string) => css`
+const ButtonStyle = (tooltip: string, hasBadge?: boolean) => css`
   border-radius: 10px;
 
   &:hover {
@@ -48,6 +50,24 @@ const ButtonStyle = (tooltip: string) => css`
     height: 24px;
   }
 
+  ${hasBadge &&
+  css`
+    &::before {
+      content: '';
+      position: absolute;
+      top: ${pxToRem(5)};
+      right: ${pxToRem(5)};
+      width: ${pxToRem(6)};
+      height: ${pxToRem(6)};
+      border-radius: 50%;
+      background-color: ${({ theme }) => theme.color.PURPLE_500};
+    }
+
+    &:hover::before {
+      background-color: ${({ theme }) => theme.color.WHITE};
+    }
+  `}
+
   ${HoverToolTip(tooltip)}
 `;
 
@@ -62,6 +82,7 @@ const LinkButton = styled(Link)<{
 
 function HeaderMenu() {
   const isLoggedIn = useHeaderMenu();
+  const { data: notificationData } = useNotification(0, isLoggedIn);
 
   return (
     <Container>
@@ -69,7 +90,10 @@ function HeaderMenu() {
         <ButtonWithPopup
           width="100%"
           height="100%"
-          css={ButtonStyle('알림')}
+          css={ButtonStyle(
+            '알림',
+            !!notificationData?.pages[0].notifications.length
+          )}
           popup={NotificationPopup}
         >
           <BellIcon />

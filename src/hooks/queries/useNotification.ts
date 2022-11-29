@@ -1,0 +1,18 @@
+import API from '@api/index';
+import useInfiniteQuery from '@hooks/useInfiniteQuery';
+
+function useNotification(start: number, enabled = true) {
+  return useInfiniteQuery(
+    ['notification'],
+    ({ pageParam = start }) =>
+      API.notification.getNotifications({ start: pageParam }),
+    {
+      getNextPageParam: (_, allPages) =>
+        allPages.reduce((acc, page) => acc + page.notifications.length, 0) + 1,
+      staleTime: 60 * 1000,
+      enabled
+    }
+  );
+}
+
+export default useNotification;
