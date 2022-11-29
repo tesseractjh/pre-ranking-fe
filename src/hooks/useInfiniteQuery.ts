@@ -2,26 +2,26 @@ import { useNavigate } from 'react-router-dom';
 import type {
   QueryFunction,
   QueryKey,
-  UseQueryOptions
+  UseInfiniteQueryOptions
 } from '@tanstack/react-query';
 import {
-  useQuery as useReactQuery,
+  useInfiniteQuery as useReactInfiniteQuery,
   useQueryClient
 } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
-function useQuery<T extends APIResponse>(
+function useInfiniteQuery<T extends APIResponse>(
   queryKey: QueryKey,
   queryFn: QueryFunction<T>,
   options?: Omit<
-    UseQueryOptions<T, unknown, T, QueryKey>,
-    'queryFn' | 'queryKey'
+    UseInfiniteQueryOptions<T, unknown, T, T, QueryKey>,
+    'queryKey' | 'queryFn'
   >
 ) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  return useReactQuery(queryKey, queryFn, {
+  return useReactInfiniteQuery(queryKey, queryFn, {
     keepPreviousData: true,
     onError: (error) => {
       if (!error || !(error instanceof AxiosError)) {
@@ -62,7 +62,7 @@ function useQuery<T extends APIResponse>(
     },
     ...options,
     onSuccess: (data) => {
-      const { accessToken } = data;
+      const { accessToken } = data.pages[data.pages.length - 1];
       if (accessToken) {
         queryClient.setQueryData(['accessToken'], accessToken);
       }
@@ -71,4 +71,4 @@ function useQuery<T extends APIResponse>(
   });
 }
 
-export default useQuery;
+export default useInfiniteQuery;

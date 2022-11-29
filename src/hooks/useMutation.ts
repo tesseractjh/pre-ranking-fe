@@ -1,28 +1,22 @@
-import { useNavigate } from 'react-router-dom';
 import type {
-  QueryFunction,
-  QueryKey,
-  UseQueryOptions
+  MutationFunction,
+  UseMutationOptions
 } from '@tanstack/react-query';
 import {
-  useQuery as useReactQuery,
+  useMutation as useReactQueryMutation,
   useQueryClient
 } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-function useQuery<T extends APIResponse>(
-  queryKey: QueryKey,
-  queryFn: QueryFunction<T>,
-  options?: Omit<
-    UseQueryOptions<T, unknown, T, QueryKey>,
-    'queryFn' | 'queryKey'
-  >
+function useMutation<T extends APIResponse>(
+  mutationFn: MutationFunction<T, MutationParams>,
+  options?: Omit<UseMutationOptions<T, unknown, MutationParams>, 'mutationFn'>
 ) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  return useReactQuery(queryKey, queryFn, {
-    keepPreviousData: true,
+  return useReactQueryMutation(mutationFn, {
     onError: (error) => {
       if (!error || !(error instanceof AxiosError)) {
         alert('알 수 없는 오류가 발생했습니다!');
@@ -61,14 +55,14 @@ function useQuery<T extends APIResponse>(
       }
     },
     ...options,
-    onSuccess: (data) => {
+    onSuccess: (data, variables, context) => {
       const { accessToken } = data;
       if (accessToken) {
         queryClient.setQueryData(['accessToken'], accessToken);
       }
-      options?.onSuccess?.(data);
+      options?.onSuccess?.(data, variables, context);
     }
   });
 }
 
-export default useQuery;
+export default useMutation;
