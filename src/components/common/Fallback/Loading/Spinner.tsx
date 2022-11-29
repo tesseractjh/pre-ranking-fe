@@ -5,7 +5,6 @@ const Container = styled.div`
   position: relative;
   width: ${pxToRem(100)};
   height: ${pxToRem(100)};
-  background-color: ${({ theme }) => theme.color.WHITE};
 
   ${({ theme }) =>
     theme.media.tablet(`
