@@ -3,7 +3,7 @@ import { axiosInstance } from '@configs/axios';
 export const getAccessToken = async () => {
   const { data } = await axiosInstance.get<
     APIResponse<{ accessToken: string }>
-  >('/user/login');
+  >('/user/signin');
   return data;
 };
 
@@ -12,6 +12,11 @@ export const signup = async (params: Params) => {
     '/user/signup',
     params
   );
+  return data;
+};
+
+export const signout = async () => {
+  const { data } = await axiosInstance.post('/user/signout');
   return data;
 };
 
