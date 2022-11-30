@@ -34,6 +34,7 @@
     "import/prefer-default-export": "off", // export가 1개면 default export로 작성
     "no-shadow": "off", // 상위 스코프의 변수명과 동일한 변수명 사용 금지
     "no-useless-escape": "off", // 불필요한 이스케이프 문자 금지
+    "react/jsx-no-useless-fragment": "off", // 불필요한 fragment 금지
     "react/jsx-props-no-spreading": "off", // JSX에 props를 스프레드 연산자로 전달 금지
     "react/react-in-jsx-scope": "off", // jsx파일에서 React를 import 해야 함
     // jsx 문법을 포함할 수 있는 파일 확장자 제한
