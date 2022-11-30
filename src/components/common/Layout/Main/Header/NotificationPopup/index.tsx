@@ -71,16 +71,11 @@ const NotificationPopup = React.forwardRef<HTMLDivElement>((props, ref) => {
   const { data, fetchNextPage, isFetching } = useNotification(0);
   const { mutate: handleClear } = useDeleteAllNotifications();
   const handleClick = useHandleItemClick();
-
-  if (!data) {
-    return null;
-  }
-
-  const hasNotification = !!data.pages[0].notifications.length;
+  const hasNotification = !!data?.pages[0].notifications.length;
 
   return (
     <Popup css={ContainerStyle} ref={ref}>
-      {isFetching && <ComponentLoading />}
+      {!data && isFetching && <ComponentLoading />}
       <Header>
         알림
         <DeleteButton
@@ -92,7 +87,7 @@ const NotificationPopup = React.forwardRef<HTMLDivElement>((props, ref) => {
         </DeleteButton>
       </Header>
       <List>
-        {data.pages.map(({ notifications }) =>
+        {data?.pages.map(({ notifications }) =>
           notifications.map((data) => (
             <NotificationItem
               key={data.notification_id}
