@@ -10,17 +10,31 @@ interface Props {
 }
 
 const Container = styled.span<{ size?: Size }>`
-  ${({ theme }) => theme.mixin.inlineFlex()}
-  padding: ${pxToRem(6)};
-  font-weight: ${({ size }) => logoSize[size ?? 'md'].fontWeight};
-  font-size: ${({ size }) => pxToRem(logoSize[size ?? 'md'].fontSize)};
+  ${({ size, theme }) => `
+    ${theme.mixin.inlineFlex()}
+    padding: ${pxToRem(6)};
+    font-weight: ${logoSize[size ?? 'md'].fontWeight};
+    font-size: ${pxToRem(logoSize[size ?? 'md'].fontSize)};
 
-  & > svg {
-    width: ${({ size }) => pxToRem(logoSize[size ?? 'md'].svgWidth)};
-    height: ${({ size }) => pxToRem(logoSize[size ?? 'md'].svgHeight)};
-    margin-right: ${({ size }) => pxToRem(logoSize[size ?? 'md'].marginRight)};
-    fill: ${({ theme }) => theme.color.PURPLE_700};
-  }
+    & > svg {
+      width: ${pxToRem(logoSize[size ?? 'md'].svgWidth)};
+      height: ${pxToRem(logoSize[size ?? 'md'].svgHeight)};
+      margin-right: ${pxToRem(logoSize[size ?? 'md'].marginRight)};
+      fill: ${theme.color.PURPLE_700};
+    }
+
+    ${theme.media.tablet(`
+      font-weight: ${logoSize[size ?? 'sm'].fontWeight};
+      font-size: ${pxToRem(logoSize[size ?? 'sm'].fontSize)};
+
+      & > svg {
+        width: ${pxToRem(logoSize[size ?? 'sm'].svgWidth)};
+        height: ${pxToRem(logoSize[size ?? 'sm'].svgHeight)};
+        margin-right: ${pxToRem(logoSize[size ?? 'sm'].marginRight)};
+        fill: ${theme.color.PURPLE_700};
+      }
+    `)}
+  `}
 `;
 
 function Logo({ size }: Props) {

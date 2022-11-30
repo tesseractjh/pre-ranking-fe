@@ -5,7 +5,9 @@ import usePopup from './hooks/usePopup';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, CustomCSS {
   children: React.ReactNode;
-  popup: React.ForwardRefExoticComponent<React.RefAttributes<HTMLDivElement>>;
+  popup: React.ForwardRefExoticComponent<
+    { onClick: React.MouseEventHandler } & React.RefAttributes<HTMLDivElement>
+  >;
   width?: CSSProperties['width'];
   height?: CSSProperties['height'];
 }
@@ -54,7 +56,7 @@ function ButtonWithPopup({
       >
         {children}
       </StyledButton>
-      {!isHidden && <Popup ref={popup} />}
+      {!isHidden && <Popup ref={popup} onClick={handleClick} />}
     </Container>
   );
 }

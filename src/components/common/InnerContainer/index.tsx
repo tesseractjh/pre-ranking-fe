@@ -6,6 +6,11 @@ const Container = styled.div`
   height: 100%;
   padding: ${pxToRem(0, 40)};
   margin: 0 auto;
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      padding: ${pxToRem(0, 20)};
+  `)}
 `;
 
 interface Props {

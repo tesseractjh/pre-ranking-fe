@@ -9,14 +9,9 @@ import ComponentLoading from '@components/common/Fallback/Loading/ComponentLoadi
 import NotificationItem from './NotificationItem';
 import useHandleItemClick from './hooks/useHandleItemClick';
 
-const Header = styled.div`
-  ${({ theme }) => theme.mixin.flex('space-between')}
-  padding: ${pxToRem(12, 20)};
-  background-color: ${({ theme }) => theme.color.PURPLE_500};
-  font-weight: 600;
-  font-size: ${pxToRem(16)};
-  color: ${({ theme }) => theme.color.WHITE};
-`;
+interface Props {
+  onClick: React.MouseEventHandler;
+}
 
 const DeleteButton = styled.button`
   font-size: ${pxToRem(14)};
@@ -67,48 +62,57 @@ const ButtonStyle = css`
   }
 `;
 
-const NotificationPopup = React.forwardRef<HTMLDivElement>((props, ref) => {
-  const { data, fetchNextPage, isFetching } = useNotification(0);
-  const { mutate: handleClear } = useDeleteAllNotifications();
-  const handleClick = useHandleItemClick();
-  const hasNotification = !!data?.pages[0].notifications.length;
+const NotificationPopup = React.forwardRef<HTMLDivElement, Props>(
+  ({ onClick }, ref) => {
+    const { data, fetchNextPage, isFetching } = useNotification(0);
+    const { mutate: handleClear } = useDeleteAllNotifications();
+    const handleClick = useHandleItemClick();
+    const hasNotification = !!data?.pages[0].notifications.length;
 
-  return (
-    <Popup css={ContainerStyle} ref={ref}>
-      {!data && isFetching && <ComponentLoading />}
-      <Header>
-        알림
-        <DeleteButton
-          type="button"
-          onClick={() => handleClear({})}
-          disabled={!hasNotification}
-        >
-          전체 삭제
-        </DeleteButton>
-      </Header>
-      <List>
-        {data?.pages.map(({ notifications }) =>
-          notifications.map((data) => (
-            <NotificationItem
-              key={data.notification_id}
-              data={data}
-              onClick={handleClick}
-            />
-          ))
-        )}
-        {hasNotification ? (
-          <ButtonWrapper>
-            <Button css={[Medium, ButtonStyle]} onClick={() => fetchNextPage()}>
-              알림 더보기
-            </Button>
-          </ButtonWrapper>
-        ) : (
-          <Fallback>알림이 없습니다!</Fallback>
-        )}
-      </List>
-    </Popup>
-  );
-});
+    return (
+      <Popup
+        css={ContainerStyle}
+        ref={ref}
+        onClick={onClick}
+        title="알림"
+        header={
+          <DeleteButton
+            type="button"
+            onClick={() => handleClear({})}
+            disabled={!hasNotification}
+          >
+            전체 삭제
+          </DeleteButton>
+        }
+      >
+        {!data && isFetching && <ComponentLoading />}
+        <List>
+          {data?.pages.map(({ notifications }) =>
+            notifications.map((data) => (
+              <NotificationItem
+                key={data.notification_id}
+                data={data}
+                onClick={handleClick}
+              />
+            ))
+          )}
+          {hasNotification ? (
+            <ButtonWrapper>
+              <Button
+                css={[Medium, ButtonStyle]}
+                onClick={() => fetchNextPage()}
+              >
+                알림 더보기
+              </Button>
+            </ButtonWrapper>
+          ) : (
+            <Fallback>알림이 없습니다!</Fallback>
+          )}
+        </List>
+      </Popup>
+    );
+  }
+);
 
 NotificationPopup.displayName = 'NotificationPopup';
 

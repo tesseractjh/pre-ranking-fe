@@ -23,11 +23,18 @@ const Container = styled.ul`
 const MenuItem = styled.li<{ isHidden?: boolean }>`
   ${({ isHidden }) => isHidden && 'display: none;'}
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: ${pxToRem(40)};
+  height: ${pxToRem(40)};
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      width: ${pxToRem(30)};
+      height: ${pxToRem(30)};
+  `)}
 `;
 
 const ButtonStyle = (tooltip: string, hasBadge?: boolean) => css`
+  ${({ theme }) => theme.mixin.inlineFlex()}
   border-radius: 10px;
 
   &:hover {
@@ -46,8 +53,8 @@ const ButtonStyle = (tooltip: string, hasBadge?: boolean) => css`
   }
 
   & > svg {
-    width: 24px;
-    height: 24px;
+    width: ${pxToRem(24)};
+    height: ${pxToRem(24)};
   }
 
   ${hasBadge &&
@@ -66,7 +73,27 @@ const ButtonStyle = (tooltip: string, hasBadge?: boolean) => css`
     &:hover::before {
       background-color: ${({ theme }) => theme.color.WHITE};
     }
+
+    ${({ theme }) =>
+      theme.media.tablet(`
+        &::before {
+          top: ${pxToRem(4)};
+          right: ${pxToRem(4)};
+          width: ${pxToRem(4)};
+          height: ${pxToRem(4)};
+        }
+    `)}
   `}
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+    border-radius: 7px;
+
+    & > svg {
+      width: ${pxToRem(18)};
+      height: ${pxToRem(18)};
+    } 
+  `)}
 
   ${HoverToolTip(tooltip)}
 `;
@@ -75,8 +102,9 @@ const LinkButton = styled(Link)<{
   $css?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }>`
   ${({ theme }) => theme.mixin.inlineFlex()}
-  width: 40px;
-  height: 40px;
+  width: 100%;
+  height: 100%;
+
   ${({ $css }) => $css || ''};
 `;
 

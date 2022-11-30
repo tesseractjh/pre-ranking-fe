@@ -1,6 +1,7 @@
-import Button, { Medium } from '@components/common/Button';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+import Button, { Medium } from '@components/common/Button';
+import pxToRem from '@utils/pxToRem';
 
 interface Props extends CustomCSS {
   type: 'button' | 'link';
@@ -20,6 +21,10 @@ const ButtonStyle = css`
   color: ${({ theme }) => theme.color.BLACK};
   text-align: center;
 
+  &:not(:last-of-type) {
+    margin-bottom: ${pxToRem(10)};
+  }
+
   &:hover {
     background-color: ${({ theme }) => theme.color.GRAY_100};
   }
@@ -27,6 +32,15 @@ const ButtonStyle = css`
   &:active {
     background-color: ${({ theme }) => theme.color.GRAY_200};
   }
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      padding: ${pxToRem(16, 0)};
+
+      &:not(:last-of-type) {
+        margin-bottom: 0;
+      }
+  `)}
 `;
 
 function MenuButton({ css, type, onClick, route, children }: Props) {
