@@ -9,7 +9,8 @@ function useNotification(start: number, enabled = true) {
     {
       getNextPageParam: (_, allPages) =>
         allPages.reduce((acc, page) => acc + page.notifications.length, 0) + 1,
-      staleTime: 60 * 1000,
+      staleTime: 30 * 1000,
+      refetchInterval: 3 * 60 * 1000,
       enabled
     }
   );
