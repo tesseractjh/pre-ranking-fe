@@ -22,6 +22,7 @@
     "prettier"
   ],
   "rules": {
+    "consistent-return": "off", // 항상 return하거나 아예 return 하지 않아야 함.
     "import/extensions": "off", // 확장자 명시
     "import/no-extraneous-dependencies": [
       // package.json에 명시되지 않은 의존성 import 금지
