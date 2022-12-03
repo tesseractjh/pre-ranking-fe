@@ -1,12 +1,23 @@
+import {
+  css,
+  DefaultTheme,
+  FlattenInterpolation,
+  ThemeProps
+} from 'styled-components';
+
 const media = {
-  tablet: (css: string) => `
+  tablet: (
+    cssString: string | FlattenInterpolation<ThemeProps<DefaultTheme>>
+  ) => css`
     @media screen and (max-width: 768px) {
-      ${css}
+      ${cssString}
     }
   `,
-  mobile: (css: string) => `
+  mobile: (
+    cssString: string | FlattenInterpolation<ThemeProps<DefaultTheme>>
+  ) => css`
     @media screen and (max-width: 480px) {
-      ${css}
+      ${cssString}
     }
   `
 };
