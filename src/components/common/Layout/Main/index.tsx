@@ -3,17 +3,22 @@ import styled from 'styled-components';
 import pxToRem from '@utils/pxToRem';
 import Header from './Header';
 
-const Section = styled.section`
+const Main = styled.main`
   padding-top: ${pxToRem(60)};
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      padding-top: ${pxToRem(50)};
+  `)}
 `;
 
 function Layout() {
   return (
     <>
       <Header />
-      <Section>
+      <Main>
         <Outlet />
-      </Section>
+      </Main>
     </>
   );
 }
