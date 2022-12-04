@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ReactComponent as LogoIcon } from '@assets/icons/logo.svg';
 import pxToRem from '@utils/pxToRem';
-import logoSize from './constants/logoSize';
+import LOGO_SIZE from './constants/logoSize';
 
 type Size = 'sm' | 'md' | 'lg';
 
@@ -13,24 +13,24 @@ const Container = styled.span<{ size?: Size }>`
   ${({ size, theme }) => `
     ${theme.mixin.inlineFlex()}
     padding: ${pxToRem(6)};
-    font-weight: ${logoSize[size ?? 'md'].fontWeight};
-    font-size: ${pxToRem(logoSize[size ?? 'md'].fontSize)};
+    font-weight: ${LOGO_SIZE[size ?? 'md'].fontWeight};
+    font-size: ${pxToRem(LOGO_SIZE[size ?? 'md'].fontSize)};
 
     & > svg {
-      width: ${pxToRem(logoSize[size ?? 'md'].svgWidth)};
-      height: ${pxToRem(logoSize[size ?? 'md'].svgHeight)};
-      margin-right: ${pxToRem(logoSize[size ?? 'md'].marginRight)};
+      width: ${pxToRem(LOGO_SIZE[size ?? 'md'].svgWidth)};
+      height: ${pxToRem(LOGO_SIZE[size ?? 'md'].svgHeight)};
+      margin-right: ${pxToRem(LOGO_SIZE[size ?? 'md'].marginRight)};
       fill: ${theme.color.PURPLE_700};
     }
 
     ${theme.media.tablet(`
-      font-weight: ${logoSize[size ?? 'sm'].fontWeight};
-      font-size: ${pxToRem(logoSize[size ?? 'sm'].fontSize)};
+      font-weight: ${LOGO_SIZE[size ?? 'sm'].fontWeight};
+      font-size: ${pxToRem(LOGO_SIZE[size ?? 'sm'].fontSize)};
 
       & > svg {
-        width: ${pxToRem(logoSize[size ?? 'sm'].svgWidth)};
-        height: ${pxToRem(logoSize[size ?? 'sm'].svgHeight)};
-        margin-right: ${pxToRem(logoSize[size ?? 'sm'].marginRight)};
+        width: ${pxToRem(LOGO_SIZE[size ?? 'sm'].svgWidth)};
+        height: ${pxToRem(LOGO_SIZE[size ?? 'sm'].svgHeight)};
+        margin-right: ${pxToRem(LOGO_SIZE[size ?? 'sm'].marginRight)};
         fill: ${theme.color.PURPLE_700};
       }
     `)}

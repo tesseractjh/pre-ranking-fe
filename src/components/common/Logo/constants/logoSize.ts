@@ -1,4 +1,4 @@
-const logoSize = {
+const LOGO_SIZE = {
   sm: {
     svgWidth: 20,
     svgHeight: 20,
@@ -22,4 +22,4 @@ const logoSize = {
   }
 } as const;
 
-export default logoSize;
+export default LOGO_SIZE;
