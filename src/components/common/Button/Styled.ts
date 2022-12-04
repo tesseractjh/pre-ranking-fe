@@ -10,6 +10,23 @@ const AnimationFadeIn = keyframes`
   }
 `;
 
+export const Large = css`
+  padding: ${pxToRem(12, 16)};
+  border-radius: ${pxToRem(8)};
+  background-color: ${({ theme }) => theme.color.PURPLE_500};
+  font-weight: 600;
+  font-size: ${pxToRem(18)};
+  color: ${({ theme }) => theme.color.WHITE};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.PURPLE_400};
+  }
+
+  &:active {
+    background-color: ${({ theme }) => theme.color.PURPLE_600};
+  }
+`;
+
 export const Medium = css`
   padding: ${pxToRem(8, 10)};
   border-radius: ${pxToRem(6)};
@@ -47,5 +64,33 @@ export const HoverToolTip = (content: string) => css`
     white-space: nowrap;
     color: ${({ theme }) => theme.color.WHITE};
     animation: ${AnimationFadeIn} 0.2s ease-in-out 0.5s forwards alternate;
+  }
+`;
+
+export const HoverInactive = (content: string) => css`
+  overflow: hidden;
+  position: relative;
+
+  &:hover {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    &::after {
+      content: '${content}';
+      ${({ theme }) => theme.mixin.inlineFlex()}
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-5deg);
+      padding: ${pxToRem(2)};
+      border: 2px solid ${({ theme }) => theme.color.WHITE};
+    }
   }
 `;
