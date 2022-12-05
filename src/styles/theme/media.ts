@@ -6,6 +6,13 @@ import {
 } from 'styled-components';
 
 const media = {
+  desktop: (
+    cssString: string | FlattenInterpolation<ThemeProps<DefaultTheme>>
+  ) => css`
+    @media screen and (min-width: 769px) {
+      ${cssString}
+    }
+  `,
   tablet: (
     cssString: string | FlattenInterpolation<ThemeProps<DefaultTheme>>
   ) => css`
