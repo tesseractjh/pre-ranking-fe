@@ -19,7 +19,7 @@ const Main = styled.main`
   `)}
 `;
 
-function Layout() {
+function MainLayout() {
   return (
     <Container>
       <Header />
@@ -31,4 +31,4 @@ function Layout() {
   );
 }
 
-export default Layout;
+export default MainLayout;
