@@ -15,6 +15,15 @@ const Container = styled.li`
   &:not(:last-of-type) {
     border-bottom: 1px solid ${({ theme }) => theme.color.GRAY_100};
   }
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      padding: ${pxToRem(0, 0, 10, 0)};  
+
+      &:not(:first-of-type) {
+        padding-top: ${pxToRem(10)};
+      }
+  `)}
 `;
 
 const Title = styled.strong`
@@ -29,6 +38,11 @@ const Title = styled.strong`
     height: ${pxToRem(16)};
     margin-right: ${pxToRem(10)};
   }
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      padding-left: ${pxToRem(10)};  
+  `)}
 `;
 
 function Category({ icon: Icon, content, links }: NavBarCategory) {

@@ -5,6 +5,7 @@ import Logo from '@components/common/Logo';
 import pxToRem from '@utils/pxToRem';
 import HeaderMenu from './HeaderMenu';
 import useHeader from './hooks/useHeader';
+import MenuButton from './MenuButton';
 
 const Container = styled.header<{ isScrolled: boolean }>`
   position: fixed;
@@ -25,7 +26,18 @@ const Container = styled.header<{ isScrolled: boolean }>`
 
 const Flex = styled.div`
   ${({ theme }) => theme.mixin.flex('space-between')}
+  position: relative;
   height: 100%;
+`;
+
+const LogoWrapper = styled.span`
+  ${({ theme }) =>
+    theme.media.tablet(`
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);  
+  `)}
 `;
 
 function Header() {
@@ -35,9 +47,12 @@ function Header() {
     <Container isScrolled={isScrolled}>
       <InnerContainer>
         <Flex>
-          <Link to="/">
-            <Logo />
-          </Link>
+          <MenuButton />
+          <LogoWrapper>
+            <Link to="/">
+              <Logo />
+            </Link>
+          </LogoWrapper>
           <HeaderMenu />
         </Flex>
       </InnerContainer>

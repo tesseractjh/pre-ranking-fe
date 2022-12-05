@@ -6,10 +6,21 @@ import Chevron from './Chevron';
 
 const Container = styled.div`
   ${({ theme }) => theme.mixin.flex('flex-start')}
-  padding: ${pxToRem(20, 10)};
+  position: sticky;
+  top: ${pxToRem(60)};
+  height: ${pxToRem(65)};
+  padding: ${pxToRem(0, 10)};
   border-bottom: 1px solid ${({ theme }) => theme.color.GRAY_300};
   margin-bottom: ${pxToRem(20)};
+  background-color: ${({ theme }) => theme.color.WHITE};
   font-size: ${pxToRem(22)};
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      top: ${pxToRem(50)};
+      height: ${pxToRem(45)};
+      font-size: ${pxToRem(16)};
+  `)}
 `;
 
 const Strong = styled.strong`
@@ -18,6 +29,7 @@ const Strong = styled.strong`
 
 function Breadcrumb() {
   const breadcrumbs = useBreadcrumb();
+
   return (
     <Container>
       {breadcrumbs.map((breadcrumb, index) => {

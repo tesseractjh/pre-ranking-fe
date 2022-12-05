@@ -1,11 +1,24 @@
+import Logo from '@components/common/Logo';
 import pxToRem from '@utils/pxToRem';
 import { useRef } from 'react';
-import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import styled, { css, keyframes } from 'styled-components';
 import NAV_BAR_LIST from '../constants/navBar';
 import Category from './Category';
 import useNavBar from './hooks/useNavBar';
 
-const Wrapper = styled.nav<{ hasScroll: boolean }>`
+const TabletAnimation = keyframes`
+  from {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transfomr: translate3d(0, 0, 0);
+  }
+`;
+
+const Wrapper = styled.nav<{ hasScroll: boolean } & CustomCSS>`
   position: relative;
 
   &::before {
@@ -17,15 +30,40 @@ const Wrapper = styled.nav<{ hasScroll: boolean }>`
     height: 100%;
     border-right: 4px solid ${({ theme }) => theme.color.GRAY_100};
   }
+
+  ${({ theme }) =>
+    theme.media.tablet(css`
+      display: none;
+      animation: ${TabletAnimation} 0.2s ease-in-out 0.05s both;
+
+      &::before {
+        display: none;
+      }
+    `)}
+
+  ${({ css }) => css || ''}
+`;
+
+const LogoWrapper = styled.div`
+  display: none;
+  padding: ${pxToRem(10)};
+  margin-bottom: ${pxToRem(20)};
+  border-bottom: 1px solid ${({ theme }) => theme.color.GRAY_200};
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      display: block;
+  `)}
 `;
 
 const Container = styled.ul`
   overflow-y: auto;
   ${({ theme }) => theme.mixin.flexColumn('flex-start', 'stretch', pxToRem(2))}
   position: sticky;
-  top: ${pxToRem(80)};
+  top: ${pxToRem(60)};
   width: ${pxToRem(240)};
   max-height: calc(100vh - ${pxToRem(80)});
+  padding-top: ${pxToRem(10)};
 
   &::-webkit-scrollbar {
     width: 4px;
@@ -40,14 +78,29 @@ const Container = styled.ul`
     height: ${pxToRem(20)};
     background-color: transparent;
   }
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      position: static;
+      padding: 0;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+  `)}
 `;
 
-function NavBar() {
+function NavBar({ css }: CustomCSS) {
   const container = useRef<HTMLUListElement>(null);
   const hasScroll = useNavBar(container);
 
   return (
-    <Wrapper hasScroll={hasScroll}>
+    <Wrapper css={css} hasScroll={hasScroll}>
+      <LogoWrapper>
+        <Link to="/">
+          <Logo size="md" />
+        </Link>
+      </LogoWrapper>
       <Container ref={container}>
         {NAV_BAR_LIST.map((props) => (
           <Category key={props.content ?? ''} {...props} />

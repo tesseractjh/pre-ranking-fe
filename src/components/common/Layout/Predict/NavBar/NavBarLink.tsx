@@ -39,6 +39,19 @@ const Container = styled.li<{ hasIndentation: boolean }>`
       color: ${({ theme }) => theme.color.BLACK};
     }
   }
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      & > .nav-link {
+        border: none;
+        padding: ${pxToRem(14, 10, 14, 20)};
+
+        &.active {
+          background-color: ${theme.color.PURPLE_500};
+          color: ${theme.color.WHITE};
+        }
+      }
+  `)}
 `;
 
 function NavBarLink({
@@ -69,7 +82,7 @@ function NavBarLink({
         </button>
       ) : (
         <NavLink
-          to={link}
+          to={`/predict/${link}`}
           className={({ isActive }) =>
             isActive ? 'nav-link active' : 'nav-link'
           }

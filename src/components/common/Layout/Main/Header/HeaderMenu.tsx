@@ -28,12 +28,12 @@ const MenuItem = styled.li<{ isHidden?: boolean }>`
 
   ${({ theme }) =>
     theme.media.tablet(`
-      width: ${pxToRem(30)};
-      height: ${pxToRem(30)};
+      width: ${pxToRem(32)};
+      height: ${pxToRem(32)};
   `)}
 `;
 
-const ButtonStyle = (tooltip: string, hasBadge?: boolean) => css`
+export const HeaderButtonStyle = (tooltip: string, hasBadge?: boolean) => css`
   ${({ theme }) => theme.mixin.inlineFlex()}
   border-radius: 10px;
 
@@ -90,8 +90,8 @@ const ButtonStyle = (tooltip: string, hasBadge?: boolean) => css`
     border-radius: 7px;
 
     & > svg {
-      width: ${pxToRem(18)};
-      height: ${pxToRem(18)};
+      width: ${pxToRem(20)};
+      height: ${pxToRem(20)};
     } 
   `)}
 
@@ -118,7 +118,7 @@ function HeaderMenu() {
         <ButtonWithPopup
           width="100%"
           height="100%"
-          css={ButtonStyle(
+          css={HeaderButtonStyle(
             '알림',
             !!notificationData?.pages[0].notifications.length
           )}
@@ -131,14 +131,14 @@ function HeaderMenu() {
         <ButtonWithPopup
           width="100%"
           height="100%"
-          css={ButtonStyle('내 정보')}
+          css={HeaderButtonStyle('내 정보')}
           popup={UserMenuPopup}
         >
           <UserIcon />
         </ButtonWithPopup>
       </MenuItem>
       <MenuItem isHidden={isLoggedIn}>
-        <LinkButton to="/login" $css={ButtonStyle('로그인')}>
+        <LinkButton to="/login" $css={HeaderButtonStyle('로그인')}>
           <LoginIcon />
         </LinkButton>
       </MenuItem>

@@ -8,6 +8,11 @@ import NavBar from './NavBar';
 const Flex = styled.div`
   ${({ theme }) => theme.mixin.flex('flex-start', 'stretch', pxToRem(20))}
   margin-top: ${pxToRem(40)};
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      margin-top: ${pxToRem(20)};
+  `)}
 `;
 
 const Section = styled.section`

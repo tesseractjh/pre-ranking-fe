@@ -10,6 +10,16 @@ const Container = styled.span`
     height: ${pxToRem(12)};
     transform: rotate(-90deg) translateX(${pxToRem(1)});
   }
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      margin: ${pxToRem(0, 8)};
+
+      & > svg {
+      width: ${pxToRem(10)};
+      height: ${pxToRem(10)};
+    }
+  `)}
 `;
 
 function Chevron() {
