@@ -1,4 +1,11 @@
-import { axiosInstance } from '@configs/axios';
+import { authInstance, axiosInstance } from '@configs/axios';
+
+export const getUserInfo = async () => {
+  const { data } = await authInstance.get<APIResponse<{ user: Model.User }>>(
+    '/user'
+  );
+  return data;
+};
 
 export const getAccessToken = async () => {
   const { data } = await axiosInstance.get<

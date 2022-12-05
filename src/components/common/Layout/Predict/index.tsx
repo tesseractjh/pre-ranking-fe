@@ -3,6 +3,7 @@ import pxToRem from '@utils/pxToRem';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import Breadcrumb from './Breadcrumb';
+import Coin from './Coin';
 import NavBar from './NavBar';
 
 const Flex = styled.div`
@@ -27,6 +28,7 @@ function PredictLayout() {
           <NavBar />
           <Section>
             <Breadcrumb />
+            <Coin />
             <Outlet />
           </Section>
         </Flex>

@@ -6,4 +6,9 @@ declare namespace Model {
     notification_link: string;
     created_at: string;
   }
+
+  interface User {
+    user_name: string;
+    coin: number;
+  }
 }
