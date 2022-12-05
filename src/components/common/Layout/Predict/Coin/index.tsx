@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import pxToRem from '@utils/pxToRem';
+import numberFormatter from '@utils/numberFormatter';
 import { ReactComponent as CoinIcon } from '@assets/icons/coin.svg';
 import useCoin from './hooks/useCoin';
-import numberFormatter from '@utils/numberFormatter';
 
 const Container = styled.div`
   ${({ theme }) => theme.mixin.flex('flex-end')}
+  margin-bottom: ${pxToRem(20)};
   font-weight: 700;
   font-size: ${pxToRem(18)};
 
@@ -16,6 +17,17 @@ const Container = styled.div`
     fill: ${({ theme }) => theme.color.YELLOW_500};
     stroke: ${({ theme }) => theme.color.BLACK};
   }
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      font-size: ${pxToRem(16)};
+
+      & > svg {
+        width: ${pxToRem(14)};
+        height: ${pxToRem(14)};
+        margin-right: ${pxToRem(8)};
+      }
+  `)}
 `;
 
 function Coin() {

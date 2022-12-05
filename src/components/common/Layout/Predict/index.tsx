@@ -20,6 +20,16 @@ const Section = styled.section`
   flex: 1;
 `;
 
+const Sticky = styled.div`
+  position: sticky;
+  top: ${pxToRem(60)};
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      top: ${pxToRem(50)};
+  `)}
+`;
+
 function PredictLayout() {
   return (
     <>
@@ -27,8 +37,10 @@ function PredictLayout() {
         <Flex>
           <NavBar />
           <Section>
-            <Breadcrumb />
-            <Coin />
+            <Sticky>
+              <Breadcrumb />
+              <Coin />
+            </Sticky>
             <Outlet />
           </Section>
         </Flex>

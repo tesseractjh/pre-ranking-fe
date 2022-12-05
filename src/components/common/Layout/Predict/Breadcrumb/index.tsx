@@ -6,8 +6,6 @@ import Chevron from './Chevron';
 
 const Container = styled.div`
   ${({ theme }) => theme.mixin.flex('flex-start')}
-  position: sticky;
-  top: ${pxToRem(60)};
   height: ${pxToRem(65)};
   padding: ${pxToRem(0, 10)};
   border-bottom: 1px solid ${({ theme }) => theme.color.GRAY_300};
@@ -17,8 +15,8 @@ const Container = styled.div`
 
   ${({ theme }) =>
     theme.media.tablet(`
-      top: ${pxToRem(50)};
       height: ${pxToRem(45)};
+      margin-bottom: ${pxToRem(10)};
       font-size: ${pxToRem(16)};
   `)}
 `;
