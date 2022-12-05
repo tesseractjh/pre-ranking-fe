@@ -9,10 +9,10 @@ import { ReactComponent as BellIcon } from '@assets/icons/bell.svg';
 import { ReactComponent as UserIcon } from '@assets/icons/user.svg';
 import { ReactComponent as LoginIcon } from '@assets/icons/login.svg';
 import pxToRem from '@utils/pxToRem';
+import useLogin from '@hooks/useLogin';
 import useNotification from '@hooks/queries/useNotification';
 import { HoverToolTip } from '@components/common/Button';
 import ButtonWithPopup from '@components/common/Button/ButtonWithPopup';
-import useHeaderMenu from './hooks/useHeaderMenu';
 import NotificationPopup from './NotificationPopup';
 import UserMenuPopup from './UserMenuPopup';
 
@@ -109,7 +109,7 @@ const LinkButton = styled(Link)<{
 `;
 
 function HeaderMenu() {
-  const isLoggedIn = useHeaderMenu();
+  const isLoggedIn = useLogin();
   const { data: notificationData } = useNotification(0, isLoggedIn);
 
   return (
