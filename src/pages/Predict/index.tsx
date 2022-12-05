@@ -1,10 +1,10 @@
-import PredictLayout from '@components/common/Layout/Predict';
+import MenuLayout from '@components/common/Layout/Menu';
 import { Route, Routes } from 'react-router-dom';
 
 function PredictPage() {
   return (
     <Routes>
-      <Route element={<PredictLayout />}>
+      <Route element={<MenuLayout />}>
         <Route index element={<div>(전체)예측 페이지</div>} />
         <Route
           path="stock_fluctuation"

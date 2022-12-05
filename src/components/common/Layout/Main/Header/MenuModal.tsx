@@ -2,7 +2,7 @@ import Modal from '@components/common/Modal';
 import pxToRem from '@utils/pxToRem';
 import React from 'react';
 import { css } from 'styled-components';
-import NavBar from '../../Predict/NavBar';
+import NavBar from '../../Menu/NavBar';
 
 const ModalStyle = css`
   ${({ theme }) =>

@@ -30,7 +30,7 @@ const Sticky = styled.div`
   `)}
 `;
 
-function PredictLayout() {
+function MenuLayout() {
   return (
     <>
       <InnerContainer>
@@ -49,4 +49,4 @@ function PredictLayout() {
   );
 }
 
-export default PredictLayout;
+export default MenuLayout;

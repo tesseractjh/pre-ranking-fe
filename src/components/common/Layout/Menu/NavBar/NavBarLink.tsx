@@ -82,7 +82,7 @@ function NavBarLink({
         </button>
       ) : (
         <NavLink
-          to={`/predict/${link}`}
+          to={`/predict${link ? `/${link}` : ''}`}
           className={({ isActive }) =>
             isActive ? 'nav-link active' : 'nav-link'
           }
