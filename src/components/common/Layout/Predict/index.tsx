@@ -2,6 +2,7 @@ import InnerContainer from '@components/common/InnerContainer';
 import pxToRem from '@utils/pxToRem';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import Breadcrumb from './Breadcrumb';
 import NavBar from './NavBar';
 
 const Flex = styled.div`
@@ -20,6 +21,7 @@ function PredictLayout() {
         <Flex>
           <NavBar />
           <Section>
+            <Breadcrumb />
             <Outlet />
           </Section>
         </Flex>
