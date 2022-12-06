@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 
 function useHeaderNav() {
   const { pathname } = useLocation();
-  const [, page, id] = pathname.split('/');
+  const [, page, id = 'all'] = pathname.split('/');
 
   return { page, id };
 }

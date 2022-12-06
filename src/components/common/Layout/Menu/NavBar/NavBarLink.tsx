@@ -75,7 +75,7 @@ function NavBarLink({ type, icon: Icon, content, link, onClick }: Props) {
     >
       {link ? (
         <NavLink
-          to={`/${page}/${link}`}
+          to={`/${page || 'predict'}/${link}`}
           className={({ isActive }) =>
             isActive ? 'nav-link active' : 'nav-link'
           }
