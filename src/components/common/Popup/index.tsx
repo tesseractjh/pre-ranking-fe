@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import pxToRem from '@utils/pxToRem';
 import { ReactComponent as XMarkIcon } from '@assets/icons/xmark.svg';
+import usePreventScroll from '@hooks/usePreventScroll';
 
 interface Props extends CustomCSS {
   onClick: React.MouseEventHandler;
@@ -72,20 +73,24 @@ const CloseButton = styled.button`
 `;
 
 const Popup = React.forwardRef<HTMLDivElement, Props>(
-  ({ css, onClick, title, header, children }, ref) => (
-    <Container css={css} ref={ref} className="popup">
-      <Header>
-        <Title>
-          <CloseButton type="button" onClick={onClick}>
-            <XMarkIcon />
-          </CloseButton>
-          {title}
-        </Title>
-        {header}
-      </Header>
-      {children}
-    </Container>
-  )
+  ({ css, onClick, title, header, children }, ref) => {
+    usePreventScroll();
+
+    return (
+      <Container css={css} ref={ref} className="popup">
+        <Header>
+          <Title>
+            <CloseButton type="button" onClick={onClick}>
+              <XMarkIcon />
+            </CloseButton>
+            {title}
+          </Title>
+          {header}
+        </Header>
+        {children}
+      </Container>
+    );
+  }
 );
 Popup.displayName = 'Popup';
 

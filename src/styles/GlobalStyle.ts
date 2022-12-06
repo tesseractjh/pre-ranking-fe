@@ -88,6 +88,15 @@ const GlobalStyle = createGlobalStyle`
   input:focus {
     outline: none;
   }
+
+  body.prevent-scroll {
+    ${({ theme }) =>
+      theme.media.tablet(`
+        overflow: hidden;
+        touch-action: none;
+        overscroll-behavior: none;
+    `)}
+  }
 `;
 
 export default GlobalStyle;

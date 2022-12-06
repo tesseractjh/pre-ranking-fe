@@ -1,3 +1,4 @@
+import usePreventScroll from '@hooks/usePreventScroll';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -26,6 +27,8 @@ const Background = styled.button`
 `;
 
 function Modal({ css, isOpen, handleClick, children }: Props) {
+  usePreventScroll(isOpen);
+
   return isOpen ? (
     <Container css={css}>
       <Background type="button" onClick={handleClick} />
