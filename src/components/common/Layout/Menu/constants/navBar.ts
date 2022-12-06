@@ -9,7 +9,7 @@ const NAV_BAR_LIST: NavBarCategory[] = [
     links: [
       {
         content: '전체',
-        link: ''
+        link: 'all'
       }
     ]
   },

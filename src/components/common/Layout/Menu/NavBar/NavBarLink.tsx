@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import pxToRem from '@utils/pxToRem';
 import { ReactComponent as ChevronIcon } from '@assets/icons/chevron.svg';
 import type { NavBarLinkButton } from '../types/navBar';
+import useNavBarLink from './hooks/useNavBarLink';
 
 interface Props extends Omit<NavBarLinkButton, 'link'> {
   link?: string;
@@ -47,20 +48,16 @@ const Container = styled.li<{ hasIndentation: boolean }>`
         padding: ${pxToRem(14, 10, 14, 20)};
 
         &.active {
-          background-color: ${theme.color.PURPLE_500};
+          background-color: ${theme.color.PURPLE_400};
           color: ${theme.color.WHITE};
         }
       }
   `)}
 `;
 
-function NavBarLink({
-  type,
-  icon: Icon,
-  content,
-  link = '__none__',
-  onClick
-}: Props) {
+function NavBarLink({ type, icon: Icon, content, link, onClick }: Props) {
+  const page = useNavBarLink();
+
   const buttonContent = (
     <>
       <span>
@@ -76,13 +73,9 @@ function NavBarLink({
       as={type === 'child' ? 'li' : 'div'}
       hasIndentation={type === 'child'}
     >
-      {link === '__none__' ? (
-        <button type="button" className="nav-link" onClick={onClick}>
-          {buttonContent}
-        </button>
-      ) : (
+      {link ? (
         <NavLink
-          to={`/predict${link ? `/${link}` : ''}`}
+          to={`/${page}/${link}`}
           className={({ isActive }) =>
             isActive ? 'nav-link active' : 'nav-link'
           }
@@ -90,6 +83,10 @@ function NavBarLink({
         >
           {buttonContent}
         </NavLink>
+      ) : (
+        <button type="button" className="nav-link" onClick={onClick}>
+          {buttonContent}
+        </button>
       )}
     </Container>
   );
