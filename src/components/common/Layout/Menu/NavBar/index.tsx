@@ -58,12 +58,13 @@ const LogoWrapper = styled.div`
 
 const Container = styled.ul`
   overflow-y: auto;
+  overscroll-behavior: contain;
   ${({ theme }) => theme.mixin.flexColumn('flex-start', 'stretch', pxToRem(2))}
   position: sticky;
   top: ${pxToRem(60)};
   width: ${pxToRem(240)};
   max-height: calc(100vh - ${pxToRem(80)});
-  padding-top: ${pxToRem(10)};
+  padding: ${pxToRem(10, 0, 20)};
 
   &::-webkit-scrollbar {
     width: 4px;
