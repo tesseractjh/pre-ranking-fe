@@ -5,6 +5,10 @@ import HomeCarousel from './HomeCarousel';
 import PREDICT_LIST from './constants/predictList';
 import PredictNavigation from './PredictNavigation';
 
+const CarouselWrapper = styled.section`
+  margin-top: ${pxToRem(10)};
+`;
+
 const ContentContainer = styled.article`
   ${({ theme }) => theme.mixin.flexColumn('flex-start', 'stretch', pxToRem(50))}
   margin-top: ${pxToRem(40)};
@@ -18,9 +22,9 @@ const ContentContainer = styled.article`
 function Home() {
   return (
     <>
-      <section>
+      <CarouselWrapper>
         <HomeCarousel />
-      </section>
+      </CarouselWrapper>
       <section>
         <InnerContainer>
           <ContentContainer>

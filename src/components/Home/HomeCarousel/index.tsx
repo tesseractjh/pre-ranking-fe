@@ -3,7 +3,7 @@ import Carousel from '@components/common/Carousel';
 import { HOME_CAROUSEL_ITEMS } from './constants/items';
 
 const CarouselStyle = css`
-  background-color: ${({ theme }) => theme.color.PURPLE_100};
+  background-color: ${({ theme }) => theme.color.PURPLE_50};
 `;
 
 function HomeCarousel() {
