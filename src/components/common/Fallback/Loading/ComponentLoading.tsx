@@ -2,7 +2,11 @@ import styled from 'styled-components';
 import Deferred from '@components/common/Deferred';
 import Spinner from './Spinner';
 
-const Container = styled.div`
+interface Props extends CustomCSS {
+  delay?: number;
+}
+
+const Container = styled.div<CustomCSS>`
   ${({ theme }) => theme.mixin.flex()}
   position: absolute;
   top: 0;
@@ -10,12 +14,14 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.2);
+
+  ${({ css }) => css || ''}
 `;
 
-function ComponentLoading() {
+function ComponentLoading({ css, delay = 200 }: Props) {
   return (
-    <Deferred delay={200}>
-      <Container>
+    <Deferred delay={delay}>
+      <Container css={css}>
         <Spinner />
       </Container>
     </Deferred>
