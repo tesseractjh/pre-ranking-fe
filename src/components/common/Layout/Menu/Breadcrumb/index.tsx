@@ -8,15 +8,11 @@ const Container = styled.div`
   ${({ theme }) => theme.mixin.flex('flex-start')}
   height: ${pxToRem(65)};
   padding: ${pxToRem(0, 10)};
-  border-bottom: 1px solid ${({ theme }) => theme.color.GRAY_300};
-  margin-bottom: ${pxToRem(20)};
-  background-color: ${({ theme }) => theme.color.WHITE};
   font-size: ${pxToRem(22)};
 
   ${({ theme }) =>
     theme.media.tablet(`
       height: ${pxToRem(45)};
-      margin-bottom: ${pxToRem(10)};
       font-size: ${pxToRem(16)};
   `)}
 `;
