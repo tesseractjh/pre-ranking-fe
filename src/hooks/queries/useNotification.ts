@@ -7,7 +7,8 @@ function useNotification(start: number, enabled = true) {
     ({ pageParam = start }) =>
       API.notification.getNotifications({ start: pageParam }),
     {
-      getNextPageParam: (_, allPages) =>
+      getNextPageParam: (lastPage, allPages) =>
+        lastPage.notifications[0] &&
         allPages.reduce((acc, page) => acc + page.notifications.length, 0) + 1,
       staleTime: 30 * 1000,
       refetchInterval: 3 * 60 * 1000,
