@@ -6,9 +6,9 @@ function useCoin() {
   const { pathname } = useLocation();
   const [, page] = pathname.split('/');
   const isLoggedIn = useLogin();
-  const { data, isLoading } = useUserInfo(isLoggedIn);
+  const { data } = useUserInfo(isLoggedIn);
 
-  return { coin: page === 'predict' && data?.user?.coin, isLoading };
+  return page === 'predict' && data?.user?.coin;
 }
 
 export default useCoin;

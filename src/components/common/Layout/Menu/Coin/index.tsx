@@ -1,8 +1,7 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import pxToRem from '@utils/pxToRem';
 import numberFormatter from '@utils/numberFormatter';
 import { ReactComponent as CoinIcon } from '@assets/icons/coin.svg';
-import ComponentLoading from '@components/common/Fallback/Loading/ComponentLoading';
 import useCoin from './hooks/useCoin';
 
 const Container = styled.div`
@@ -32,33 +31,8 @@ const Container = styled.div`
   `)}
 `;
 
-const FallbackStyle = css`
-  position: static;
-  width: ${pxToRem(20)};
-  height: ${pxToRem(20)};
-  background-color: transparent;
-
-  & > div {
-    width: 100%;
-    height: 100%;
-
-    & > div {
-      border-width: ${pxToRem(2)};
-    }
-  }
-`;
-
 function Coin() {
-  const { coin, isLoading } = useCoin();
-
-  if (isLoading) {
-    return (
-      <Container>
-        <CoinIcon />
-        <ComponentLoading css={FallbackStyle} />
-      </Container>
-    );
-  }
+  const coin = useCoin();
 
   return typeof coin === 'number' ? (
     <Container>

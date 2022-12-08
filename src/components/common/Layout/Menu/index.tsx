@@ -1,6 +1,11 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
 import styled from 'styled-components';
+import useReload from '@hooks/useReload';
 import InnerContainer from '@components/common/InnerContainer';
+import ComponentLoading from '@components/common/Fallback/Loading/ComponentLoading';
+import ComponentError from '@components/common/Fallback/Error/ComponentError';
 import pxToRem from '@utils/pxToRem';
 import {
   HEADER_HEIGHT,
@@ -40,17 +45,26 @@ const Sticky = styled.div`
 `;
 
 function MenuLayout() {
+  const handleReload = useReload();
+
   return (
     <InnerContainer>
       <Flex>
         <NavBar />
-        <Section>
-          <Sticky>
-            <Breadcrumb />
-            <Coin />
-          </Sticky>
-          <Outlet />
-        </Section>
+        <ErrorBoundary
+          FallbackComponent={ComponentError}
+          onReset={handleReload}
+        >
+          <Suspense fallback={<ComponentLoading />}>
+            <Section>
+              <Sticky>
+                <Breadcrumb />
+                <Coin />
+              </Sticky>
+              <Outlet />
+            </Section>
+          </Suspense>
+        </ErrorBoundary>
       </Flex>
     </InnerContainer>
   );
