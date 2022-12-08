@@ -2,7 +2,11 @@ import styled from 'styled-components';
 import pxToRem from '@utils/pxToRem';
 import { ReactComponent as WarningIcon } from '@assets/icons/warning.svg';
 
-const Container = styled.div`
+interface Props extends CustomCSS {
+  children?: React.ReactNode;
+}
+
+const Container = styled.div<CustomCSS>`
   ${({ theme }) => theme.mixin.flexColumn()}
   width: 100vw;
   height: 100vh;
@@ -16,6 +20,8 @@ const Container = styled.div`
     margin-bottom: ${pxToRem(30)};
     fill: ${({ theme }) => theme.color.PURPLE_600};
   }
+
+  ${({ css }) => css || ''}
 `;
 
 const Title = styled.h1`
@@ -25,11 +31,12 @@ const Title = styled.h1`
   color: ${({ theme }) => theme.color.BLACK};
 `;
 
-function Error() {
+function Error({ css, children }: Props) {
   return (
-    <Container>
+    <Container css={css}>
       <WarningIcon />
       <Title>연결에 실패했습니다!</Title>잠시 후 다시 시도해주세요.
+      {children}
     </Container>
   );
 }
