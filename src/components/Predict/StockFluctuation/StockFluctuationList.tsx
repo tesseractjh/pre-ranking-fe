@@ -1,5 +1,5 @@
 import PredictContainer from '../PredictContainer';
-import useStockFluctuation from '../hooks/useStockFluctuation';
+import useStockFluctuation from './hooks/useStockFluctuation';
 import StockFluctuationItem from './StockFluctuationItem';
 import PredictWrapper from '../PredictWrapper';
 

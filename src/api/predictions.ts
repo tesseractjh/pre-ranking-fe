@@ -6,6 +6,7 @@ export const getPredictions = async (params: Params) => {
       predictions: (Model.Prediction &
         Omit<Model.StockFluctuation, 'info_id' | 'created_at'> & {
           participant_count: number;
+          prediction_value: string;
         })[];
     }>
   >('/prediction', { params });
