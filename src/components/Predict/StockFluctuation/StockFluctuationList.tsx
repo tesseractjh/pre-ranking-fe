@@ -4,10 +4,10 @@ import StockFluctuationItem from './StockFluctuationItem';
 import PredictWrapper from '../PredictWrapper';
 
 function StockFluctuationList() {
-  const data = useStockFluctuation();
+  const { data, handleIntersect } = useStockFluctuation();
 
   return (
-    <PredictContainer>
+    <PredictContainer onIntersect={handleIntersect}>
       {data.map((prediction) => (
         <PredictWrapper key={prediction.prediction_id}>
           <StockFluctuationItem prediction={prediction} />

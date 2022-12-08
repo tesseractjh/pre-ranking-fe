@@ -5,10 +5,10 @@ import PredictWrapper from '../PredictWrapper';
 import StockFluctuationItem from '../StockFluctuation/StockFluctuationItem';
 
 function PredictAll() {
-  const data = usePredictAll();
+  const { data, handleIntersect } = usePredictAll();
 
   return (
-    <PredictContainer>
+    <PredictContainer onIntersect={handleIntersect}>
       {data.map((prediction) => (
         <PredictWrapper
           key={prediction.prediction_id}

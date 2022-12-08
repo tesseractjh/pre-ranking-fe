@@ -1,11 +1,20 @@
+import { useCallback } from 'react';
 import usePrediction from '@hooks/queries/usePrediction';
 
 function useStockFluctuation() {
-  const { data } = usePrediction({
+  const { data, fetchNextPage } = usePrediction({
     category: 'info_stock_fluctuation'
   });
 
-  return data?.predictions ?? [];
+  const handleIntersect = useCallback(async () => {
+    const result = await fetchNextPage();
+    return result;
+  }, []);
+
+  return {
+    data: data?.pages.flatMap(({ predictions }) => predictions) ?? [],
+    handleIntersect
+  };
 }
 
 export default useStockFluctuation;
