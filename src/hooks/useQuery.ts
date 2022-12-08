@@ -53,6 +53,10 @@ function useQuery<T extends APIResponse>(
       if (status === 401) {
         alert('권한이 없습니다!');
       } else {
+        if (options?.onError) {
+          options.onError(error);
+          return;
+        }
         alert(message);
       }
 
