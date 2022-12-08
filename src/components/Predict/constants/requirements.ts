@@ -1,0 +1,5 @@
+const COIN_REQUIREMENTS = {
+  STOCK_FLUCTUATION: 10
+};
+
+export default COIN_REQUIREMENTS;

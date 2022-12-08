@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components';
 import Button, { Medium } from '@components/common/Button';
 import dateFormatter from '@utils/dateFormatter';
 import pxToRem from '@utils/pxToRem';
+import { ReactComponent as CoinIcon } from '@assets/icons/coin.svg';
+import COIN_REQUIREMENTS from '../constants/requirements';
 
 interface Props {
   prediction: Model.Prediction &
@@ -106,6 +108,26 @@ const PredictButton = styled.button<CustomCSS>`
   ${({ css }) => css || ''}
 `;
 
+const Flex = styled.div`
+  ${({ theme }) => theme.mixin.flex('flex-start', 'stretch', pxToRem(10))}
+  padding: ${pxToRem(0, 10)};
+`;
+
+const Coin = styled.span`
+  ${({ theme }) => theme.mixin.inlineFlex('flex-start')};
+  width: ${pxToRem(50)};
+  font-weight: 700;
+  font-size: ${pxToRem(14)};
+
+  & > svg {
+    width: ${pxToRem(12)};
+    height: ${pxToRem(12)};
+    margin-right: ${pxToRem(8)};
+    fill: ${({ theme }) => theme.color.YELLOW_500};
+    stroke: ${({ theme }) => theme.color.BLACK};
+  }
+`;
+
 const Triangle = styled.span<{ negative?: boolean }>`
   display: inline-block;
   width: ${pxToRem(5)};
@@ -152,6 +174,8 @@ const DecreaseStyle = css`
 `;
 
 const SubmitButtonStyle = css`
+  flex: 1;
+
   &:disabled {
     background-color: ${({ theme }) => theme.color.GRAY_400};
     cursor: not-allowed;
@@ -223,7 +247,14 @@ function StockFluctuationItem({ prediction }: Props) {
               하락
             </PredictButton>
           </ButtonContainer>
-          <Button css={[Medium, SubmitButtonStyle]}>예측하기</Button>
+          <Flex>
+            <Coin>
+              <CoinIcon />
+              {dateFormatter.getDateDiff(prevDate, nextDate) *
+                COIN_REQUIREMENTS.STOCK_FLUCTUATION}
+            </Coin>
+            <Button css={[Medium, SubmitButtonStyle]}>예측하기</Button>
+          </Flex>
         </RightContainer>
       </Right>
     </Container>
