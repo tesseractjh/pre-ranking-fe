@@ -40,7 +40,17 @@ const color = {
   YELLOW_600: '#ca8a04',
   YELLOW_700: '#a16207',
   YELLOW_800: '#854d0e',
-  YELLOW_900: '#713f12'
+  YELLOW_900: '#713f12',
+  BLUE_50: '#eff6ff',
+  BLUE_100: '#dbeafe',
+  BLUE_200: '#bfdbfe',
+  BLUE_300: '#93c5fd',
+  BLUE_400: '#60a5fa',
+  BLUE_500: '#3b82f6',
+  BLUE_600: '#2563eb',
+  BLUE_700: '#1d4ed8',
+  BLUE_800: '#1e40af',
+  BLUE_900: '#1e3a8a'
 } as const;
 
 export default color;
