@@ -91,6 +91,7 @@ export const HoverInactive = (content: string) => css`
       transform: translate(-50%, -50%) rotate(-5deg);
       padding: ${pxToRem(2)};
       border: 2px solid ${({ theme }) => theme.color.WHITE};
+      color: ${({ theme }) => theme.color.WHITE};
     }
   }
 `;
