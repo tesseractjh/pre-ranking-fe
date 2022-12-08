@@ -75,6 +75,10 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
+  button:disabled {
+    color: inherit;
+  }
+
   button,
   input,
   select,
