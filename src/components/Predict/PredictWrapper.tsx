@@ -5,20 +5,65 @@ interface Props extends CustomCSS {
   all?: boolean;
   icon?: SVGIcon;
   category?: string;
+  predictionValue: string | null;
+  endDate: number;
   children: React.ReactNode;
 }
 
-const Wrapper = styled.li<CustomCSS>`
+const Wrapper = styled.li<
+  CustomCSS & { hasPrediction: boolean; isOverdue: boolean }
+>`
   overflow: hidden;
   margin-bottom: ${pxToRem(40)};
   border-radius: ${pxToRem(10)};
-  border: 1px solid ${({ theme }) => theme.color.GRAY_300};
   background-color: ${({ theme }) => theme.color.WHITE};
+
+  ${({ hasPrediction, isOverdue, theme }) => {
+    let color: string;
+
+    if (isOverdue) {
+      color = theme.color.GRAY_600;
+    } else {
+      color = theme.color[hasPrediction ? 'GRAY_300' : 'PURPLE_300'];
+    }
+
+    return `
+      border: 1px solid ${color};
+
+      & .form-predict {
+        background-color: ${color};
+      }
+      
+      & > header, & > div > div {
+        border-color: ${color};
+      }
+
+      
+      ${
+        isOverdue &&
+        `
+          & .info-predict {
+            position: relative;
+
+            &::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(0, 0, 0, 0.15);
+            }
+          }
+        `
+      }
+    `;
+  }}
 
   ${({ css }) => css || ''}
 `;
 
-const Header = styled.div`
+const Header = styled.header`
   ${({ theme }) => theme.mixin.flex('flex-start')}
   padding: ${pxToRem(10, 20)};
   border-bottom: 1px solid ${({ theme }) => theme.color.GRAY_300};
@@ -32,9 +77,21 @@ const Header = styled.div`
   }
 `;
 
-function PredictWrapper({ css, all, icon: Icon, category, children }: Props) {
+function PredictWrapper({
+  css,
+  all,
+  icon: Icon,
+  category,
+  predictionValue,
+  endDate,
+  children
+}: Props) {
   return (
-    <Wrapper css={css}>
+    <Wrapper
+      css={css}
+      hasPrediction={!!predictionValue}
+      isOverdue={Date.now() > endDate}
+    >
       {all && (
         <Header>
           {Icon && <Icon />}

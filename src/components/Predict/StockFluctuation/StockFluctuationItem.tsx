@@ -8,17 +8,18 @@ interface Props {
       participant_count: number;
       prediction_value: string;
     };
+  endDate: number;
 }
 
 const Container = styled.div`
   ${({ theme }) => theme.mixin.flex('flex-start', 'stretch')}
 `;
 
-function StockFluctuationItem({ prediction }: Props) {
+function StockFluctuationItem({ prediction, endDate }: Props) {
   return (
     <Container>
-      <PredictInfo prediction={prediction} />
-      <PredictForm prediction={prediction} />
+      <PredictInfo prediction={prediction} endDate={endDate} />
+      <PredictForm prediction={prediction} endDate={endDate} />
     </Container>
   );
 }

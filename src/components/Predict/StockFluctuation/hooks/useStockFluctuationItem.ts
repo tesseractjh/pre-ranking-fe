@@ -2,14 +2,14 @@ import useUserInfo from '@hooks/queries/useUserInfo';
 import { useState } from 'react';
 
 function useStockFluctuationItem(predictedValue: string | null) {
-  const [predictionValue, setPredictionValue] = useState(predictedValue ?? '');
+  const [inputValue, setInputValue] = useState(predictedValue ?? '');
   const { data } = useUserInfo(false);
 
   const handlePredict = (value: string) => () => {
-    setPredictionValue(value);
+    setInputValue(value);
   };
 
-  return { coin: data?.user.coin, predictionValue, handlePredict };
+  return { coin: data?.user.coin, inputValue, handlePredict };
 }
 
 export default useStockFluctuationItem;

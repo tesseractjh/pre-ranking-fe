@@ -7,8 +7,9 @@ interface Props {
   prediction: Model.Prediction &
     Omit<Model.StockFluctuation, 'info_id' | 'created_at'> & {
       participant_count: number;
-      prediction_value: string;
+      prediction_value: string | null;
     };
+  endDate: number;
 }
 
 const Container = styled.div`
@@ -69,9 +70,8 @@ const PredictDetail = styled.div`
   color: ${({ theme }) => theme.color.GRAY_800};
 `;
 
-function PredictInfo({ prediction }: Props) {
+function PredictInfo({ prediction, endDate }: Props) {
   const {
-    created_at: startDate,
     last_date: prevDate,
     stock_name: stockName,
     short_code: code,
@@ -82,12 +82,9 @@ function PredictInfo({ prediction }: Props) {
     participant_count: participantCount
   } = prediction;
 
-  const startDateObj = new Date(startDate);
-  startDateObj.setTime(startDateObj.getTime() + 24 * 60 * 60 * 1000);
-
   return (
-    <Container>
-      <PrevDate>{dateFormatter.getFromMonthToDay(prevDate)}</PrevDate>
+    <Container className="info-predict">
+      <PrevDate>{dateFormatter.getDateFromMonthToDay(prevDate)}</PrevDate>
       <div>
         <StockInfoTop>
           <StockName>{stockName}</StockName>
@@ -109,7 +106,9 @@ function PredictInfo({ prediction }: Props) {
         </span>
         <span>
           예측 마감 |{' '}
-          <Bold>{dateFormatter.getFromMonthToMinute(startDateObj)}</Bold>
+          <Bold>
+            {dateFormatter.getDateFromMonthToMinute(new Date(endDate))}
+          </Bold>
         </span>
       </PredictDetail>
     </Container>

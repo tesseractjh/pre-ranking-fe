@@ -4,24 +4,27 @@ import dateFormatter from '@utils/dateFormatter';
 import Button, { HoverInactive, Medium } from '@components/common/Button';
 import { Triangle } from '@components/common/Triangle';
 import { ReactComponent as CoinIcon } from '@assets/icons/coin.svg';
-import COIN_REQUIREMENTS from '../constants/requirements';
 import useStockFluctuationItem from './hooks/useStockFluctuationItem';
+import usePredictForm from '../hooks/usePredictForm';
 
 interface Props {
   prediction: Model.Prediction &
     Omit<Model.StockFluctuation, 'info_id' | 'created_at'> & {
       participant_count: number;
-      prediction_value: string;
+      prediction_value: string | null;
     };
+  endDate: number;
 }
 
-const Container = styled.div<CustomCSS & { hasPrediction: boolean }>`
+const Wrapper = styled.div<CustomCSS>`
   width: ${pxToRem(240)};
-  padding: ${pxToRem(8)};
-  background-color: ${({ hasPrediction, theme }) =>
-    theme.color[hasPrediction ? 'GRAY_300' : 'PURPLE_200']};
+  padding: ${pxToRem(4)};
 
   ${({ css }) => css || ''}
+
+  &::before, &::after {
+    z-index: 10;
+  }
 
   &:hover::after {
     padding: ${pxToRem(6)};
@@ -30,12 +33,59 @@ const Container = styled.div<CustomCSS & { hasPrediction: boolean }>`
   }
 `;
 
-const RightContainer = styled.div`
+const Container = styled.div<{ hasPrediction: boolean; isOverdue: boolean }>`
   ${({ theme }) => theme.mixin.flexColumn('flex-start', 'stretch')}
+  position: relative;
   height: 100%;
   padding: ${pxToRem(8)};
   border-radius: ${pxToRem(8)};
   background-color: ${({ theme }) => theme.color.WHITE};
+
+  &::before {
+    position: absolute;
+    top: ${pxToRem(-4)};
+    left: ${pxToRem(-4)};
+    padding: ${pxToRem(4)};
+    font-size: ${pxToRem(12)};
+    color: ${({ theme }) => theme.color.WHITE};
+
+    ${({ hasPrediction, isOverdue, theme }) => {
+      if (isOverdue) {
+        return `
+          content: '마감';
+          background-color: ${theme.color.GRAY_900};
+        `;
+      }
+
+      if (hasPrediction) {
+        return `
+          content: '결과대기';
+          background-color: ${theme.color.GRAY_500};
+        `;
+      }
+
+      return `
+        content: '예측가능';
+        background-color: ${theme.color.PURPLE_600}
+      `;
+    }}
+  }
+
+  ${({ hasPrediction, isOverdue, theme }) =>
+    hasPrediction &&
+    isOverdue &&
+    `
+      &::after {
+        content: '결과대기';
+        position: absolute;
+        top: ${pxToRem(16)};
+        left: ${pxToRem(-4)};
+        padding: ${pxToRem(4)};
+        background-color: ${theme.color.GRAY_500};
+        font-size: ${pxToRem(12)};
+        color: ${theme.color.WHITE};
+      }
+    `}
 `;
 
 const NextDate = styled.span`
@@ -54,6 +104,7 @@ const PredictButton = styled.button<CustomCSS>`
   height: ${pxToRem(40)};
   font-weight: 700;
   font-size: ${pxToRem(20)};
+  transition: all 0.25s ease-in-out;
 
   &:disabled {
     cursor: default;
@@ -86,7 +137,6 @@ const IncreaseStyle = (value: string) => css`
   border: 1px solid ${({ theme }) => theme.color.RED_200};
   border-bottom: 1px solid transparent;
   background-color: ${({ theme }) => theme.color.RED_50};
-  transition: all 0.3s ease-in-out;
 
   &:hover {
     background-color: ${({ theme }) => theme.color.RED_100};
@@ -118,7 +168,6 @@ const DecreaseStyle = (value: string) => css`
   border: 1px solid ${({ theme }) => theme.color.BLUE_200};
   border-top: 1px solid transparent;
   background-color: ${({ theme }) => theme.color.BLUE_50};
-  transition: all 0.3s ease-in-out;
 
   &:hover {
     background-color: ${({ theme }) => theme.color.BLUE_100};
@@ -162,43 +211,44 @@ const SubmitButtonStyle = css`
   }
 `;
 
-function PredictForm({ prediction }: Props) {
+function PredictForm({ prediction, endDate }: Props) {
+  const { coin, inputValue, handlePredict } = useStockFluctuationItem(
+    prediction.prediction_value
+  );
+
   const {
-    last_date: prevDate,
-    result_date: nextDate,
-    prediction_value: predictedValue
-  } = prediction;
-  const { coin, predictionValue, handlePredict } =
-    useStockFluctuationItem(predictedValue);
-  const requiredCoin =
-    dateFormatter.getDateDiff(prevDate, nextDate) *
-    COIN_REQUIREMENTS.STOCK_FLUCTUATION;
-  const lackOfCoin = typeof coin === 'number' && coin < requiredCoin;
-  const disabled = lackOfCoin || !!predictedValue;
-  const submitDisabled = !predictionValue || disabled;
+    nextDate,
+    predictionValue,
+    requiredCoin,
+    lackOfCoin,
+    hasPrediction,
+    isOverdue,
+    inputDisabled,
+    submitDisabled
+  } = usePredictForm({ prediction, endDate, coin, inputValue });
 
   return (
-    <Container
+    <Wrapper
       css={[lackOfCoin && HoverInactive('코인 부족')].filter(Boolean)}
-      hasPrediction={!!predictedValue}
+      className="form-predict"
     >
-      <RightContainer>
-        <NextDate>{dateFormatter.getFromMonthToDay(nextDate)}</NextDate>
+      <Container hasPrediction={hasPrediction} isOverdue={isOverdue}>
+        <NextDate>{dateFormatter.getDateFromMonthToDay(nextDate)}</NextDate>
         <ButtonContainer>
           <PredictButton
             type="button"
-            css={IncreaseStyle(predictionValue)}
+            css={IncreaseStyle(inputValue)}
             onClick={handlePredict('0')}
-            disabled={disabled}
+            disabled={inputDisabled}
           >
             <Triangle />
             상승
           </PredictButton>
           <PredictButton
             type="button"
-            css={DecreaseStyle(predictionValue)}
+            css={DecreaseStyle(inputValue)}
             onClick={handlePredict('1')}
-            disabled={disabled}
+            disabled={inputDisabled}
           >
             <Triangle negative />
             하락
@@ -210,11 +260,11 @@ function PredictForm({ prediction }: Props) {
             {requiredCoin}
           </Coin>
           <Button css={[Medium, SubmitButtonStyle]} disabled={submitDisabled}>
-            {predictedValue ? '예측완료' : '예측하기'}
+            {predictionValue ? '예측완료' : '예측하기'}
           </Button>
         </Flex>
-      </RightContainer>
-    </Container>
+      </Container>
+    </Wrapper>
   );
 }
 
