@@ -14,9 +14,13 @@ declare global {
   type MutationParams = {
     query?: Record<string, unknown>;
     body?: unknown;
+    param?: unknown;
   };
 
   type APIResponse<T = Record<string, unknown>> = T & { accessToken?: string };
+  type MutationResponse = {
+    isSuccess: boolean;
+  };
 
   type SVGIcon = React.FunctionComponent<
     React.SVGProps<SVGSVGElement> & {

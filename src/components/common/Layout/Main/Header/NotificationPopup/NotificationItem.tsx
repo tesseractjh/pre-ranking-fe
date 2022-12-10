@@ -49,7 +49,7 @@ function NotificationItem({ data, onClick }: Props) {
 
   return (
     <Container>
-      <Button type="button" onClick={onClick({ body: id }, link)}>
+      <Button type="button" onClick={onClick({ param: id }, link)}>
         <Text>{text}</Text>
         <Time>{timeFormatter.relativeTime(time)}</Time>
       </Button>

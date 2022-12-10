@@ -8,16 +8,16 @@ export const getNotifications = async (params: Params) => {
 };
 
 export const deleteNotification = async (params: MutationParams) => {
-  const { body } = params;
-  const { data } = await authInstance.delete<
-    APIResponse<{ isSuccess: boolean }>
-  >(`/notification/${body}`);
+  const { param } = params;
+  const { data } = await authInstance.delete<APIResponse<MutationResponse>>(
+    `/notification/${param}`
+  );
   return data;
 };
 
 export const deleteAllNotifications = async () => {
-  const { data } = await authInstance.delete<
-    APIResponse<{ isSuccess: boolean }>
-  >('notification');
+  const { data } = await authInstance.delete<APIResponse<MutationResponse>>(
+    'notification'
+  );
   return data;
 };
