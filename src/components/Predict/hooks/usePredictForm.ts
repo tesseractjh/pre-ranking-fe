@@ -13,6 +13,7 @@ interface Props {
 
 function usePredictForm({ prediction, endDate, coin, inputValue }: Props) {
   const {
+    prediction_id: id,
     last_date: prevDate,
     result_date: nextDate,
     prediction_value: predictionValue
@@ -28,6 +29,7 @@ function usePredictForm({ prediction, endDate, coin, inputValue }: Props) {
   const submitDisabled = !inputValue || inputDisabled;
 
   return {
+    id,
     prevDate,
     nextDate,
     predictionValue,

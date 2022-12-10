@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import pxToRem from '@utils/pxToRem';
 import dateFormatter from '@utils/dateFormatter';
@@ -50,6 +51,14 @@ const Container = styled.div<{ hasPrediction: boolean; isOverdue: boolean }>`
     color: ${({ theme }) => theme.color.WHITE};
 
     ${({ hasPrediction, isOverdue, theme }) => {
+      if (isOverdue && hasPrediction) {
+        return `
+          content: '마감';
+          top: ${pxToRem(16)};
+          background-color: ${theme.color.GRAY_900};
+        `;
+      }
+
       if (isOverdue) {
         return `
           content: '마감';
@@ -59,15 +68,12 @@ const Container = styled.div<{ hasPrediction: boolean; isOverdue: boolean }>`
 
       if (hasPrediction) {
         return `
-          content: '결과대기';
-          background-color: ${theme.color.GRAY_500};
+          content: '예측완료';
+          background-color: ${theme.color.PURPLE_600};
         `;
       }
 
-      return `
-        content: '예측가능';
-        background-color: ${theme.color.PURPLE_600}
-      `;
+      return '';
     }}
   }
 
@@ -76,12 +82,12 @@ const Container = styled.div<{ hasPrediction: boolean; isOverdue: boolean }>`
     isOverdue &&
     `
       &::after {
-        content: '결과대기';
+        content: '예측완료';
         position: absolute;
-        top: ${pxToRem(16)};
+        top: ${pxToRem(-4)};
         left: ${pxToRem(-4)};
         padding: ${pxToRem(4)};
-        background-color: ${theme.color.GRAY_500};
+        background-color: ${theme.color.PURPLE_600};
         font-size: ${pxToRem(12)};
         color: ${theme.color.WHITE};
       }
@@ -131,6 +137,11 @@ const Coin = styled.span`
     fill: ${({ theme }) => theme.color.YELLOW_500};
     stroke: ${({ theme }) => theme.color.BLACK};
   }
+`;
+
+const DetailLink = styled(Link)<{ $css: CustomCSS['css'] }>`
+  ${({ $css }) => $css || ''}
+  text-align: center;
 `;
 
 const IncreaseStyle = (value: string) => css`
@@ -220,8 +231,8 @@ function PredictForm({ prediction, endDate }: Props) {
     });
 
   const {
+    id,
     nextDate,
-    predictionValue,
     requiredCoin,
     lackOfCoin,
     hasPrediction,
@@ -264,13 +275,22 @@ function PredictForm({ prediction, endDate }: Props) {
             <CoinIcon />
             {requiredCoin}
           </Coin>
-          <Button
-            css={[Medium, SubmitButtonStyle]}
-            disabled={submitDisabled}
-            onClick={handleSubmit}
-          >
-            {predictionValue ? '예측완료' : '예측하기'}
-          </Button>
+          {isOverdue ? (
+            <DetailLink
+              $css={[Medium, SubmitButtonStyle]}
+              to={`/predict/detail/${id}`}
+            >
+              예측 상세보기
+            </DetailLink>
+          ) : (
+            <Button
+              css={[Medium, SubmitButtonStyle]}
+              disabled={submitDisabled}
+              onClick={handleSubmit}
+            >
+              {hasPrediction ? '예측완료' : '예측하기'}
+            </Button>
+          )}
         </Flex>
       </Container>
     </Wrapper>

@@ -24,7 +24,7 @@ const Wrapper = styled.li<
     if (isOverdue) {
       color = theme.color.GRAY_600;
     } else {
-      color = theme.color[hasPrediction ? 'GRAY_300' : 'PURPLE_300'];
+      color = theme.color[hasPrediction ? 'PURPLE_300' : 'GRAY_300'];
     }
 
     return `
