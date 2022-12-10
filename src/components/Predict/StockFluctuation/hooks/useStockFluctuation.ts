@@ -3,7 +3,7 @@ import usePrediction from '@hooks/queries/usePrediction';
 
 function useStockFluctuation() {
   const { data, fetchNextPage } = usePrediction({
-    category: 'info_stock_fluctuation'
+    category: 'stock_fluctuation'
   });
 
   const handleIntersect = useCallback(async () => {

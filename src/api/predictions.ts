@@ -12,3 +12,12 @@ export const getPredictions = async (params: Params) => {
   >('/prediction', { params });
   return data;
 };
+
+export const postUserPrediction = async (params: Params) => {
+  const { body } = params;
+  const { data } = await authInstance.post<APIResponse<MutationResponse>>(
+    '/prediction',
+    body
+  );
+  return data;
+};

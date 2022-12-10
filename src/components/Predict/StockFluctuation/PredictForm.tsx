@@ -212,9 +212,12 @@ const SubmitButtonStyle = css`
 `;
 
 function PredictForm({ prediction, endDate }: Props) {
-  const { coin, inputValue, handlePredict } = useStockFluctuationItem(
-    prediction.prediction_value
-  );
+  const { coin, inputValue, handlePredict, handleSubmit } =
+    useStockFluctuationItem({
+      predictionId: prediction.prediction_id,
+      predictionValue: prediction.prediction_value,
+      category: 'stock_fluctuation'
+    });
 
   const {
     nextDate,
@@ -229,7 +232,9 @@ function PredictForm({ prediction, endDate }: Props) {
 
   return (
     <Wrapper
-      css={[lackOfCoin && HoverInactive('코인 부족')].filter(Boolean)}
+      css={[
+        lackOfCoin && !hasPrediction && !isOverdue && HoverInactive('코인 부족')
+      ].filter(Boolean)}
       className="form-predict"
     >
       <Container hasPrediction={hasPrediction} isOverdue={isOverdue}>
@@ -259,7 +264,11 @@ function PredictForm({ prediction, endDate }: Props) {
             <CoinIcon />
             {requiredCoin}
           </Coin>
-          <Button css={[Medium, SubmitButtonStyle]} disabled={submitDisabled}>
+          <Button
+            css={[Medium, SubmitButtonStyle]}
+            disabled={submitDisabled}
+            onClick={handleSubmit}
+          >
             {predictionValue ? '예측완료' : '예측하기'}
           </Button>
         </Flex>

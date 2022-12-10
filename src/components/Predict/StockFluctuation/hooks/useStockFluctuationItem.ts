@@ -1,15 +1,33 @@
+import useCreateUserPrediction from '@hooks/mutations/useCreateUserPrediction';
 import useUserInfo from '@hooks/queries/useUserInfo';
 import { useState } from 'react';
 
-function useStockFluctuationItem(predictedValue: string | null) {
-  const [inputValue, setInputValue] = useState(predictedValue ?? '');
+interface Props {
+  predictionId: number;
+  predictionValue: string | null;
+  category?: string;
+}
+
+function useStockFluctuationItem({
+  predictionId,
+  predictionValue,
+  category
+}: Props) {
+  const [inputValue, setInputValue] = useState(predictionValue ?? '');
   const { data } = useUserInfo(false);
+  const { mutateAsync } = useCreateUserPrediction(category);
 
   const handlePredict = (value: string) => () => {
     setInputValue(value);
   };
 
-  return { coin: data?.user.coin, inputValue, handlePredict };
+  const handleSubmit = async () => {
+    await mutateAsync({
+      body: { category, predictionId, predictionValue: inputValue }
+    });
+  };
+
+  return { coin: data?.user.coin, inputValue, handlePredict, handleSubmit };
 }
 
 export default useStockFluctuationItem;
