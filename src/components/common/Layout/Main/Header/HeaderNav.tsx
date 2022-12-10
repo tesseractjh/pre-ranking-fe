@@ -78,17 +78,17 @@ const Anchor = styled(Link)<{ $isActive: boolean }>`
 `;
 
 function HeaderNav() {
-  const { page, id } = useHeaderNav();
+  const { page, params } = useHeaderNav();
 
   return (
     <Container>
       <Item>
-        <Anchor to={`/predict/${id}`} $isActive={page === 'predict'}>
+        <Anchor to={`/predict/${params}`} $isActive={page === 'predict'}>
           예측
         </Anchor>
       </Item>
       <Item>
-        <Anchor to={`/ranking/${id}`} $isActive={page === 'ranking'}>
+        <Anchor to={`/ranking/${params}`} $isActive={page === 'ranking'}>
           랭킹
         </Anchor>
       </Item>
