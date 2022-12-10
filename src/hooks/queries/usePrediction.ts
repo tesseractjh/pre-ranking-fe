@@ -12,6 +12,8 @@ function usePrediction({ category }: Props) {
     ({ pageParam = 0 }) =>
       API.prediction.getPredictions({ category, lastId: pageParam }),
     {
+      staleTime: 15 * 1000,
+      cacheTime: 60 * 1000,
       suspense: true,
       getNextPageParam: (lastPage) =>
         lastPage.predictions[0] &&

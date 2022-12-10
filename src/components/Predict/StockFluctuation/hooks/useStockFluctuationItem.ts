@@ -1,6 +1,6 @@
 import useCreateUserPrediction from '@hooks/mutations/useCreateUserPrediction';
 import useUserInfo from '@hooks/queries/useUserInfo';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Props {
   predictionId: number;
@@ -16,6 +16,12 @@ function useStockFluctuationItem({
   const [inputValue, setInputValue] = useState(predictionValue ?? '');
   const { data } = useUserInfo(false);
   const { mutateAsync } = useCreateUserPrediction(category);
+
+  useEffect(() => {
+    if (predictionValue) {
+      setInputValue(predictionValue);
+    }
+  }, [predictionValue]);
 
   const handlePredict = (value: string) => () => {
     setInputValue(value);
