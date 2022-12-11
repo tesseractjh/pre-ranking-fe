@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import pxToRem from '@utils/pxToRem';
@@ -297,4 +298,4 @@ function PredictForm({ prediction, endDate }: Props) {
   );
 }
 
-export default PredictForm;
+export default React.memo(PredictForm);

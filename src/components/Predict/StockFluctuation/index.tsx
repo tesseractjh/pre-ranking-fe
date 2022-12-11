@@ -1,3 +1,5 @@
+import PredictFilter from '../Filter';
+import Checkbox from '../Filter/Checkbox';
 import PredictComment from '../PredictComment';
 import StockFluctuationList from './StockFluctuationList';
 
@@ -15,6 +17,13 @@ function StockFluctuation() {
         <br />- 현재 종가는 실시간 가격이 아니며, 예측이 시작된 시각에
         한국거래소에서 제공하는 API의 최신 종가를 나타냅니다.
       </PredictComment>
+      <PredictFilter>
+        <Checkbox
+          id="unsubmitted"
+          category="stock_fluctuation"
+          content="아직 참여하지 않은 예측"
+        />
+      </PredictFilter>
       <StockFluctuationList />
     </>
   );

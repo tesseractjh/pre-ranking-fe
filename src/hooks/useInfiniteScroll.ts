@@ -10,6 +10,7 @@ const observerCallback =
   };
 
 function useInfiniteScroll<T extends Element>(
+  data: unknown,
   onIntersect: () => Promise<unknown>
 ) {
   const target = useRef<T>(null);
@@ -22,7 +23,7 @@ function useInfiniteScroll<T extends Element>(
       observer.observe(target.current.lastElementChild);
       return () => observer.disconnect();
     }
-  }, [target.current?.lastElementChild, onIntersect]);
+  }, [target.current?.lastElementChild, onIntersect, data]);
 
   return target;
 }

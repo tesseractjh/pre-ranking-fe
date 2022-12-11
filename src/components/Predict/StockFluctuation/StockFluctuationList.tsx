@@ -1,15 +1,15 @@
 import PredictContainer from '../PredictContainer';
-import useStockFluctuation from './hooks/useStockFluctuation';
 import StockFluctuationItem from './StockFluctuationItem';
 import PredictWrapper from '../PredictWrapper';
+import usePredictionList from '../hooks/usePredictionList';
 
 const PREDICTION_PERIOD = 24 * 60 * 60 * 1000;
 
 function StockFluctuationList() {
-  const { data, handleIntersect } = useStockFluctuation();
+  const { data, handleIntersect } = usePredictionList('stock_fluctuation');
 
   return (
-    <PredictContainer onIntersect={handleIntersect}>
+    <PredictContainer data={data} onIntersect={handleIntersect}>
       {data.map((prediction) => {
         const endDate =
           new Date(prediction.created_at).getTime() + PREDICTION_PERIOD;

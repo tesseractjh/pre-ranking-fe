@@ -1,5 +1,6 @@
-import pxToRem from '@utils/pxToRem';
+import React from 'react';
 import styled from 'styled-components';
+import pxToRem from '@utils/pxToRem';
 
 interface Props extends CustomCSS {
   all?: boolean;
@@ -103,4 +104,4 @@ function PredictWrapper({
   );
 }
 
-export default PredictWrapper;
+export default React.memo(PredictWrapper);

@@ -7,11 +7,8 @@ function useCreateUserPrediction(category?: string) {
 
   return useMutation(API.prediction.postUserPrediction, {
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['prediction', {}],
-        exact: true
-      });
       queryClient.invalidateQueries(['prediction', { category }]);
+      queryClient.invalidateQueries(['prediction', { category: 'all' }]);
       queryClient.invalidateQueries(['user']);
     }
   });

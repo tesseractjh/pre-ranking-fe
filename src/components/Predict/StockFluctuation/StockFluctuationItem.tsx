@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import PredictForm from './PredictForm';
 import PredictInfo from './PredictInfo';
@@ -24,4 +25,4 @@ function StockFluctuationItem({ prediction, endDate }: Props) {
   );
 }
 
-export default StockFluctuationItem;
+export default React.memo(StockFluctuationItem);

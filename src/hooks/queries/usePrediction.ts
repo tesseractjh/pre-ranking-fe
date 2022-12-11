@@ -2,15 +2,16 @@ import API from '@api/index';
 import useInfiniteQuery from '@hooks/useInfiniteQuery';
 
 interface Props {
-  category?: string;
+  category: string;
+  unsubmitted: boolean;
 }
 
-function usePrediction({ category }: Props) {
-  const params = { category };
+function usePrediction({ category, unsubmitted }: Props) {
+  const params = { category, unsubmitted: unsubmitted ? true : undefined };
   return useInfiniteQuery(
     ['prediction', params],
     ({ pageParam = 0 }) =>
-      API.prediction.getPredictions({ category, lastId: pageParam }),
+      API.prediction.getPredictions({ ...params, lastId: pageParam }),
     {
       staleTime: 15 * 1000,
       cacheTime: 60 * 1000,

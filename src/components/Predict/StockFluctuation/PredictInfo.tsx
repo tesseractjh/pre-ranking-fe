@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import pxToRem from '@utils/pxToRem';
 import dateFormatter from '@utils/dateFormatter';
@@ -115,4 +116,4 @@ function PredictInfo({ prediction, endDate }: Props) {
   );
 }
 
-export default PredictInfo;
+export default React.memo(PredictInfo);
