@@ -2,6 +2,7 @@ declare namespace Model {
   interface Notification {
     notification_id: number;
     user_id: number;
+    notification_title: string;
     notification_text: string;
     notification_link: string;
     created_at: string;

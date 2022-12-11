@@ -19,7 +19,7 @@ const Container = styled.li`
 `;
 
 const Button = styled.button`
-  ${({ theme }) => theme.mixin.inlineFlex('space-between', 'flex-start')}
+  ${({ theme }) => theme.mixin.inlineFlex('flex-start', 'stretch')}
   width: 100%;
   min-height: ${pxToRem(80)};
   padding: ${pxToRem(16, 20)};
@@ -27,9 +27,22 @@ const Button = styled.button`
   text-align: left;
 `;
 
+const Title = styled.strong`
+  font-weight: 700;
+`;
+
+const Flex = styled.span`
+  overflow: hidden;
+  flex: 1;
+  ${({ theme }) =>
+    theme.mixin.inlineFlexColumn('space-between', 'stretch', pxToRem(10))}
+  width: 100%;
+`;
+
 const Text = styled.span`
   flex: 1;
   word-break: break-all;
+  line-height: 1.3;
 `;
 
 const Time = styled.time`
@@ -42,6 +55,7 @@ const Time = styled.time`
 function NotificationItem({ data, onClick }: Props) {
   const {
     notification_id: id,
+    notification_title: title,
     notification_text: text,
     notification_link: link,
     created_at: time
@@ -50,7 +64,10 @@ function NotificationItem({ data, onClick }: Props) {
   return (
     <Container>
       <Button type="button" onClick={onClick({ param: id }, link)}>
-        <Text>{text}</Text>
+        <Flex>
+          <Title>{title}</Title>
+          <Text>{text}</Text>
+        </Flex>
         <Time>{timeFormatter.relativeTime(time)}</Time>
       </Button>
     </Container>
