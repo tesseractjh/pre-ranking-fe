@@ -1,8 +1,9 @@
-import pxToRem from '@utils/pxToRem';
 import styled from 'styled-components';
+import { INNER_CONTAINER_WIDTH } from '@constants/style';
+import pxToRem from '@utils/pxToRem';
 
 const Container = styled.div`
-  max-width: ${pxToRem(1140)};
+  max-width: ${pxToRem(INNER_CONTAINER_WIDTH)};
   height: 100%;
   padding: ${pxToRem(0, 40)};
   margin: 0 auto;

@@ -14,6 +14,11 @@ interface Props {
 
 const Container = styled.div`
   ${({ theme }) => theme.mixin.flex('flex-start', 'stretch')}
+
+  ${({ theme }) =>
+    theme.media.laptop(`
+    flex-direction: column;
+  `)}
 `;
 
 function StockFluctuationItem({ prediction, endDate }: Props) {

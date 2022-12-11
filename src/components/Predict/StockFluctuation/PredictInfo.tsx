@@ -15,24 +15,50 @@ interface Props {
 
 const Container = styled.div`
   flex: 1;
-  ${({ theme }) => theme.mixin.flexColumn('space-between', 'stretch')}
+  ${({ theme }) =>
+    theme.mixin.flexColumn('space-between', 'stretch', pxToRem(10))}
   padding: ${pxToRem(16)};
-  border-right: 1px solid ${({ theme }) => theme.color.GRAY_300};
+
+  ${({ theme }) =>
+    theme.media.laptop(`
+      min-height: ${pxToRem(200)};
+  `)}
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      min-height: ${pxToRem(160)};
+  `)}
 `;
 
 const PrevDate = styled.span`
   font-weight: 700;
   font-size: ${pxToRem(16)};
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      font-size: ${pxToRem(14)};
+  `)}
 `;
 
 const StockInfoTop = styled.div`
   ${({ theme }) => theme.mixin.flex('flex-start', 'flex-end', pxToRem(10))}
+  flex-wrap: wrap;
   font-size: ${pxToRem(14)};
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      font-size: ${pxToRem(12)};
+  `)}
 `;
 
 const StockName = styled.strong`
   font-weight: 700;
   font-size: ${pxToRem(28)};
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      font-size: ${pxToRem(20)};
+  `)}
 `;
 
 const MarketCategory = styled.span`
@@ -44,6 +70,7 @@ const MarketCategory = styled.span`
 
 const StockInfoBottom = styled.div<{ vs: number }>`
   ${({ theme }) => theme.mixin.flex('flex-start', 'flex-end', pxToRem(16))}
+  flex-wrap: wrap;
   margin-top: ${pxToRem(10)};
   font-size: ${pxToRem(14)};
 
@@ -53,12 +80,24 @@ const StockInfoBottom = styled.div<{ vs: number }>`
     }
     return theme.color[vs > 0 ? 'RED_600' : 'BLUE_600'];
   }};
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      gap: ${pxToRem(12)};
+      font-size: ${pxToRem(12)};
+  `)}
 `;
 
 const StockPrice = styled.strong`
   font-weight: 900;
   font-size: ${pxToRem(32)};
   letter-spacing: -2px;
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      font-size: ${pxToRem(28)};
+      letter-spacing: -1px;
+  `)}
 `;
 
 const Bold = styled.span`
@@ -69,6 +108,11 @@ const PredictDetail = styled.div`
   ${({ theme }) => theme.mixin.flexColumn('center', 'flex-start', pxToRem(6))}
   font-size: ${pxToRem(14)};
   color: ${({ theme }) => theme.color.GRAY_800};
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      font-size: ${pxToRem(12)};
+  `)}
 `;
 
 function PredictInfo({ prediction, endDate }: Props) {

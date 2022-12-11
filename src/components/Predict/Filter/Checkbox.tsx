@@ -11,8 +11,6 @@ interface Props {
 
 const Container = styled.button<{ checked: boolean }>`
   ${({ theme }) => theme.mixin.flex()}
-  padding: ${pxToRem(0, 20)};
-  margin-bottom: ${pxToRem(30)};
   font-size: ${pxToRem(16)};
 
   &:hover > span {
@@ -35,6 +33,11 @@ const Container = styled.button<{ checked: boolean }>`
         fill: ${theme.color.PURPLE_500};
       }
     `}
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      font-size: ${pxToRem(14)};
+  `)}
 `;
 
 const IconWrapper = styled.span`
@@ -52,6 +55,14 @@ const IconWrapper = styled.span`
     width: 100%;
     height: 100%;
   }
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      width: ${pxToRem(16)};
+      height: ${pxToRem(16)};
+      padding: ${pxToRem(1)};
+      margin-right: ${pxToRem(8)};
+  `)}
 `;
 
 function Checkbox({ id, category, content }: Props) {

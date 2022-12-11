@@ -10,6 +10,11 @@ interface Props {
 
 const Container = styled.ul`
   padding: ${pxToRem(0, 20)};
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      padding: 0;
+  `)}
 `;
 
 function PredictContainer({ data, onIntersect, children }: Props) {

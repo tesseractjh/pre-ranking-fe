@@ -76,6 +76,12 @@ const Header = styled.header`
     height: ${pxToRem(12)};
     margin-right: ${pxToRem(8)};
   }
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      padding: ${pxToRem(8, 16)};
+      font-size: ${pxToRem(14)};
+  `)}
 `;
 
 function PredictWrapper({

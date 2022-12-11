@@ -33,6 +33,11 @@ const Wrapper = styled.div<CustomCSS>`
     font-weight: 700;
     font-size: ${pxToRem(24)};
   }
+
+  ${({ theme }) =>
+    theme.media.laptop(`
+      width: 100%;
+  `)}
 `;
 
 const Container = styled.div<{ hasPrediction: boolean; isOverdue: boolean }>`
@@ -99,6 +104,11 @@ const NextDate = styled.span`
   font-weight: 700;
   font-size: ${pxToRem(16)};
   text-align: center;
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      font-size: ${pxToRem(14)};
+  `)}
 `;
 
 const ButtonContainer = styled.div`
@@ -117,12 +127,17 @@ const PredictButton = styled.button<CustomCSS>`
     cursor: default;
   }
 
+  ${({ theme }) =>
+    theme.media.tablet(`
+      font-size: ${pxToRem(18)};
+  `)}
+
   ${({ css }) => css || ''}
 `;
 
 const Flex = styled.div`
   ${({ theme }) => theme.mixin.flex('flex-start', 'stretch', pxToRem(10))}
-  padding: ${pxToRem(0, 10)};
+  padding-left: ${pxToRem(10)};
 `;
 
 const Coin = styled.span`

@@ -1,3 +1,4 @@
+import { INNER_CONTAINER_WIDTH } from '@constants/style';
 import {
   css,
   DefaultTheme,
@@ -10,6 +11,13 @@ const media = {
     cssString: string | FlattenInterpolation<ThemeProps<DefaultTheme>>
   ) => css`
     @media screen and (min-width: 769px) {
+      ${cssString}
+    }
+  `,
+  laptop: (
+    cssString: string | FlattenInterpolation<ThemeProps<DefaultTheme>>
+  ) => css`
+    @media screen and (max-width: ${INNER_CONTAINER_WIDTH - 1}px) {
       ${cssString}
     }
   `,

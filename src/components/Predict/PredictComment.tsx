@@ -13,6 +13,11 @@ const Container = styled.p`
   font-size: ${pxToRem(14)};
   line-height: 1.5;
   color: ${({ theme }) => theme.color.GRAY_700};
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      font-size: ${pxToRem(12)};
+  `)}
 `;
 
 function PredictComment({ children }: Props) {
