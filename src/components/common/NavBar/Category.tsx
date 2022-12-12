@@ -1,7 +1,7 @@
-import pxToRem from '@utils/pxToRem';
 import styled from 'styled-components';
-import type { NavBarCategory } from '../types/navBar';
-import { isGroup } from '../types/navBar';
+import pxToRem from '@utils/pxToRem';
+import type { NavBarCategory } from './types/navBar';
+import { isGroup } from './types/navBar';
 import NavBarGroup from './NavBarGroup';
 import NavBarLink from './NavBarLink';
 

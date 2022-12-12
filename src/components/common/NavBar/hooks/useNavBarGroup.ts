@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import type { NavBarLinkButton } from '../../types/navBar';
+import type { NavBarLinkButton } from '../types/navBar';
 
 function useNavBarGroup(
   ref: React.RefObject<HTMLUListElement>,

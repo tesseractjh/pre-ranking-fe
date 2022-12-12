@@ -2,9 +2,9 @@ import { ReactComponent as EconomyIcon } from '@assets/icons/predict/economy.svg
 import { ReactComponent as StockIcon } from '@assets/icons/predict/stock.svg';
 import { ReactComponent as ETCIcon } from '@assets/icons/predict/etc.svg';
 import { ReactComponent as LottoIcon } from '@assets/icons/predict/lotto.svg';
-import { NavBarCategory } from '../types/navBar';
+import type { NavBarCategory } from '@components/common/NavBar/types/navBar';
 
-const NAV_BAR_LIST: NavBarCategory[] = [
+export const NAV_BAR_LIST: NavBarCategory[] = [
   {
     links: [
       {
@@ -45,5 +45,3 @@ const NAV_BAR_LIST: NavBarCategory[] = [
     ]
   }
 ];
-
-export default NAV_BAR_LIST;

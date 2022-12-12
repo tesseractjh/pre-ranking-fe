@@ -3,9 +3,13 @@ import pxToRem from '@utils/pxToRem';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css, keyframes } from 'styled-components';
-import NAV_BAR_LIST from '../constants/navBar';
 import Category from './Category';
 import useNavBar from './hooks/useNavBar';
+import type { NavBarCategory } from './types/navBar';
+
+interface Props extends CustomCSS {
+  content: NavBarCategory[]
+}
 
 const TabletAnimation = keyframes`
   from {
@@ -91,7 +95,7 @@ const Container = styled.ul`
   `)}
 `;
 
-function NavBar({ css }: CustomCSS) {
+function NavBar({ css, content }: Props) {
   const container = useRef<HTMLUListElement>(null);
   const hasScroll = useNavBar(container);
 
@@ -103,7 +107,7 @@ function NavBar({ css }: CustomCSS) {
         </Link>
       </LogoWrapper>
       <Container ref={container}>
-        {NAV_BAR_LIST.map((props) => (
+        {content.map((props) => (
           <Category key={props.content ?? ''} {...props} />
         ))}
       </Container>

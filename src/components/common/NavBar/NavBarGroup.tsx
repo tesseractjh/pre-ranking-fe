@@ -1,7 +1,7 @@
 import pxToRem from '@utils/pxToRem';
 import { useRef } from 'react';
 import styled from 'styled-components';
-import type { NavBarLinkGroup } from '../types/navBar';
+import type { NavBarLinkGroup } from './types/navBar';
 import useNavBarGroup from './hooks/useNavBarGroup';
 import NavBarLink from './NavBarLink';
 

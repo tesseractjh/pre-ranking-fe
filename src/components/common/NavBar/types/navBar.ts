@@ -15,3 +15,4 @@ export type NavBarCategory = {
 };
 
 export const isGroup = (link: any): link is NavBarLinkGroup => link.children;
+export const isButton = (link: any): link is NavBarLinkButton => !link.children;

@@ -1,8 +1,9 @@
-import Modal from '@components/common/Modal';
-import pxToRem from '@utils/pxToRem';
 import React from 'react';
 import { css } from 'styled-components';
-import NavBar from '../../Menu/NavBar';
+import Modal from '@components/common/Modal';
+import NavBar from '@components/common/NavBar';
+import pxToRem from '@utils/pxToRem';
+import { NAV_BAR_LIST } from '@constants/navBar';
 
 const ModalStyle = css`
   ${({ theme }) =>
@@ -29,7 +30,7 @@ function MenuModal(
 ) {
   return (
     <Modal {...props} css={ModalStyle}>
-      <NavBar css={NavBarStyle} />
+      <NavBar css={NavBarStyle} content={NAV_BAR_LIST} />
     </Modal>
   );
 }

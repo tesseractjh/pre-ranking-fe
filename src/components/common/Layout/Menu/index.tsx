@@ -6,15 +6,16 @@ import useReload from '@hooks/useReload';
 import InnerContainer from '@components/common/InnerContainer';
 import ComponentLoading from '@components/common/Fallback/Loading/ComponentLoading';
 import ComponentError from '@components/common/Fallback/Error/ComponentError';
+import NavBar from '@components/common/NavBar';
 import pxToRem from '@utils/pxToRem';
 import {
   HEADER_HEIGHT,
   HEADER_HEIGHT_TABLET,
   SUB_HEADER_HEIGHT_TABLET
 } from '@constants/style';
+import { NAV_BAR_LIST } from '@constants/navBar';
 import Breadcrumb from './Breadcrumb';
 import Coin from './Coin';
-import NavBar from './NavBar';
 
 const Flex = styled.div`
   ${({ theme }) => theme.mixin.flex('flex-start', 'stretch', pxToRem(20))}
@@ -51,7 +52,7 @@ function MenuLayout() {
   return (
     <InnerContainer>
       <Flex>
-        <NavBar />
+        <NavBar content={NAV_BAR_LIST} />
         <ErrorBoundary
           FallbackComponent={ComponentError}
           onReset={handleReload}

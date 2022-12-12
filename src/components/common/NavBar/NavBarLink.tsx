@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import pxToRem from '@utils/pxToRem';
 import { ReactComponent as ChevronIcon } from '@assets/icons/chevron.svg';
-import type { NavBarLinkButton } from '../types/navBar';
+import type { NavBarLinkButton } from './types/navBar';
 import useNavBarLink from './hooks/useNavBarLink';
 
 interface Props extends Omit<NavBarLinkButton, 'link'> {
