@@ -1,13 +1,12 @@
 import { useLocation } from 'react-router-dom';
-import type { NavBarCategory } from '@components/common/NavBar/types/navBar';
 import { isGroup, isButton } from '@components/common/NavBar/types/navBar';
-import NAV_BAR_LIST from '@constants/navBar';
+import { NAV_BAR_LIST } from '@constants/navBar';
 
 const getBreadcrumbs = (param: string) => {
   let breadcrumbs: (string | undefined)[] = [];
 
   NAV_BAR_LIST.forEach(({ links, content: categoryContent }) => {
-    links.forEach((groupLink: NavBarCategory['links']) => {
+    links.forEach((groupLink) => {
       if (isGroup(groupLink)) {
         groupLink.children.forEach(
           ({ link: childLink, content: childContent }) => {

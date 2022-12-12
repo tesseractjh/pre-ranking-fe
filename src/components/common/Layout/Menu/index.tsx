@@ -1,12 +1,8 @@
-import { Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
-import { ErrorBoundary } from 'react-error-boundary';
 import styled from 'styled-components';
 import useReload from '@hooks/useReload';
-import InnerContainer from '@components/common/InnerContainer';
+import LayoutWithNavBar from '@components/common/LayoutWithNavBar';
 import ComponentLoading from '@components/common/Fallback/Loading/ComponentLoading';
 import ComponentError from '@components/common/Fallback/Error/ComponentError';
-import NavBar from '@components/common/NavBar';
 import pxToRem from '@utils/pxToRem';
 import {
   HEADER_HEIGHT,
@@ -16,20 +12,6 @@ import {
 import { NAV_BAR_LIST } from '@constants/navBar';
 import Breadcrumb from './Breadcrumb';
 import Coin from './Coin';
-
-const Flex = styled.div`
-  ${({ theme }) => theme.mixin.flex('flex-start', 'stretch', pxToRem(20))}
-  margin-top: ${pxToRem(40)};
-
-  ${({ theme }) =>
-    theme.media.tablet(`
-      margin-top: ${pxToRem(20)};
-  `)}
-`;
-
-const Section = styled.section`
-  flex: 1;
-`;
 
 const Sticky = styled.div`
   ${({ theme }) => theme.mixin.flex('space-between')}
@@ -50,25 +32,18 @@ function MenuLayout() {
   const handleReload = useReload();
 
   return (
-    <InnerContainer>
-      <Flex>
-        <NavBar content={NAV_BAR_LIST} />
-        <ErrorBoundary
-          FallbackComponent={ComponentError}
-          onReset={handleReload}
-        >
-          <Suspense fallback={<ComponentLoading />}>
-            <Section>
-              <Sticky>
-                <Breadcrumb />
-                <Coin />
-              </Sticky>
-              <Outlet />
-            </Section>
-          </Suspense>
-        </ErrorBoundary>
-      </Flex>
-    </InnerContainer>
+    <LayoutWithNavBar
+      navBarContent={NAV_BAR_LIST}
+      errorFallback={ComponentError}
+      onReset={handleReload}
+      suspenseFallback={<ComponentLoading />}
+      componentBeforeOutlet={
+        <Sticky>
+          <Breadcrumb />
+          <Coin />
+        </Sticky>
+      }
+    />
   );
 }
 
