@@ -9,9 +9,16 @@ interface Props {
   endDate: number;
   coin: number | undefined;
   inputValue: string;
+  category: keyof typeof COIN_REQUIREMENTS;
 }
 
-function usePredictForm({ prediction, endDate, coin, inputValue }: Props) {
+function usePredictForm({
+  prediction,
+  endDate,
+  coin,
+  inputValue,
+  category
+}: Props) {
   const {
     prediction_id: id,
     last_date: prevDate,
@@ -20,8 +27,7 @@ function usePredictForm({ prediction, endDate, coin, inputValue }: Props) {
   } = prediction;
 
   const requiredCoin =
-    dateFormatter.getDateDiff(prevDate, nextDate) *
-    COIN_REQUIREMENTS.STOCK_FLUCTUATION;
+    dateFormatter.getDateDiff(prevDate, nextDate) * COIN_REQUIREMENTS[category];
   const lackOfCoin = typeof coin === 'number' && coin < requiredCoin;
   const hasPrediction = !!predictionValue;
   const isOverdue = Date.now() > endDate;

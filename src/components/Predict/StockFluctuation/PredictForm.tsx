@@ -255,7 +255,13 @@ function PredictForm({ prediction, endDate }: Props) {
     isOverdue,
     inputDisabled,
     submitDisabled
-  } = usePredictForm({ prediction, endDate, coin, inputValue });
+  } = usePredictForm({
+    prediction,
+    endDate,
+    coin,
+    inputValue,
+    category: 'stock_fluctuation'
+  });
 
   return (
     <Wrapper

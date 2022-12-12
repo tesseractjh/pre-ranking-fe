@@ -1,5 +1,5 @@
 const COIN_REQUIREMENTS = {
-  STOCK_FLUCTUATION: 10
-};
+  stock_fluctuation: 10
+} as const;
 
 export default COIN_REQUIREMENTS;
