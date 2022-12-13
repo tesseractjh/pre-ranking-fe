@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ReactComponent as MenuIcon } from '@assets/icons/menu.svg';
 import pxToRem from '@utils/pxToRem';
 import { HeaderButtonStyle } from './HeaderMenu';
-import useMenu from './hooks/useMenu';
+import useMenu from '../hooks/useMenu';
 import MenuModal from './MenuModal';
 
 const Container = styled.button`

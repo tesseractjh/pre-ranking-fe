@@ -5,9 +5,13 @@ import {
   HEADER_HEIGHT_TABLET,
   SUB_HEADER_HEIGHT_TABLET
 } from '@constants/style';
-import useHeaderNav from './hooks/useHeaderNav';
+import useHeaderNav from '../hooks/useHeaderNav';
 
-const Container = styled.ul`
+interface Props {
+  hasSubMenu: boolean;
+}
+
+const Container = styled.ul<{ hasSubMenu: boolean }>`
   ${({ theme }) => theme.mixin.flex('space-between', 'center', pxToRem(30))}
   height: 100%;
 
@@ -21,6 +25,8 @@ const Container = styled.ul`
       height: ${pxToRem(SUB_HEADER_HEIGHT_TABLET)};
       border-bottom: 1px solid transparent;
   `)}
+
+  ${({ hasSubMenu }) => !hasSubMenu && 'display: none;'}
 `;
 
 const Item = styled.li`
@@ -77,11 +83,11 @@ const Anchor = styled(Link)<{ $isActive: boolean }>`
     `}
 `;
 
-function HeaderNav() {
+function HeaderNav({ hasSubMenu }: Props) {
   const { page, params } = useHeaderNav();
 
   return (
-    <Container>
+    <Container hasSubMenu={hasSubMenu}>
       <Item>
         <Anchor to={`/predict/${params}`} $isActive={page === 'predict'}>
           예측
