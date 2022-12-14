@@ -6,6 +6,7 @@ import MainLayout from '@components/common/Layout/Main';
 import AuthRoute from '@components/common/AuthRoute';
 import MenuLayout from '@components/common/Layout/Menu';
 import RankingPage from '@pages/Ranking';
+import MyPagePage from '@pages/MyPage';
 import HomePage from './pages';
 
 function Router() {
@@ -25,7 +26,8 @@ function Router() {
           <Route path="predict/*" element={<PredictPage />} />
           <Route path="ranking/*" element={<RankingPage />} />
         </Route>
-        <Route path="profile" element={<div>프로필 페이지</div>} />
+        <Route path="mypage" element={<Navigate to="all" replace />} />
+        <Route path="mypage/*" element={<MyPagePage />} />
       </Route>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />

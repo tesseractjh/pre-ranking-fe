@@ -21,3 +21,10 @@ export const postUserPrediction = async (params: Params) => {
   );
   return data;
 };
+
+export const getPredictionCount = async () => {
+  const { data } = await authInstance.get<
+    APIResponse<{ count: Model.PredictionCount }>
+  >('/prediction/count');
+  return data;
+};

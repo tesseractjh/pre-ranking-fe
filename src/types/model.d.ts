@@ -10,7 +10,20 @@ declare namespace Model {
 
   interface User {
     user_name: string;
+    exp: number;
     coin: number;
+  }
+
+  interface Rank {
+    user_id: number;
+    score: number;
+    ranking: number;
+    total_count: number;
+  }
+
+  interface PredictionCount {
+    total_count: number;
+    right_count: number;
   }
 
   interface Prediction {
