@@ -26,6 +26,17 @@ declare namespace Model {
     right_count: number;
   }
 
+  interface PredictionRecord {
+    user_id: number;
+    prediction_id: number;
+    category: string;
+    prediction_value: string;
+    prediction_result: number | null;
+    result_date: string;
+    score: number | null;
+    coin: number | null;
+  }
+
   interface Prediction {
     prediction_id: number;
     prediction_category: string;
@@ -39,6 +50,7 @@ declare namespace Model {
     info_id: number;
     stock_name: string;
     last_price: number;
+    result_price: number;
     last_date: string;
     code: string;
     short_code: string;

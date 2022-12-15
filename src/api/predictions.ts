@@ -28,3 +28,12 @@ export const getPredictionCount = async () => {
   >('/prediction/count');
   return data;
 };
+
+export const getPredictionRecords = async (params: Params) => {
+  const { data } = await authInstance.get<
+    APIResponse<{ predictions: Model.PredictionRecord[] }>
+  >('/prediction/record', {
+    params
+  });
+  return data;
+};
