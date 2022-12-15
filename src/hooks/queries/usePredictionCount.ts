@@ -1,10 +1,11 @@
 import API from '@api/index';
 import useQuery from '@hooks/useQuery';
 
-function usePredictionCount() {
+function usePredictionCount(category?: string) {
+  const params = { category };
   return useQuery(
-    ['predictionCount'],
-    () => API.prediction.getPredictionCount(),
+    ['predictionCount', params],
+    () => API.prediction.getPredictionCount(params),
     {
       staleTime: 60 * 1000
     }

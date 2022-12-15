@@ -1,16 +1,10 @@
-import useMyPage from './hooks/useMyPage';
-import Prediction from './Prediction';
+import Record from './Record';
 
 function MyPage() {
-  const { category, columns, count, data } = useMyPage();
-
   return (
-    <Prediction
-      category={category}
-      columns={columns}
-      count={count}
-      data={data}
-    />
+    <>
+      <Record />
+    </>
   );
 }
 

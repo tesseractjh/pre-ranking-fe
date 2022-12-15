@@ -13,19 +13,11 @@ const Row = styled.tr<{ isDetailOpen: boolean; hasDetail: boolean }>`
     ${({ hasDetail, theme }) =>
       theme.color[hasDetail ? 'GRAY_200' : 'PURPLE_100']};
 
-  &:hover {
-    background-color: ${({ theme }) => theme.color.PURPLE_50};
-  }
-
   ${({ isDetailOpen, hasDetail, theme }) =>
     isDetailOpen &&
     hasDetail &&
     `
       background-color: ${theme.color.PURPLE_100};
-
-      &:hover {
-        background-color: ${theme.color.PURPLE_100};
-      }
     `}
 `;
 

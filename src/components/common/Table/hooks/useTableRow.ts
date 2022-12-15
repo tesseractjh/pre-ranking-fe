@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 function useTableRow() {
   const [isDetailOpen, setIsDetailOpen] = useState(false);

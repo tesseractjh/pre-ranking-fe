@@ -5,19 +5,21 @@ import usePredictionCount from '@hooks/queries/usePredictionCount';
 import MYPAGE_COLUMNS from '../constants/column';
 import normalizeData from '../utils/normalizeData';
 
-function useMyPage() {
-  const [page, setPage] = useState(0);
+function useRecord() {
+  const [page, setPage] = useState(1);
   const { pathname } = useLocation();
   const category = pathname.split('/')[2];
-  const { data: countData } = usePredictionCount();
-  const { data } = usePredictionRecord(category);
+
+  const { data: countData } = usePredictionCount(category);
+  const { data } = usePredictionRecord({ category, page });
 
   return {
-    category,
+    page,
+    setPage,
     columns: MYPAGE_COLUMNS,
-    count: countData?.count.total_count ?? 0,
-    data: normalizeData(data?.pages[page].predictions ?? [])
+    totalCount: countData?.count.total_count ?? 0,
+    data: normalizeData(data?.predictions ?? [])
   };
 }
 
-export default useMyPage;
+export default useRecord;

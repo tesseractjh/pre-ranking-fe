@@ -1,5 +1,6 @@
-import pxToRem from '@utils/pxToRem';
+import React from 'react';
 import styled from 'styled-components';
+import pxToRem from '@utils/pxToRem';
 import type { TableColumn } from '../types/table';
 
 interface Props {
@@ -37,4 +38,4 @@ function TableHead({ columns }: Props) {
   );
 }
 
-export default TableHead;
+export default React.memo(TableHead);

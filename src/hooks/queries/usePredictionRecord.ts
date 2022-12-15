@@ -1,19 +1,20 @@
 import API from '@api/index';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import useQuery from '@hooks/useQuery';
 
-function usePredictionRecord(category: string) {
-  const params = { category };
-  return useInfiniteQuery(
+interface Props {
+  category: string;
+  page: number;
+}
+
+function usePredictionRecord({ category, page }: Props) {
+  const params = { category, page };
+  return useQuery(
     ['predictionRecord', params],
-    ({ pageParam = 0 }) =>
-      API.prediction.getPredictionRecords({ ...params, lastId: pageParam }),
+    () => API.prediction.getPredictionRecords(params),
     {
       staleTime: 15 * 1000,
       cacheTime: 60 * 1000,
       suspense: true,
-      getNextPageParam: (lastPage) =>
-        lastPage.predictions[0] &&
-        lastPage.predictions[lastPage.predictions.length - 1].prediction_id,
       onError: () => {
         console.error('예측 기록 데이터 요청 실패');
       }
