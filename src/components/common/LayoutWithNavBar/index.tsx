@@ -41,18 +41,24 @@ function LayoutWithNavBar({
   componentBeforeOutlet,
   componentAfterOutlet
 }: Props) {
+  const section = (
+    <Section>
+      {componentBeforeOutlet}
+      <Outlet />
+      {componentAfterOutlet}
+    </Section>
+  );
+
   return (
     <InnerContainer>
       <Flex>
         <NavBar content={navBarContent} />
         <ErrorBoundary FallbackComponent={errorFallback} onReset={onReset}>
-          <Suspense fallback={suspenseFallback}>
-            <Section>
-              {componentBeforeOutlet}
-              <Outlet />
-              {componentAfterOutlet}
-            </Section>
-          </Suspense>
+          {suspenseFallback ? (
+            <Suspense fallback={suspenseFallback}>{section}</Suspense>
+          ) : (
+            section
+          )}
         </ErrorBoundary>
       </Flex>
     </InnerContainer>
