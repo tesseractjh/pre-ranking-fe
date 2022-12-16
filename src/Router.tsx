@@ -5,6 +5,7 @@ import PredictPage from '@pages/Predict';
 import MainLayout from '@components/common/Layout/Main';
 import AuthRoute from '@components/common/AuthRoute';
 import MenuLayout from '@components/common/Layout/Menu';
+import NotFound from '@components/common/Fallback/Error/NotFound';
 import RankingPage from '@pages/Ranking';
 import MyPagePage from '@pages/MyPage';
 import HomePage from './pages';
@@ -31,6 +32,7 @@ function Router() {
       </Route>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
+      <Route path="/*" element={<NotFound />} />
     </Routes>
   );
 }
