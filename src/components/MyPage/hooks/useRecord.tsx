@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import usePredictionRecord from '@hooks/queries/usePredictionRecord';
 import usePredictionCount from '@hooks/queries/usePredictionCount';
@@ -15,6 +15,10 @@ function useRecord() {
     containAll: true
   });
   const { data } = usePredictionRecord({ category, page });
+
+  useEffect(() => {
+    setPage(1);
+  }, [pathname]);
 
   return {
     page,
