@@ -1,6 +1,6 @@
 import pxToRem from '@utils/pxToRem';
 import styled from 'styled-components';
-import type { Predict, SVGIcon } from '../types/predict';
+import type { Predict } from '../types/predict';
 import PredictLink from './PredictLink';
 
 interface Props {

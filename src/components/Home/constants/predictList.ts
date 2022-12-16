@@ -4,7 +4,7 @@ import { ReactComponent as SportsIcon } from '@assets/icons/predict/sports.svg';
 import { ReactComponent as SoccerIcon } from '@assets/icons/predict/soccer.svg';
 import { ReactComponent as ETCIcon } from '@assets/icons/predict/etc.svg';
 import { ReactComponent as LottoIcon } from '@assets/icons/predict/lotto.svg';
-import type { Predict, SVGIcon } from '../types/predict';
+import type { Predict } from '../types/predict';
 
 const PREDICT_LIST: { icon: SVGIcon; title: string; predicts: Predict[] }[] = [
   {
