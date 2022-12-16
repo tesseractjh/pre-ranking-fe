@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import type {
   QueryFunction,
   QueryKey,
@@ -18,7 +17,6 @@ function useQuery<T extends APIResponse>(
     'queryFn' | 'queryKey'
   >
 ) {
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   return useReactQuery(queryKey, queryFn, {
@@ -51,7 +49,7 @@ function useQuery<T extends APIResponse>(
       const { message, redirect } = error.response.data.error;
 
       if (status === 401) {
-        alert('권한이 없습니다!');
+        alert('로그인이 필요한 서비스입니다!');
       } else {
         if (options?.onError) {
           options.onError(error);
@@ -61,7 +59,7 @@ function useQuery<T extends APIResponse>(
       }
 
       if (redirect) {
-        navigate(redirect);
+        window.location.href = `${import.meta.env.VITE_CLIENT_URL}/login`;
       }
     },
     ...options,

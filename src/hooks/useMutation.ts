@@ -17,7 +17,7 @@ function useMutation<T extends APIResponse>(
   const queryClient = useQueryClient();
 
   return useReactQueryMutation(mutationFn, {
-    onError: (error) => {
+    onError: (error, ...restProps) => {
       if (!error || !(error instanceof AxiosError)) {
         alert('알 수 없는 오류가 발생했습니다!');
         return;
@@ -45,13 +45,17 @@ function useMutation<T extends APIResponse>(
       const { message, redirect } = error.response.data.error;
 
       if (status === 401) {
-        alert('권한이 없습니다!');
+        alert('로그인이 필요한 서비스입니다!');
       } else {
+        if (options?.onError) {
+          options.onError(error, ...restProps);
+          return;
+        }
         alert(message);
       }
 
       if (redirect) {
-        navigate(redirect);
+        window.location.href = `${import.meta.env.VITE_CLIENT_URL}/login`;
       }
     },
     ...options,
