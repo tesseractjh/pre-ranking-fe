@@ -1,3 +1,4 @@
+import withErrorBoundary from '@components/hoc/withErrorBoundary';
 import PredictFilter from '../Filter';
 import Checkbox from '../Filter/Checkbox';
 import PredictComment from '../PredictComment';
@@ -29,4 +30,4 @@ function StockFluctuation() {
   );
 }
 
-export default StockFluctuation;
+export default withErrorBoundary(StockFluctuation);

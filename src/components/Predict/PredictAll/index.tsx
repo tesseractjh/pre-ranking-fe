@@ -1,4 +1,5 @@
 import { ReactComponent as StockIcon } from '@assets/icons/predict/stock.svg';
+import withErrorBoundary from '@components/hoc/withErrorBoundary';
 import PredictFilter from '../Filter';
 import Checkbox from '../Filter/Checkbox';
 import usePredictionList from '../hooks/usePredictionList';
@@ -42,4 +43,4 @@ function PredictAll() {
   );
 }
 
-export default PredictAll;
+export default withErrorBoundary(PredictAll);

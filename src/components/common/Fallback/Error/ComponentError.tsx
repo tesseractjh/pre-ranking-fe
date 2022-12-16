@@ -1,13 +1,13 @@
 import { css } from 'styled-components';
-import Button, { Medium } from '@components/common/Button';
 import pxToRem from '@utils/pxToRem';
+import Button, { Medium } from '@components/common/Button';
 import { ReactComponent as RefreshIcon } from '@assets/icons/refresh.svg';
 import { ReactComponent as WarningIcon } from '@assets/icons/warning.svg';
+import useReload from '@hooks/useReload';
 import Error from '.';
 
 interface Props {
-  error: Error;
-  resetErrorBoundary: (...args: Array<unknown>) => void;
+  resetErrorBoundary?: (...args: Array<unknown>) => void;
 }
 
 const ContainerStyle = css`
@@ -35,18 +35,21 @@ const RefreshButtonStyle = css`
   }
 `;
 
-function ComponentError({ error, resetErrorBoundary }: Props) {
+function ComponentError({ resetErrorBoundary }: Props) {
+  const handleReset = useReload();
+
   return (
     <Error
       css={ContainerStyle}
       icon={WarningIcon}
       title="예측 정보를 불러오는데 실패하였습니다!"
       content="잠시 후 다시 시도해주세요."
+      fullScreen={false}
     >
       <Button
         type="button"
         css={[Medium, RefreshButtonStyle]}
-        onClick={resetErrorBoundary}
+        onClick={resetErrorBoundary ?? handleReset}
       >
         <RefreshIcon />
         새로고침

@@ -1,3 +1,4 @@
+import withErrorBoundary from '@components/hoc/withErrorBoundary';
 import Record from './Record';
 
 function MyPage() {
@@ -8,4 +9,4 @@ function MyPage() {
   );
 }
 
-export default MyPage;
+export default withErrorBoundary(MyPage);

@@ -1,8 +1,6 @@
 import styled from 'styled-components';
-import useReload from '@hooks/useReload';
 import LayoutWithNavBar from '@components/common/LayoutWithNavBar';
 import ComponentLoading from '@components/common/Fallback/Loading/ComponentLoading';
-import ComponentError from '@components/common/Fallback/Error/ComponentError';
 import pxToRem from '@utils/pxToRem';
 import {
   HEADER_HEIGHT,
@@ -29,13 +27,9 @@ const Sticky = styled.div`
 `;
 
 function MenuLayout() {
-  const handleReload = useReload();
-
   return (
     <LayoutWithNavBar
       navBarContent={NAV_BAR_LIST}
-      errorFallback={ComponentError}
-      onReset={handleReload}
       suspenseFallback={<ComponentLoading />}
       componentBeforeOutlet={
         <Sticky>

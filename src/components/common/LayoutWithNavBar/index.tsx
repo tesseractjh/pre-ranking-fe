@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { ErrorBoundary } from 'react-error-boundary';
 import pxToRem from '@utils/pxToRem';
 import styled from 'styled-components';
 import InnerContainer from '../InnerContainer';
@@ -9,11 +8,6 @@ import { NavBarCategory } from '../NavBar/types/navBar';
 
 interface Props {
   navBarContent: NavBarCategory[];
-  errorFallback: React.ComponentType<{
-    error: Error;
-    resetErrorBoundary: (...args: Array<unknown>) => void;
-  }>;
-  onReset?: (...args: Array<unknown>) => void;
   suspenseFallback?: React.ReactNode;
   componentBeforeOutlet?: React.ReactNode;
   componentAfterOutlet?: React.ReactNode;
@@ -35,8 +29,6 @@ const Section = styled.section`
 
 function LayoutWithNavBar({
   navBarContent,
-  errorFallback,
-  onReset,
   suspenseFallback,
   componentBeforeOutlet,
   componentAfterOutlet
@@ -53,13 +45,11 @@ function LayoutWithNavBar({
     <InnerContainer>
       <Flex>
         <NavBar content={navBarContent} />
-        <ErrorBoundary FallbackComponent={errorFallback} onReset={onReset}>
-          {suspenseFallback ? (
-            <Suspense fallback={suspenseFallback}>{section}</Suspense>
-          ) : (
-            section
-          )}
-        </ErrorBoundary>
+        {suspenseFallback ? (
+          <Suspense fallback={suspenseFallback}>{section}</Suspense>
+        ) : (
+          section
+        )}
       </Flex>
     </InnerContainer>
   );

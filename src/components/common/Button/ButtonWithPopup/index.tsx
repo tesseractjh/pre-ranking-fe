@@ -1,5 +1,5 @@
-import { ButtonHTMLAttributes, createContext, useMemo } from 'react';
-import React, { useRef } from 'react';
+import type { ButtonHTMLAttributes } from 'react';
+import React, { useRef, createContext, useMemo } from 'react';
 import styled, { CSSProperties } from 'styled-components';
 import usePopup from './hooks/usePopup';
 
