@@ -1,7 +1,8 @@
+import React, { useContext } from 'react';
+import styled from 'styled-components';
 import pxToRem from '@utils/pxToRem';
 import timeFormatter from '@utils/timeFormatter';
-import React from 'react';
-import styled from 'styled-components';
+import { ButtonWithPopupContext } from '@components/common/Button/ButtonWithPopup';
 
 interface Props {
   data: Model.Notification;
@@ -61,9 +62,17 @@ function NotificationItem({ data, onClick }: Props) {
     created_at: time
   } = data;
 
+  const { handleClose } = useContext(ButtonWithPopupContext) ?? {};
+
   return (
     <Container>
-      <Button type="button" onClick={onClick({ param: id }, link)}>
+      <Button
+        type="button"
+        onClick={(event) => {
+          onClick({ param: id }, link)();
+          handleClose?.(event);
+        }}
+      >
         <Flex>
           <Title>{title}</Title>
           <Text>{text}</Text>

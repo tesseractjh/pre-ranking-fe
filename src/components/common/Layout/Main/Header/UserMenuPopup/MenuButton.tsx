@@ -1,7 +1,9 @@
-import { Link } from 'react-router-dom';
-import styled, { css } from 'styled-components';
-import Button, { Medium } from '@components/common/Button';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { css } from 'styled-components';
 import pxToRem from '@utils/pxToRem';
+import Button, { Medium } from '@components/common/Button';
+import { ButtonWithPopupContext } from '@components/common/Button/ButtonWithPopup';
 
 interface Props extends CustomCSS {
   type: 'button' | 'link';
@@ -9,10 +11,6 @@ interface Props extends CustomCSS {
   route?: string;
   children: React.ReactNode;
 }
-
-const LinkButton = styled(Link)<{ $css: CustomCSS['css'] }>`
-  ${({ $css }) => $css || ''}
-`;
 
 const ButtonStyle = css`
   display: inline-block;
@@ -44,23 +42,24 @@ const ButtonStyle = css`
 `;
 
 function MenuButton({ css, type, onClick, route, children }: Props) {
-  if (type === 'button') {
-    return (
-      <Button css={[Medium, ButtonStyle, css]} onClick={onClick}>
-        {children}
-      </Button>
-    );
-  }
+  const { handleClose } = useContext(ButtonWithPopupContext) ?? {};
+  const navigate = useNavigate();
 
-  if (type === 'link' && route) {
-    return (
-      <LinkButton $css={[Medium, ButtonStyle, css]} to={route}>
-        {children}
-      </LinkButton>
-    );
-  }
-
-  return null;
+  return (
+    <Button
+      css={[Medium, ButtonStyle, css]}
+      onClick={(event) => {
+        if (type === 'button') {
+          onClick?.(event);
+        } else if (route) {
+          navigate(route);
+        }
+        handleClose?.(event);
+      }}
+    >
+      {children}
+    </Button>
+  );
 }
 
 export default MenuButton;

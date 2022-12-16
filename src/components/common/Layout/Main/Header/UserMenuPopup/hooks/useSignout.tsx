@@ -1,12 +1,9 @@
 import API from '@api/index';
-import { useNavigate } from 'react-router-dom';
 
 function useSignout() {
-  const navigate = useNavigate();
-
   const handleSignout = async () => {
     await API.user.signout();
-    navigate(0);
+    window.location.href = import.meta.env.VITE_CLIENT_URL;
   };
 
   return handleSignout;

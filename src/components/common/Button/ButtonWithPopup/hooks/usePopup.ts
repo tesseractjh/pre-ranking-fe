@@ -7,10 +7,13 @@ function usePopup(
 ) {
   const [isHidden, setIsHidden] = useState(true);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setIsHidden((prev) => !prev);
-    onClick?.(event);
-  };
+  const handleClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      setIsHidden((prev) => !prev);
+      onClick?.(event);
+    },
+    []
+  );
 
   const handleDocumentClick = useCallback(({ target }: MouseEvent) => {
     if (

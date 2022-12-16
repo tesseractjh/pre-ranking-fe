@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, createContext, useMemo } from 'react';
 import React, { useRef } from 'react';
 import styled, { CSSProperties } from 'styled-components';
 import usePopup from './hooks/usePopup';
@@ -32,6 +32,10 @@ const StyledButton = styled.button<CustomCSS>`
   height: 100%;
 `;
 
+export const ButtonWithPopupContext = createContext<{
+  handleClose: React.MouseEventHandler<HTMLButtonElement>;
+} | null>(null);
+
 function ButtonWithPopup({
   width,
   height,
@@ -45,19 +49,26 @@ function ButtonWithPopup({
   const popup = useRef<HTMLDivElement>(null);
   const { isHidden, handleClick } = usePopup(popup, button, onClick);
 
+  const contextValue = useMemo(
+    () => ({ handleClose: handleClick }),
+    [handleClick]
+  );
+
   return (
-    <Container $width={width} $height={height}>
-      <StyledButton
-        css={css}
-        type="button"
-        {...props}
-        onClick={handleClick}
-        ref={button}
-      >
-        {children}
-      </StyledButton>
-      {!isHidden && <Popup ref={popup} onClick={handleClick} />}
-    </Container>
+    <ButtonWithPopupContext.Provider value={contextValue}>
+      <Container $width={width} $height={height}>
+        <StyledButton
+          css={css}
+          type="button"
+          {...props}
+          onClick={handleClick}
+          ref={button}
+        >
+          {children}
+        </StyledButton>
+        {!isHidden && <Popup ref={popup} onClick={handleClick} />}
+      </Container>
+    </ButtonWithPopupContext.Provider>
   );
 }
 
