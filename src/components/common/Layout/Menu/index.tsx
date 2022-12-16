@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import LayoutWithNavBar from '@components/common/LayoutWithNavBar';
 import ComponentLoading from '@components/common/Fallback/Loading/ComponentLoading';
 import pxToRem from '@utils/pxToRem';
@@ -26,11 +26,15 @@ const Sticky = styled.div`
   `)}
 `;
 
+const LoadingStyle = css`
+  position: fixed;
+`;
+
 function MenuLayout() {
   return (
     <LayoutWithNavBar
       navBarContent={NAV_BAR_LIST}
-      suspenseFallback={<ComponentLoading />}
+      suspenseFallback={<ComponentLoading css={LoadingStyle} />}
       componentBeforeOutlet={
         <Sticky>
           <Breadcrumb />
