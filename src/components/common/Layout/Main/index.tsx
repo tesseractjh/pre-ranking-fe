@@ -8,32 +8,27 @@ import {
 } from '@constants/style';
 import Header from './Header';
 import Footer from './Footer';
-import useSubMenu from './hooks/useSubMenu';
 
 const Container = styled.div`
   ${({ theme }) => theme.mixin.flexColumn('flex-start', 'stretch')}
   min-height: 100vh;
 `;
 
-const Main = styled.main<{ hasSubMenu: boolean }>`
+const Main = styled.main`
   flex: 1;
   padding-top: ${pxToRem(HEADER_HEIGHT)};
 
-  ${({ hasSubMenu, theme }) =>
+  ${({ theme }) =>
     theme.media.tablet(`
-      padding-top: ${pxToRem(
-        HEADER_HEIGHT_TABLET + (hasSubMenu ? SUB_HEADER_HEIGHT_TABLET : 0)
-      )};
+      padding-top: ${pxToRem(HEADER_HEIGHT_TABLET + SUB_HEADER_HEIGHT_TABLET)};
   `)}
 `;
 
 function MainLayout() {
-  const hasSubMenu = useSubMenu();
-
   return (
     <Container>
-      <Header hasSubMenu={hasSubMenu} />
-      <Main hasSubMenu={hasSubMenu}>
+      <Header />
+      <Main>
         <Outlet />
       </Main>
       <Footer />

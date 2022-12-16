@@ -13,11 +13,7 @@ import useHeader from '../hooks/useHeader';
 import MenuButton from './MenuButton';
 import HeaderNav from './HeaderNav';
 
-interface Props {
-  hasSubMenu: boolean;
-}
-
-const Container = styled.header<{ isScrolled: boolean; hasSubMenu: boolean }>`
+const Container = styled.header<{ isScrolled: boolean }>`
   position: fixed;
   z-index: 100;
   width: 100%;
@@ -28,12 +24,9 @@ const Container = styled.header<{ isScrolled: boolean; hasSubMenu: boolean }>`
   ${({ isScrolled, theme }) =>
     isScrolled && `border-color: ${theme.color.GRAY_200};`}
 
-  ${({ isScrolled, hasSubMenu, theme }) =>
+  ${({ isScrolled, theme }) =>
     theme.media.tablet(`
-      height: ${pxToRem(
-        HEADER_HEIGHT_TABLET + (hasSubMenu ? SUB_HEADER_HEIGHT_TABLET : 0)
-      )};
-
+      height: ${pxToRem(HEADER_HEIGHT_TABLET + SUB_HEADER_HEIGHT_TABLET)};
       ${isScrolled && `border-color: ${theme.color.PURPLE_400};`}
   `)}
 `;
@@ -59,11 +52,11 @@ const LogoWrapper = styled.span`
   `)}
 `;
 
-function Header({ hasSubMenu }: Props) {
+function Header() {
   const isScrolled = useHeader();
 
   return (
-    <Container isScrolled={isScrolled} hasSubMenu={hasSubMenu}>
+    <Container isScrolled={isScrolled}>
       <InnerContainer>
         <Flex>
           <MenuButton />
@@ -72,7 +65,7 @@ function Header({ hasSubMenu }: Props) {
               <Logo />
             </Link>
           </LogoWrapper>
-          <HeaderNav hasSubMenu={hasSubMenu} />
+          <HeaderNav />
           <HeaderMenu />
         </Flex>
       </InnerContainer>
