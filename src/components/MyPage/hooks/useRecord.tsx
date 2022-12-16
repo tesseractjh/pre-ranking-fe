@@ -10,7 +10,10 @@ function useRecord() {
   const { pathname } = useLocation();
   const category = pathname.split('/')[2];
 
-  const { data: countData } = usePredictionCount(category);
+  const { data: countData } = usePredictionCount({
+    category,
+    containAll: true
+  });
   const { data } = usePredictionRecord({ category, page });
 
   return {

@@ -1,8 +1,13 @@
 import API from '@api/index';
 import useQuery from '@hooks/useQuery';
 
-function usePredictionCount(category?: string) {
-  const params = { category };
+interface Props {
+  category: string;
+  containAll?: boolean;
+}
+
+function usePredictionCount({ category, containAll }: Props) {
+  const params = { category, containAll };
   return useQuery(
     ['predictionCount', params],
     () => API.prediction.getPredictionCount(params),
