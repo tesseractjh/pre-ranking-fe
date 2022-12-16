@@ -2,6 +2,7 @@ import { css } from 'styled-components';
 import Button, { Medium } from '@components/common/Button';
 import pxToRem from '@utils/pxToRem';
 import { ReactComponent as RefreshIcon } from '@assets/icons/refresh.svg';
+import { ReactComponent as WarningIcon } from '@assets/icons/warning.svg';
 import Error from '.';
 
 interface Props {
@@ -36,7 +37,12 @@ const RefreshButtonStyle = css`
 
 function ComponentError({ error, resetErrorBoundary }: Props) {
   return (
-    <Error css={ContainerStyle}>
+    <Error
+      css={ContainerStyle}
+      icon={WarningIcon}
+      title="예측 정보를 불러오는데 실패하였습니다!"
+      content="잠시 후 다시 시도해주세요."
+    >
       <Button
         type="button"
         css={[Medium, RefreshButtonStyle]}

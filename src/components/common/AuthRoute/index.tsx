@@ -1,7 +1,7 @@
-import useAccessToken from '@hooks/queries/useAccessToken';
 import { useEffect, useState } from 'react';
-import Error from '../Fallback/Error';
+import useAccessToken from '@hooks/queries/useAccessToken';
 import Loading from '../Fallback/Loading';
+import PageError from '../Fallback/Error/PageError';
 
 interface Props {
   children: React.ReactNode;
@@ -22,7 +22,7 @@ function AuthRoute({ children }: Props) {
   }
 
   if (isError) {
-    return <Error />;
+    return <PageError />;
   }
 
   return <>{children}</>;

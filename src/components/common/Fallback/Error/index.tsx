@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 import pxToRem from '@utils/pxToRem';
-import { ReactComponent as WarningIcon } from '@assets/icons/warning.svg';
 
 interface Props extends CustomCSS {
+  icon: SVGIcon;
+  title: string;
+  content: string;
+  fullScreen?: boolean;
   children?: React.ReactNode;
 }
 
-const Container = styled.div<CustomCSS>`
+const Container = styled.div<{ fullScreen: boolean } & CustomCSS>`
   ${({ theme }) => theme.mixin.flexColumn()}
-  width: 100vw;
-  height: 100vh;
+  width: ${({ fullScreen }) => (fullScreen ? '100vw' : '100%')};
+  height: ${({ fullScreen }) => (fullScreen ? '100vh' : pxToRem(400))};
   font-size: ${pxToRem(16)};
   color: ${({ theme }) => theme.color.GRAY_400};
   text-align: center;
@@ -31,11 +34,19 @@ const Title = styled.h1`
   color: ${({ theme }) => theme.color.BLACK};
 `;
 
-function Error({ css, children }: Props) {
+function Error({
+  css,
+  icon: Icon,
+  title,
+  content,
+  fullScreen = true,
+  children
+}: Props) {
   return (
-    <Container css={css}>
-      <WarningIcon />
-      <Title>연결에 실패했습니다!</Title>잠시 후 다시 시도해주세요.
+    <Container css={css} fullScreen={fullScreen}>
+      <Icon />
+      <Title>{title}</Title>
+      {content}
       {children}
     </Container>
   );
