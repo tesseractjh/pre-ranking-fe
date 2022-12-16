@@ -15,6 +15,16 @@ const Container = styled.div`
   ${({ theme }) => theme.mixin.flex('center', 'center', pxToRem(10))}
   padding: ${pxToRem(10)};
   margin-top: ${pxToRem(20)};
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      max-width: ${pxToRem(400)};
+      padding: ${pxToRem(10, 0)};
+      margin: ${pxToRem(20, 'auto', 0)};
+      justify-content: space-between;
+      gap: 0;
+      margin-top: ${pxToRem(10)};
+  `)}
 `;
 
 const Button = styled.button<{ isSelected?: boolean }>`
@@ -36,7 +46,7 @@ const Button = styled.button<{ isSelected?: boolean }>`
     background-color: ${({ theme }) => theme.color.GRAY_100};
   }
 
-  &:active {
+  &:active:not(:disabled) {
     background-color: ${({ theme }) => theme.color.GRAY_200};
   }
 

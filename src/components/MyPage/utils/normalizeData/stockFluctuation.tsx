@@ -19,10 +19,28 @@ const Container = styled.td`
   padding: ${pxToRem(16, 0)};
   font-size: ${pxToRem(16)};
   text-align: center;
+
+  ${({ theme }) =>
+    theme.media.laptop(`
+      font-size: ${pxToRem(14)};
+  `)}
 `;
 
 const Flex = styled.span`
   ${({ theme }) => theme.mixin.inlineFlex('center', 'center', pxToRem(20))}
+
+  ${({ theme }) =>
+    theme.media.tablet(`
+      flex-wrap: wrap;
+      gap: ${pxToRem(10)}
+  `)}
+`;
+
+const Prev = styled.span`
+  ${({ theme }) =>
+    theme.media.tablet(`
+      flex-basis: 100%;
+  `)}
 `;
 
 const Bold = styled.strong<{ $color?: keyof typeof color }>`
@@ -75,11 +93,11 @@ function StockFluctuationDetail({
   return (
     <Container colSpan={4}>
       <Flex>
-        <span>
+        <Prev>
           {dateFormatter.getDateFromMonthToDay(lastDate)}{' '}
           <Bold>{stockName} </Bold>
           종가 <Bold>{lastPrice.toLocaleString('ko-kr')}</Bold>원
-        </span>
+        </Prev>
         →
         <span>
           {dateFormatter.getDateFromMonthToDay(resultDate)} 종가{' '}

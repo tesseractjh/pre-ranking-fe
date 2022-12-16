@@ -42,6 +42,19 @@ const Container = styled.li<{ hasIndentation: boolean }>`
   }
 
   ${({ theme }) =>
+    theme.media.laptop(`
+      & > .nav-link {
+        font-size: ${pxToRem(16)};
+
+        & svg {
+          width: ${pxToRem(14)};
+          height: ${pxToRem(14)};
+          margin-right: ${pxToRem(8)};
+        }
+      }
+  `)}
+
+  ${({ theme }) =>
     theme.media.tablet(`
       & > .nav-link {
         border: none;

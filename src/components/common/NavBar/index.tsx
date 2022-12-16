@@ -8,7 +8,7 @@ import useNavBar from './hooks/useNavBar';
 import type { NavBarCategory } from './types/navBar';
 
 interface Props extends CustomCSS {
-  content: NavBarCategory[]
+  content: NavBarCategory[];
 }
 
 const TabletAnimation = keyframes`
@@ -83,6 +83,11 @@ const Container = styled.ul`
     height: ${pxToRem(20)};
     background-color: transparent;
   }
+
+  ${({ theme }) =>
+    theme.media.laptop(`
+      width: ${pxToRem(200)};
+  `)}
 
   ${({ theme }) =>
     theme.media.tablet(`

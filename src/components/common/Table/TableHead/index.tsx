@@ -10,6 +10,11 @@ interface Props {
 const Container = styled.thead`
   font-weight: 700;
   font-size: ${pxToRem(16)};
+
+  ${({ theme }) =>
+    theme.media.laptop(`
+      font-size: ${pxToRem(14)};
+  `)}
 `;
 
 const Row = styled.tr`

@@ -30,6 +30,11 @@ const Cell = styled.td<CustomCSS>`
   padding: ${pxToRem(10, 0)};
   text-align: center;
 
+  ${({ theme }) =>
+    theme.media.tablet(`
+      padding: ${pxToRem(12, 0)};
+  `)}
+
   ${({ css }) => css || ''}
 `;
 

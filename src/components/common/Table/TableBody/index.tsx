@@ -10,6 +10,11 @@ interface Props {
 
 const Container = styled.tbody`
   font-size: ${pxToRem(14)};
+
+  ${({ theme }) =>
+    theme.media.laptop(`
+    font-size: ${pxToRem(13)};
+  `)}
 `;
 
 function TableBody({ columns, data }: Props) {

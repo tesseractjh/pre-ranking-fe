@@ -40,6 +40,11 @@ const Title = styled.strong`
   }
 
   ${({ theme }) =>
+    theme.media.laptop(`
+      font-size: ${pxToRem(16)};
+  `)}
+
+  ${({ theme }) =>
     theme.media.tablet(`
       padding-left: ${pxToRem(10)};  
   `)}
