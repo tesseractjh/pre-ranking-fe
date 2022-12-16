@@ -5,7 +5,7 @@ import useUserInfo from '@hooks/queries/useUserInfo';
 
 function useSummary() {
   const { data: userInfoData } = useUserInfo(true);
-  const { data: myRankData } = useMyRank();
+  const { data: myRankData } = useMyRank('all');
   const { data: predictionCountData } = usePredictionCount({ category: 'all' });
 
   const nextLevel = LEVEL.findIndex(

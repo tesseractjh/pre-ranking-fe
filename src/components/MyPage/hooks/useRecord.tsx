@@ -21,6 +21,7 @@ function useRecord() {
   }, [pathname]);
 
   return {
+    category,
     page,
     setPage,
     columns: MYPAGE_COLUMNS,

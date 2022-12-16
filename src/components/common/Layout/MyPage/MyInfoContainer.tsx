@@ -10,7 +10,7 @@ interface Props {
 const Title = styled.h2`
   ${({ theme }) => theme.mixin.flex('flex-start')}
   padding: ${pxToRem(20, 10)};
-  margin-bottom: ${pxToRem(20)};
+  margin-bottom: ${pxToRem(10)};
   border-bottom: 1px solid ${({ theme }) => theme.color.GRAY_200};
   font-weight: 700;
   font-size: ${pxToRem(24)};
