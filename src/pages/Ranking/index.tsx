@@ -1,16 +1,15 @@
 import { Route, Routes } from 'react-router-dom';
 import NotFound from '@components/common/Fallback/Error/NotFound';
+import Preparation from '@components/common/Fallback/Error/Preparation';
 
 function RankingPage() {
   return (
     <Routes>
-      <Route path="all" element={<div>(전체) 랭킹 페이지</div>} />
-      <Route
-        path="stock_fluctuation"
-        element={<div>주가 등락 랭킹 페이지</div>}
-      />
-      <Route path="stock_price" element={<div>종가 랭킹 페이지</div>} />
-      <Route path="lotto" element={<div>로또 당첨 번호 랭킹 페이지</div>} />
+      <Route path="all" element={<Preparation />} />
+      <Route path="stock_fluctuation" element={<Preparation />} />
+      <Route path="stock_price" element={<Preparation />} />
+      <Route path="lotto" element={<Preparation />} />
+      <Route path="detail/*" element={<Preparation />} />
       <Route path="*" element={<NotFound fullScreen={false} />} />
     </Routes>
   );
