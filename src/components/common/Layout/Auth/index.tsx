@@ -1,5 +1,6 @@
 import Logo from '@components/common/Logo';
 import pxToRem from '@utils/pxToRem';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface Props {
@@ -64,7 +65,9 @@ const Title = styled.h1`
 function AuthLayout({ title, children }: Props) {
   return (
     <Wrapper>
-      <Logo size="lg" />
+      <Link to="/">
+        <Logo size="lg" />
+      </Link>
       <Container>
         <Title>{title}</Title>
         {children}
