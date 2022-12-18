@@ -10,8 +10,5 @@ export const checkboxFilterState = atomFamily<
   CheckboxFilterStateParams
 >({
   key: 'checkboxFilterState',
-  default: false,
-  effects: (param) => [
-    ({ onSet }) => onSet((value) => console.log(param, value))
-  ]
+  default: false
 });
