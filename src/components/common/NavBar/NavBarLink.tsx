@@ -59,6 +59,13 @@ const Container = styled.li<{ hasIndentation: boolean }>`
       & > .nav-link {
         border: none;
         padding: ${pxToRem(14, 10, 14, 20)};
+        font-size: ${pxToRem(18)};
+
+        & svg {
+          width: ${pxToRem(16)};
+          height: ${pxToRem(16)};
+          margin-right: ${pxToRem(10)};
+        }
 
         &.active {
           background-color: ${theme.color.PURPLE_400};

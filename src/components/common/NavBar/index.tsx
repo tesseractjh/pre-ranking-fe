@@ -92,6 +92,7 @@ const Container = styled.ul`
   ${({ theme }) =>
     theme.media.tablet(`
       position: static;
+      width: 100%;
       padding: 0;
 
       &::-webkit-scrollbar {
