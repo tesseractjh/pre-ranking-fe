@@ -37,9 +37,9 @@ function Router() {
             <Route path="mypage" element={<Navigate to="all" replace />} />
             <Route path="mypage/*" element={<MyPagePage />} />
           </Route>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/*" element={<NotFound />} />
+          <Route path="login/*" element={<LoginPage />} />
+          <Route path="signup" element={<SignupPage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </ErrorBoundary>

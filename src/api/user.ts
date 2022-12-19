@@ -14,6 +14,18 @@ export const getAccessToken = async () => {
   return data;
 };
 
+export const signin = async (params: Params) => {
+  try {
+    const { data } = await axiosInstance.post<
+      APIResponse<{ isSuccess: boolean }>
+    >('/user/signin/redirect', params);
+    return data?.isSuccess;
+  } catch {
+    alert('잘못된 요청입니다!');
+    return false;
+  }
+};
+
 export const signup = async (params: Params) => {
   const { data } = await axiosInstance.patch<{ isSuccess: boolean }>(
     '/user/signup',
