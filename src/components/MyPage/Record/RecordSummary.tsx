@@ -45,8 +45,10 @@ function RecordSummary({ category }: Props) {
       </Info>
       <Info>
         <AccuracyIcon />
-        <Bold>{((rightCount * 100) / totalCount).toFixed(2)}%</Bold>(
-        {rightCount} / {totalCount})
+        <Bold>
+          {totalCount ? ((rightCount * 100) / totalCount).toFixed(2) : 0}%
+        </Bold>
+        ({rightCount} / {totalCount})
       </Info>
     </Container>
   );
