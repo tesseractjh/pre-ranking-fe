@@ -6,6 +6,7 @@ import NotFound from '@components/common/Fallback/Error/NotFound';
 import { ErrorBoundary } from 'react-error-boundary';
 import PageError from '@components/common/Fallback/Error/PageError';
 import Loading from '@components/common/Fallback/Loading';
+import useGoogleAnalytics from '@hooks/useGoogleAnalytics';
 
 const HomePage = lazy(() => import('./pages'));
 const MenuLayout = lazy(() => import('@components/common/Layout/Menu'));
@@ -16,6 +17,8 @@ const LoginPage = lazy(() => import('@pages/Login'));
 const SignupPage = lazy(() => import('@pages/Signup'));
 
 function Router() {
+  useGoogleAnalytics();
+
   return (
     <ErrorBoundary fallback={<PageError />}>
       <Suspense fallback={<Loading />}>
