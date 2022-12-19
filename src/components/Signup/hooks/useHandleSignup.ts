@@ -9,7 +9,7 @@ const EMAIL_PATTERN =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 function useSignup() {
-  const { email } = useQueryParams();
+  const { id, provider, email } = useQueryParams();
   const handleSignup = useHandleSignup();
   const {
     register,
@@ -17,7 +17,7 @@ function useSignup() {
     formState: { errors }
   } = useForm({
     mode: 'onChange',
-    defaultValues: { userName: '', email }
+    defaultValues: { userName: '', id, provider, email }
   });
 
   const onSubmit = handleSubmit((data) => {
@@ -35,7 +35,7 @@ function useSignup() {
     validate: {
       checkDuplicate: async (value) => {
         const hasDuplicate = await API.user.checkDuplicateUserName(value);
-        return hasDuplicate || '중복된 닉네임입니다';
+        return !hasDuplicate || '중복된 닉네임입니다';
       }
     }
   });
@@ -49,7 +49,7 @@ function useSignup() {
     validate: {
       checkDuplicate: async (value) => {
         const hasDuplicate = await API.user.checkDuplicateEmail(value);
-        return hasDuplicate || '중복된 이메일입니다';
+        return !hasDuplicate || '중복된 이메일입니다';
       }
     }
   });

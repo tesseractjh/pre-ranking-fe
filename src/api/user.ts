@@ -29,11 +29,11 @@ export const signout = async () => {
 
 export const checkDuplicateUserName = async (userName: string) => {
   try {
-    const { data } = await axiosInstance.get<boolean>(
+    const { data } = await axiosInstance.get<{ hasDuplicate: boolean }>(
       `/user/user_name?value=${userName}`,
       { timeout: 2000 }
     );
-    return data;
+    return data?.hasDuplicate;
   } catch {
     alert('서버 에러!');
     return false;
@@ -42,11 +42,11 @@ export const checkDuplicateUserName = async (userName: string) => {
 
 export const checkDuplicateEmail = async (email: string) => {
   try {
-    const { data } = await axiosInstance.get<boolean>(
+    const { data } = await axiosInstance.get<{ hasDuplicate: boolean }>(
       `/user/email?value=${email}`,
       { timeout: 2000 }
     );
-    return data;
+    return data?.hasDuplicate;
   } catch {
     alert('서버 에러!');
     return false;
