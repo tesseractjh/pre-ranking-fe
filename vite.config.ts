@@ -6,6 +6,7 @@ import * as path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [svgr(), react()],
+  assetsInclude: ['public/*'],
   server: {
     open: true,
     port: 3000
