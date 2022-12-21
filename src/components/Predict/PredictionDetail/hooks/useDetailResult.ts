@@ -5,9 +5,11 @@ function useDetailResult(prediction: Model.PredictionDetail) {
     prediction;
 
   return (
-    data?.map(({ prediction_value: value, count }) =>
-      CHART_DATA[category.split('_').slice(1).join('_')](value, count)
-    ) ?? []
+    data
+      ?.map(({ prediction_value: value, count }) =>
+        CHART_DATA[category.split('_').slice(1).join('_')](value, count)
+      )
+      .sort((a, b) => b.value - a.value) ?? []
   );
 }
 
