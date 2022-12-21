@@ -1,9 +1,8 @@
+import dateFormatter from '@utils/dateFormatter';
 import PredictContainer from '../PredictContainer';
 import StockFluctuationItem from './StockFluctuationItem';
 import PredictWrapper from '../PredictWrapper';
 import usePredictionList from '../hooks/usePredictionList';
-
-const PREDICTION_PERIOD = 24 * 60 * 60 * 1000;
 
 function StockFluctuationList() {
   const { data, handleIntersect } = usePredictionList('stock_fluctuation');
@@ -11,8 +10,7 @@ function StockFluctuationList() {
   return (
     <PredictContainer data={data} onIntersect={handleIntersect}>
       {data.map((prediction) => {
-        const endDate =
-          new Date(prediction.created_at).getTime() + PREDICTION_PERIOD;
+        const endDate = dateFormatter.getEndDate(prediction.created_at);
         return (
           <PredictWrapper
             key={prediction.prediction_id}

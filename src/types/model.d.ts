@@ -46,12 +46,27 @@ declare namespace Model {
     created_at: string;
   }
 
-  interface StockFluctuation {
+  interface PredictionDetail extends Prediction {
+    prediction_created_at: string;
+    participant_count: number;
+    prediction_value: string | null;
+    user_prediction_data:
+      | {
+          prediction_value: string;
+          count: number;
+        }[]
+      | null;
+  }
+
+  interface Info {
+    last_date: string;
+  }
+
+  interface StockFluctuation extends Info {
     info_id: number;
     stock_name: string;
     last_price: number;
     result_price: number;
-    last_date: string;
     code: string;
     short_code: string;
     market_category: string;

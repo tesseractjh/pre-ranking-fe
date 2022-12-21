@@ -10,11 +10,7 @@ import useStockFluctuationItem from './hooks/useStockFluctuationItem';
 import usePredictForm from '../hooks/usePredictForm';
 
 interface Props {
-  prediction: Model.Prediction &
-    Omit<Model.StockFluctuation, 'info_id' | 'created_at'> & {
-      participant_count: number;
-      prediction_value: string | null;
-    };
+  prediction: Model.PredictionDetail & Model.StockFluctuation;
   endDate: number;
 }
 
@@ -239,7 +235,7 @@ const SubmitButtonStyle = css`
 `;
 
 function PredictForm({ prediction, endDate }: Props) {
-  const { coin, inputValue, handlePredict, handleSubmit } =
+  const { coin, inputValue, isDetail, handlePredict, handleSubmit } =
     useStockFluctuationItem({
       predictionId: prediction.prediction_id,
       predictionValue: prediction.prediction_value,
@@ -297,20 +293,22 @@ function PredictForm({ prediction, endDate }: Props) {
             <CoinIcon />
             {requiredCoin}
           </Coin>
-          {isOverdue ? (
+          {!isDetail && isOverdue ? (
             <DetailLink
               $css={[Medium, SubmitButtonStyle]}
               to={`/predict/detail/${id}`}
+              className="form-submit"
             >
               예측 상세보기
             </DetailLink>
           ) : (
             <Button
               css={[Medium, SubmitButtonStyle]}
+              className="form-submit"
               disabled={submitDisabled}
               onClick={handleSubmit}
             >
-              {hasPrediction ? '예측완료' : '예측하기'}
+              {isOverdue ? '예측마감' : hasPrediction ? '예측완료' : '예측하기'}
             </Button>
           )}
         </Flex>

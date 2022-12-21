@@ -3,11 +3,7 @@ import { authInstance } from '@configs/axios';
 export const getPredictions = async (params: Params) => {
   const { data } = await authInstance.get<
     APIResponse<{
-      predictions: (Model.Prediction &
-        Omit<Model.StockFluctuation, 'info_id' | 'created_at'> & {
-          participant_count: number;
-          prediction_value: string;
-        })[];
+      predictions: Model.PredictionDetail[];
     }>
   >('/prediction', { params });
   return data;
@@ -35,5 +31,13 @@ export const getPredictionRecords = async (params: Params) => {
   >('/prediction/record', {
     params
   });
+  return data;
+};
+
+export const getPredictionDetail = async (params: Params) => {
+  const { id } = params;
+  const { data } = await authInstance.get<
+    APIResponse<{ prediction: Model.PredictionDetail }>
+  >(`/prediction/detail/${id}`);
   return data;
 };

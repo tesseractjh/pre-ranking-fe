@@ -5,11 +5,7 @@ import dateFormatter from '@utils/dateFormatter';
 import { Triangle } from '@components/common/Triangle';
 
 interface Props {
-  prediction: Model.Prediction &
-    Omit<Model.StockFluctuation, 'info_id' | 'created_at'> & {
-      participant_count: number;
-      prediction_value: string | null;
-    };
+  prediction: Model.PredictionDetail & Model.StockFluctuation;
   endDate: number;
 }
 

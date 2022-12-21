@@ -4,6 +4,7 @@ import pxToRem from '@utils/pxToRem';
 
 interface Props extends CustomCSS {
   all?: boolean;
+  detail?: boolean;
   icon?: SVGIcon;
   category?: string;
   predictionValue: string | null;
@@ -15,6 +16,7 @@ const Wrapper = styled.li<
   CustomCSS & { hasPrediction: boolean; isOverdue: boolean }
 >`
   overflow: hidden;
+  list-style-type: none;
   margin-bottom: ${pxToRem(40)};
   border-radius: ${pxToRem(10)};
   background-color: ${({ theme }) => theme.color.WHITE};
@@ -87,6 +89,7 @@ const Header = styled.header`
 function PredictWrapper({
   css,
   all,
+  detail,
   icon: Icon,
   category,
   predictionValue,
@@ -95,9 +98,10 @@ function PredictWrapper({
 }: Props) {
   return (
     <Wrapper
+      as={detail ? 'div' : 'li'}
       css={css}
       hasPrediction={!!predictionValue}
-      isOverdue={Date.now() > endDate}
+      isOverdue={!detail && Date.now() > endDate}
     >
       {all && (
         <Header>
