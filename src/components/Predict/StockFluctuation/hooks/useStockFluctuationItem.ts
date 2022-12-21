@@ -1,6 +1,7 @@
 import useCreateUserPrediction from '@hooks/mutations/useCreateUserPrediction';
 import useUserInfo from '@hooks/queries/useUserInfo';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 interface Props {
   predictionId: number;
@@ -16,6 +17,8 @@ function useStockFluctuationItem({
   const [inputValue, setInputValue] = useState(predictionValue ?? '');
   const { data } = useUserInfo(false);
   const { mutateAsync } = useCreateUserPrediction(category);
+  const { pathname } = useLocation();
+  const isDetail = pathname.split('/')[2] === 'detail';
 
   useEffect(() => {
     if (predictionValue) {
@@ -33,7 +36,13 @@ function useStockFluctuationItem({
     });
   };
 
-  return { coin: data?.user.coin, inputValue, handlePredict, handleSubmit };
+  return {
+    coin: data?.user.coin,
+    inputValue,
+    isDetail,
+    handlePredict,
+    handleSubmit
+  };
 }
 
 export default useStockFluctuationItem;

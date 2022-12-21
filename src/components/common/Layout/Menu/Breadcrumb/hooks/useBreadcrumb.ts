@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { isGroup, isButton } from '@components/common/NavBar/types/navBar';
 import { NAV_BAR_LIST } from '@constants/navBar';
+import usePredictionDetail from '@hooks/queries/usePredictionDetail';
 
 const getBreadcrumbs = (param: string) => {
   let breadcrumbs: (string | undefined)[] = [];
@@ -26,9 +27,14 @@ const getBreadcrumbs = (param: string) => {
 
 function useBreadcrumb() {
   const { pathname } = useLocation();
-  const param = pathname.split('/')[2];
+  const [, , param = '', id = 0] = pathname.split('/');
+  const { data } = usePredictionDetail(Number(id), param === 'detail');
+  const category = data?.prediction?.prediction_category
+    .split('_')
+    .slice(1)
+    .join('_');
 
-  return getBreadcrumbs(param ?? '');
+  return getBreadcrumbs(category ?? param);
 }
 
 export default useBreadcrumb;

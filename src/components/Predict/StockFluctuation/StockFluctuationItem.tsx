@@ -4,11 +4,7 @@ import PredictForm from './PredictForm';
 import PredictInfo from './PredictInfo';
 
 interface Props {
-  prediction: Model.Prediction &
-    Omit<Model.StockFluctuation, 'info_id' | 'created_at'> & {
-      participant_count: number;
-      prediction_value: string;
-    };
+  prediction: Model.PredictionDetail;
   endDate: number;
 }
 
@@ -22,10 +18,13 @@ const Container = styled.div`
 `;
 
 function StockFluctuationItem({ prediction, endDate }: Props) {
+  const typedPrediction = prediction as Model.PredictionDetail &
+    Model.StockFluctuation;
+
   return (
     <Container>
-      <PredictInfo prediction={prediction} endDate={endDate} />
-      <PredictForm prediction={prediction} endDate={endDate} />
+      <PredictInfo prediction={typedPrediction} endDate={endDate} />
+      <PredictForm prediction={typedPrediction} endDate={endDate} />
     </Container>
   );
 }

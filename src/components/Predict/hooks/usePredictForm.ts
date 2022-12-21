@@ -2,10 +2,7 @@ import dateFormatter from '@utils/dateFormatter';
 import COIN_REQUIREMENTS from '../constants/requirements';
 
 interface Props {
-  prediction: Model.Prediction & {
-    last_date: string;
-    prediction_value: string | null;
-  };
+  prediction: Model.PredictionDetail & Model.Info;
   endDate: number;
   coin: number | undefined;
   inputValue: string;

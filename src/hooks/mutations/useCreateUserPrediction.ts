@@ -11,6 +11,7 @@ function useCreateUserPrediction(category?: string) {
       queryClient.invalidateQueries(['prediction', { category: 'all' }]);
       queryClient.invalidateQueries(['predictionCount']);
       queryClient.invalidateQueries(['predictionRecord']);
+      queryClient.invalidateQueries(['predictionDetail']);
       queryClient.invalidateQueries(['user']);
     }
   });

@@ -2,8 +2,8 @@ const DAYS = ['일', '월', '화', '수', '목', '금', '토'];
 const DAY_TIME = 24 * 60 * 60 * 1000;
 
 const dateFormatter = {
-  getDateFromMonthToDay(dateString: Date | string) {
-    const dateObj = new Date(dateString);
+  getDateFromMonthToDay(inputDate: Date | string) {
+    const dateObj = new Date(inputDate);
     const month = dateObj.getMonth() + 1;
     const date = dateObj.getDate();
     const day = dateObj.getDay();
@@ -11,8 +11,8 @@ const dateFormatter = {
     return `${month}월 ${date}일 (${DAYS[day]})`;
   },
 
-  getDateFromMonthToMinute(dateString: Date | string) {
-    const dateObj = new Date(dateString);
+  getDateFromMonthToMinute(inputDate: Date | string) {
+    const dateObj = new Date(inputDate);
     const month = dateObj.getMonth() + 1;
     const date = dateObj.getDate();
     const day = dateObj.getDay();
@@ -30,6 +30,11 @@ const dateFormatter = {
     return (
       Math.ceil((curDateObj.getTime() - prevDateObj.getTime()) / DAY_TIME) - 1
     );
+  },
+
+  getEndDate(inputDate: Date | string) {
+    const dateObj = new Date(inputDate);
+    return dateObj.getTime() + DAY_TIME;
   }
 };
 
