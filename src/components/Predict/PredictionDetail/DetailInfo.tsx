@@ -1,22 +1,19 @@
+import React from 'react';
 import PredictWrapper from '../PredictWrapper';
 import StockFluctuationItem from '../StockFluctuation/StockFluctuationItem';
-import usePredictionInfo from './hooks/usePredictionInfo';
 
-function DetailInfo() {
-  const info = usePredictionInfo();
+interface Props {
+  prediction: Model.PredictionDetail;
+  endDate: number;
+}
 
-  if (!info) {
-    return null;
-  }
-
-  const { category, prediction, endDate } = info;
-
+function DetailInfo({ prediction, endDate }: Props) {
   let Component: React.ComponentType<{
     prediction: Model.PredictionDetail;
     endDate: number;
   }>;
 
-  switch (category) {
+  switch (prediction.prediction_category) {
     case 'info_stock_fluctuation':
       Component = StockFluctuationItem;
       break;
@@ -35,4 +32,4 @@ function DetailInfo() {
   );
 }
 
-export default DetailInfo;
+export default React.memo(DetailInfo);

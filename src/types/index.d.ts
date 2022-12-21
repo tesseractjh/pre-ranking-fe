@@ -3,6 +3,7 @@ import {
   FlattenInterpolation,
   ThemeProps
 } from 'styled-components';
+import color from '@styles/theme/color';
 
 declare global {
   type CustomCSS = {
@@ -27,4 +28,10 @@ declare global {
       title?: string | undefined;
     }
   >;
+
+  type ChartData = {
+    label: string;
+    value: number;
+    color: keyof typeof color;
+  };
 }

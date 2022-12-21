@@ -98,6 +98,7 @@ function PredictWrapper({
 }: Props) {
   return (
     <Wrapper
+      as={detail ? 'div' : 'li'}
       css={css}
       hasPrediction={!!predictionValue}
       isOverdue={!detail && Date.now() > endDate}

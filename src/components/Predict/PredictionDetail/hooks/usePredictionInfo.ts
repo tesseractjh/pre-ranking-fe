@@ -11,11 +11,9 @@ function usePredictionInfo() {
   }
 
   const { prediction } = data;
-  const category = prediction.prediction_category;
   const endDate = dateFormatter.getEndDate(prediction.prediction_created_at);
 
   return {
-    category,
     prediction,
     endDate
   };

@@ -50,10 +50,12 @@ declare namespace Model {
     prediction_created_at: string;
     participant_count: number;
     prediction_value: string | null;
-    user_prediction_data: {
-      prediction_value: string;
-      count: number;
-    }[];
+    user_prediction_data:
+      | {
+          prediction_value: string;
+          count: number;
+        }[]
+      | null;
   }
 
   interface Info {
