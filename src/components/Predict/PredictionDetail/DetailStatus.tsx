@@ -11,7 +11,7 @@ function DetailStatus({ prediction }: Props) {
   const data = useDetailStatuss(prediction);
 
   return data.length ? (
-    <DetailLayout icon={ChartIcon} title="유저 예측 결과">
+    <DetailLayout icon={ChartIcon} title="유저 예측">
       <HorizontalBarChart data={data} />
     </DetailLayout>
   ) : null;
