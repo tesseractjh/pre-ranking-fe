@@ -14,7 +14,7 @@ declare namespace Model {
     coin: number;
   }
 
-  interface Rank {
+  interface UserRank {
     user_id: number;
     score: number;
     ranking: number;
@@ -32,6 +32,12 @@ declare namespace Model {
   interface PredictionCount {
     total_count: number;
     right_count: number;
+  }
+
+  interface Rank extends PredictionCount {
+    user_name: string;
+    score: number;
+    ranking: number;
   }
 
   interface PredictionRecord extends PredictionBase {

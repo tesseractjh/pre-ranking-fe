@@ -46,7 +46,7 @@ function TableRow({ columns, tableData: { id, datas, detail } }: Props) {
       <Row
         hasDetail={!!detail}
         isDetailOpen={isDetailOpen}
-        onClick={handleClick}
+        onClick={detail ? handleClick : undefined}
       >
         {datas.map(({ value, css }, index) => (
           <Cell key={`${columns[index].column}-${id}`} css={css}>

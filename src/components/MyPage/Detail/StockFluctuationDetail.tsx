@@ -33,15 +33,19 @@ const Flex = styled.span`
 
   ${({ theme }) =>
     theme.media.tablet(`
-      flex-wrap: wrap;
-      gap: ${pxToRem(10)}
+      ${theme.mixin.inlineFlexColumn('flex-start', 'stretch', pxToRem(10))}
   `)}
 `;
 
-const Prev = styled.span`
+const Prev = styled.span``;
+
+const LineBreak = styled.span`
+  ${({ theme }) => theme.mixin.inlineFlex('center', 'center', pxToRem(20))}
+
   ${({ theme }) =>
     theme.media.tablet(`
-      flex-basis: 100%;
+      justify-content: flex-end;
+      gap: ${pxToRem(10)};
   `)}
 `;
 
@@ -74,14 +78,17 @@ function StockFluctuationDetail({ record, table }: Props) {
         <Bold>{stockName} </Bold>
         종가 <Bold>{lastPrice.toLocaleString('ko-kr')}</Bold>원
       </Prev>
-      →
-      <span>
-        {dateFormatter.getDateFromMonthToDay(resultDate)} 종가{' '}
-        <Bold $color={resultPrice > lastPrice ? 'RED_600' : 'BLUE_600'}>
-          {resultPrice.toLocaleString('ko-kr')}
-        </Bold>
-        원
-      </span>
+
+      <LineBreak>
+        →
+        <span>
+          {dateFormatter.getDateFromMonthToDay(resultDate)} 종가{' '}
+          <Bold $color={resultPrice > lastPrice ? 'RED_600' : 'BLUE_600'}>
+            {resultPrice.toLocaleString('ko-kr')}
+          </Bold>
+          원
+        </span>
+      </LineBreak>
     </Flex>
   );
 

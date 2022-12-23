@@ -12,6 +12,7 @@ function useCreateUserPrediction(category?: string) {
       queryClient.invalidateQueries(['predictionCount']);
       queryClient.invalidateQueries(['predictionRecord']);
       queryClient.invalidateQueries(['predictionDetail']);
+      queryClient.invalidateQueries(['predictionRank']);
       queryClient.invalidateQueries(['user']);
     }
   });
