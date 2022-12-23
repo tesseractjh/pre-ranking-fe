@@ -1,6 +1,6 @@
 import CHART_DATA from '@components/Predict/constants/chart';
 
-function useDetailResult(prediction: Model.PredictionDetail) {
+function useDetailStatus(prediction: Model.PredictionDetail) {
   const { prediction_category: category, user_prediction_data: data } =
     prediction;
 
@@ -13,4 +13,4 @@ function useDetailResult(prediction: Model.PredictionDetail) {
   );
 }
 
-export default useDetailResult;
+export default useDetailStatus;

@@ -1,41 +1,22 @@
-import styled from 'styled-components';
-import pxToRem from '@utils/pxToRem';
-import HorizontalBarChart from '@components/common/Chart/HorizontalBarChart';
-import { ReactComponent as ChartIcon } from '@assets/icons/chart.svg';
-import useDetailResult from './hooks/useDetailResult';
+import { ReactComponent as ScoreIcon } from '@assets/icons/score.svg';
+import getTypedModelAndDetail from '@components/MyPage/utils/getTypedModelAndDetail';
+import DetailLayout from './DetailLayout';
 
 interface Props {
   prediction: Model.PredictionDetail;
 }
 
-const Title = styled.div`
-  ${({ theme }) => theme.mixin.flex('flex-start')}
-  padding-bottom: ${pxToRem(10)};
-  margin: ${pxToRem(30, 0, 20)};
-  border-bottom: 1px solid ${({ theme }) => theme.color.GRAY_200};
-  font-weight: 700;
-  font-size: ${pxToRem(20)};
-
-  & > svg {
-    width: ${pxToRem(16)};
-    height: ${pxToRem(16)};
-    margin-right: ${pxToRem(10)};
-    fill: ${({ theme }) => theme.color.PURPLE_700};
-  }
-`;
-
 function DetailResult({ prediction }: Props) {
-  const data = useDetailResult(prediction);
+  const { typed, Detail } = getTypedModelAndDetail(
+    prediction,
+    prediction.prediction_category.split('_').slice(1).join('_')
+  );
 
-  return data.length ? (
-    <>
-      <Title>
-        <ChartIcon />
-        예측 결과
-      </Title>
-      <HorizontalBarChart data={data} />
-    </>
-  ) : null;
+  return (
+    <DetailLayout icon={ScoreIcon} title="결과">
+      {Detail && <Detail record={typed} />}
+    </DetailLayout>
+  );
 }
 
 export default DetailResult;

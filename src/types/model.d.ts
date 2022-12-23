@@ -21,28 +21,34 @@ declare namespace Model {
     total_count: number;
   }
 
+  interface Info {
+    last_date: string;
+  }
+
+  interface PredictionBase {
+    result_date: string;
+  }
+
   interface PredictionCount {
     total_count: number;
     right_count: number;
   }
 
-  interface PredictionRecord {
+  interface PredictionRecord extends PredictionBase {
     user_id: number;
     prediction_id: number;
     category: string;
     prediction_value: string;
     prediction_result: number | null;
-    result_date: string;
     score: number | null;
     coin: number | null;
   }
 
-  interface Prediction {
+  interface Prediction extends PredictionBase {
     prediction_id: number;
     prediction_category: string;
     prediction_info_id: number;
     result_value: string;
-    result_date: string;
     created_at: string;
   }
 
@@ -56,10 +62,6 @@ declare namespace Model {
           count: number;
         }[]
       | null;
-  }
-
-  interface Info {
-    last_date: string;
   }
 
   interface StockFluctuation extends Info {
