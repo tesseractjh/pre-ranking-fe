@@ -5,7 +5,7 @@ export type TableColumn = {
 };
 
 export type TableData = {
-  id: number;
+  id: string | number;
   datas: ({
     value: React.ReactNode;
   } & CustomCSS)[];

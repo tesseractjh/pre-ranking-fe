@@ -27,8 +27,11 @@ const getBreadcrumbs = (param: string) => {
 
 function useBreadcrumb() {
   const { pathname } = useLocation();
-  const [, , param = '', id = 0] = pathname.split('/');
-  const { data } = usePredictionDetail(Number(id), param === 'detail');
+  const [, page, param = '', id = 0] = pathname.split('/');
+  const { data } = usePredictionDetail(
+    Number(id),
+    page === 'predict' && param === 'detail'
+  );
   const category = data?.prediction?.prediction_category
     .split('_')
     .slice(1)

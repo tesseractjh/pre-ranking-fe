@@ -14,11 +14,19 @@ declare namespace Model {
     coin: number;
   }
 
-  interface Rank {
+  interface UserRank {
     user_id: number;
     score: number;
     ranking: number;
     total_count: number;
+  }
+
+  interface Info {
+    last_date: string;
+  }
+
+  interface PredictionBase {
+    result_date: string;
   }
 
   interface PredictionCount {
@@ -26,23 +34,27 @@ declare namespace Model {
     right_count: number;
   }
 
-  interface PredictionRecord {
+  interface Rank extends PredictionCount {
+    user_name: string;
+    score: number;
+    ranking: number;
+  }
+
+  interface PredictionRecord extends PredictionBase {
     user_id: number;
     prediction_id: number;
     category: string;
     prediction_value: string;
     prediction_result: number | null;
-    result_date: string;
     score: number | null;
     coin: number | null;
   }
 
-  interface Prediction {
+  interface Prediction extends PredictionBase {
     prediction_id: number;
     prediction_category: string;
     prediction_info_id: number;
     result_value: string;
-    result_date: string;
     created_at: string;
   }
 
@@ -56,10 +68,6 @@ declare namespace Model {
           count: number;
         }[]
       | null;
-  }
-
-  interface Info {
-    last_date: string;
   }
 
   interface StockFluctuation extends Info {
