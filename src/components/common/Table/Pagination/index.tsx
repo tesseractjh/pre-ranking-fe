@@ -18,11 +18,8 @@ const Container = styled.div`
 
   ${({ theme }) =>
     theme.media.tablet(`
-      max-width: ${pxToRem(400)};
       padding: ${pxToRem(10, 0)};
       margin: ${pxToRem(20, 'auto', 0)};
-      justify-content: space-between;
-      gap: 0;
       margin-top: ${pxToRem(10)};
   `)}
 `;
