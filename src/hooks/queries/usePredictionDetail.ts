@@ -12,7 +12,7 @@ function usePredictionDetail(id: number, enabled = true) {
       staleTime: 15 * 1000,
       cacheTime: 60 * 1000,
       onError: () => {
-        console.log('예측 상세 데이터 요청 실패!');
+        console.error('예측 상세 데이터 요청 실패!');
       }
     }
   );
