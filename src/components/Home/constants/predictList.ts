@@ -13,7 +13,7 @@ const PREDICT_LIST: { icon: SVGIcon; title: string; predicts: Predict[] }[] = [
     predicts: [
       {
         icon: StockIcon,
-        content: '주가 등락',
+        content: '주식 종가 등락',
         link: 'stock_fluctuation',
         status: 'active'
       },

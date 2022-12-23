@@ -22,11 +22,11 @@ export const NAV_BAR_LIST: NavBarCategory[] = [
         content: '주식',
         children: [
           {
-            content: '주가 등락',
+            content: '종가 등락',
             link: 'stock_fluctuation'
           },
           {
-            content: '주식 종가',
+            content: '종가',
             link: 'stock_price'
           }
         ]
