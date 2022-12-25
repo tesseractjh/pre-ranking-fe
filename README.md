@@ -11,6 +11,7 @@ https://preranking.shop/
 ## 🏷 프로젝트 개요
 - 개발 기간: 2022.11.22 ~ 진행중
 - 개발 인원: 1명 (개인 프로젝트)
+- [프리랭킹 백엔드 Repository](https://github.com/tesseractjh/pre-ranking-be)
 
 ## 🛠 기술 스택
 ### 프론트엔드
@@ -40,7 +41,7 @@ https://preranking.shop/
 <img src="https://img.shields.io/badge/Github Actions-181717?style=flat-square&logo=Github&logoColor=white"/>
 </div>
 
-## 기능
+## ⚙️ 기능
 ### 로그인
 - OAuth로 카카오, Google 계정으로 로그인 가능
 - 회원가입시 닉네임, 이메일을 입력하여야 하며, Google 계정의 경우 해당 Google 계정 이메일이 기본값으로 입력됨
