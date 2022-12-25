@@ -41,7 +41,7 @@ https://preranking.shop/
 <img src="https://img.shields.io/badge/Github Actions-181717?style=flat-square&logo=Github&logoColor=white"/>
 </div>
 
-## 아키텍처
+## 🏗️ 아키텍처
 ![aws 아키텍처](https://user-images.githubusercontent.com/67459853/209478134-37f5b49f-9dc0-456a-8e37-593e7a62c34e.png)
 
 ## ⚙️ 기능
