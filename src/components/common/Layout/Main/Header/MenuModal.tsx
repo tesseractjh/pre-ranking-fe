@@ -4,6 +4,7 @@ import Modal from '@components/common/Modal';
 import NavBar from '@components/common/NavBar';
 import pxToRem from '@utils/pxToRem';
 import { NAV_BAR_LIST } from '@constants/navBar';
+import useMenuModal from '../hooks/useMenuModal';
 
 const ModalStyle = css`
   ${({ theme }) =>
@@ -28,6 +29,9 @@ const NavBarStyle = css`
 function MenuModal(
   props: Omit<React.ComponentProps<typeof Modal>, 'children'>
 ) {
+  const { handleClick } = props;
+  useMenuModal(handleClick);
+
   return (
     <Modal {...props} css={ModalStyle}>
       <NavBar css={NavBarStyle} content={NAV_BAR_LIST} />

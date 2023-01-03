@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 interface Props extends CustomCSS {
   isOpen: boolean;
-  handleClick: React.MouseEventHandler;
+  handleClick: () => void;
   children: React.ReactNode;
 }
 
