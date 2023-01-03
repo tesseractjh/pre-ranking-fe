@@ -10,8 +10,8 @@ import {
 } from '@constants/style';
 import HeaderMenu from './HeaderMenu';
 import useHeader from '../hooks/useHeader';
-import MenuButton from './MenuButton';
 import HeaderNav from './HeaderNav';
+import NavMenu from './NavMenu';
 
 const Container = styled.header<{ isScrolled: boolean }>`
   position: fixed;
@@ -59,7 +59,7 @@ function Header() {
     <Container isScrolled={isScrolled}>
       <InnerContainer>
         <Flex>
-          <MenuButton />
+          <NavMenu />
           <LogoWrapper>
             <Link to="/">
               <Logo />

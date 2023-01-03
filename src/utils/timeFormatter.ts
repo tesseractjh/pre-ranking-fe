@@ -30,7 +30,7 @@ const timeFormatter = {
 
     if (Math.abs(diff) < 30 * 24 * 60 * 60 * 1000) {
       return this.formatter.format(
-        Math.floor(diff / (24 * 60 * 60 * 1000)),
+        Math.floor(diff / (7 * 24 * 60 * 60 * 1000)),
         'weeks'
       );
     }

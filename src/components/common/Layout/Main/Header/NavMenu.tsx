@@ -23,7 +23,7 @@ const Container = styled.button`
   `)}
 `;
 
-function MenuButton() {
+function NavMenu() {
   const { isOpen, handleClick, handleClose } = useMenu();
 
   return (
@@ -36,4 +36,4 @@ function MenuButton() {
   );
 }
 
-export default MenuButton;
+export default NavMenu;
