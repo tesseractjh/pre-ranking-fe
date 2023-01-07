@@ -6,7 +6,7 @@ interface Props {
   endDate: number;
   coin: number | undefined;
   inputValue: string;
-  category: keyof typeof COIN_REQUIREMENTS;
+  category: string;
 }
 
 function usePredictionForm({

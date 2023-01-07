@@ -1,5 +1,5 @@
-const COIN_REQUIREMENTS = {
+const COIN_REQUIREMENTS: Record<string, number> = {
   stock_fluctuation: 10
-} as const;
+};
 
 export default COIN_REQUIREMENTS;

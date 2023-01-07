@@ -150,11 +150,13 @@ const SubmitButtonStyle = css`
 `;
 
 function StockPredictionForm({ prediction, endDate, children }: Props) {
+  const category = prediction.prediction_category.split('_').slice(1).join('_');
+
   const { coin, inputValue, isDetail, handlePredict, handleSubmit } =
     usePredictionItem({
       predictionId: prediction.prediction_id,
       predictionValue: prediction.prediction_value,
-      category: 'stock_fluctuation'
+      category
     });
 
   const {
@@ -171,7 +173,7 @@ function StockPredictionForm({ prediction, endDate, children }: Props) {
     endDate,
     coin,
     inputValue,
-    category: 'stock_fluctuation'
+    category
   });
 
   const contextValue = useMemo(
