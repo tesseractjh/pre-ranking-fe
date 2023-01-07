@@ -1,5 +1,5 @@
 import Button, { Medium } from '@components/common/Button';
-import Input from '@components/common/Form/Input';
+import FormInput from '@components/common/Form/Input/FormInput';
 import pxToRem from '@utils/pxToRem';
 import styled from 'styled-components';
 import useSignup from './hooks/useHandleSignup';
@@ -18,7 +18,7 @@ function Signup() {
   const { onSubmit, userNameRegister, emailRegister, errors } = useSignup();
   return (
     <Container onSubmit={onSubmit}>
-      <Input
+      <FormInput
         id="signup-input-username"
         label="닉네임"
         placeholder="아이디를 입력하세요(한글, 영문, 숫자로 2 ~ 16자)"
@@ -26,7 +26,7 @@ function Signup() {
         register={userNameRegister}
         errorMessage={errors.userName?.message}
       />
-      <Input
+      <FormInput
         id="signup-input-email"
         label="이메일"
         placeholder="이메일을 입력하세요"
