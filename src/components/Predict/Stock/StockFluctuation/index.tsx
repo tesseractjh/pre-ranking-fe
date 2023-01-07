@@ -1,7 +1,7 @@
 import withErrorBoundary from '@components/hoc/withErrorBoundary';
-import PredictFilter from '../Filter';
-import Checkbox from '../Filter/Checkbox';
-import PredictComment from '../PredictComment';
+import PredictFilter from '../../Filter';
+import Checkbox from '../../Filter/Checkbox';
+import PredictComment from '../../PredictComment';
 import StockFluctuationList from './StockFluctuationList';
 
 function StockFluctuation() {

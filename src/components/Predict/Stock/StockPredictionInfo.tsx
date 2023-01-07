@@ -111,7 +111,7 @@ const PredictDetail = styled.div`
   `)}
 `;
 
-function PredictInfo({ prediction, endDate }: Props) {
+function StockPredictionInfo({ prediction, endDate }: Props) {
   const {
     last_date: prevDate,
     stock_name: stockName,
@@ -156,4 +156,4 @@ function PredictInfo({ prediction, endDate }: Props) {
   );
 }
 
-export default React.memo(PredictInfo);
+export default React.memo(StockPredictionInfo);

@@ -1,6 +1,6 @@
 import React from 'react';
 import PredictWrapper from '../PredictWrapper';
-import StockFluctuationItem from '../StockFluctuation/StockFluctuationItem';
+import StockFluctuationItem from '../Stock/StockFluctuation/StockFluctuationItem';
 
 interface Props {
   prediction: Model.PredictionDetail;

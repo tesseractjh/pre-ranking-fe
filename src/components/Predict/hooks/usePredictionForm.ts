@@ -9,7 +9,7 @@ interface Props {
   category: keyof typeof COIN_REQUIREMENTS;
 }
 
-function usePredictForm({
+function usePredictionForm({
   prediction,
   endDate,
   coin,
@@ -45,4 +45,4 @@ function usePredictForm({
   };
 }
 
-export default usePredictForm;
+export default usePredictionForm;

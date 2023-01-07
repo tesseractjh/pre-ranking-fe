@@ -1,8 +1,8 @@
 import dateFormatter from '@utils/dateFormatter';
-import PredictContainer from '../PredictContainer';
+import PredictContainer from '../../PredictContainer';
 import StockFluctuationItem from './StockFluctuationItem';
-import PredictWrapper from '../PredictWrapper';
-import usePredictionList from '../hooks/usePredictionList';
+import PredictWrapper from '../../PredictWrapper';
+import usePredictionList from '../../hooks/usePredictionList';
 
 function StockFluctuationList() {
   const { data, handleIntersect } = usePredictionList('stock_fluctuation');

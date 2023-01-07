@@ -1,7 +1,7 @@
-import useCreateUserPrediction from '@hooks/mutations/useCreateUserPrediction';
-import useUserInfo from '@hooks/queries/useUserInfo';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import useCreateUserPrediction from '@hooks/mutations/useCreateUserPrediction';
+import useUserInfo from '@hooks/queries/useUserInfo';
 
 interface Props {
   predictionId: number;
@@ -9,11 +9,7 @@ interface Props {
   category?: string;
 }
 
-function useStockFluctuationItem({
-  predictionId,
-  predictionValue,
-  category
-}: Props) {
+function usePredictionItem({ predictionId, predictionValue, category }: Props) {
   const [inputValue, setInputValue] = useState(predictionValue ?? '');
   const { data } = useUserInfo(false);
   const { mutateAsync } = useCreateUserPrediction(category);
@@ -26,7 +22,7 @@ function useStockFluctuationItem({
     }
   }, [predictionValue]);
 
-  const handlePredict = (value: string) => () => {
+  const handlePredict = (value: string) => {
     setInputValue(value);
   };
 
@@ -45,4 +41,4 @@ function useStockFluctuationItem({
   };
 }
 
-export default useStockFluctuationItem;
+export default usePredictionItem;

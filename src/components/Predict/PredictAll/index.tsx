@@ -6,7 +6,7 @@ import Checkbox from '../Filter/Checkbox';
 import usePredictionList from '../hooks/usePredictionList';
 import PredictContainer from '../PredictContainer';
 import PredictWrapper from '../PredictWrapper';
-import StockFluctuationItem from '../StockFluctuation/StockFluctuationItem';
+import StockFluctuationItem from '../Stock/StockFluctuation/StockFluctuationItem';
 
 function PredictAll() {
   const { data, handleIntersect } = usePredictionList('all');
