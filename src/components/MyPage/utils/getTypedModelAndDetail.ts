@@ -1,4 +1,4 @@
-import StockFluctuationDetail from '../Detail/StockFluctuationDetail';
+import StockDetail from '../Detail/StockDetail';
 
 const getTypedModelAndDetail = <T extends Model.PredictionBase>(
   model: T,
@@ -8,7 +8,12 @@ const getTypedModelAndDetail = <T extends Model.PredictionBase>(
     case 'stock_fluctuation':
       return {
         typed: model as T & Model.StockFluctuation,
-        Detail: StockFluctuationDetail
+        Detail: StockDetail
+      };
+    case 'stock_price':
+      return {
+        typed: model as T & Model.StockPrice,
+        Detail: StockDetail
       };
     default:
       return { typed: model };

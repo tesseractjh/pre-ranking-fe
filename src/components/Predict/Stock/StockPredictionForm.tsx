@@ -177,7 +177,7 @@ function StockPredictionForm({ prediction, endDate, children }: Props) {
   });
 
   const contextValue = useMemo(
-    () => ({ handlePredict, inputValue, inputDisabled }),
+    () => ({ handlePredict, inputValue, isOverdue, inputDisabled }),
     [inputValue, inputDisabled]
   );
 
