@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import InnerContainer from '@components/common/InnerContainer';
 import pxToRem from '@utils/pxToRem';
+import PREDICTION_LIST from '@constants/predictionList';
 import HomeCarousel from './HomeCarousel';
-import PREDICT_LIST from './constants/predictList';
 import PredictNavigation from './PredictNavigation';
 
 const CarouselWrapper = styled.section`
@@ -28,7 +28,7 @@ function Home() {
       <section>
         <InnerContainer>
           <ContentContainer>
-            {PREDICT_LIST.map((props) => (
+            {PREDICTION_LIST.map((props) => (
               <PredictNavigation key={props.title} {...props} />
             ))}
           </ContentContainer>

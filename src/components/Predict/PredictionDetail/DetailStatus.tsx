@@ -1,6 +1,6 @@
 import HorizontalBarChart from '@components/common/Chart/HorizontalBarChart';
 import { ReactComponent as ChartIcon } from '@assets/icons/chart.svg';
-import useDetailStatuss from './hooks/useDetailStatus';
+import useDetailStatus from './hooks/useDetailStatus';
 import DetailLayout from './DetailLayout';
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 }
 
 function DetailStatus({ prediction }: Props) {
-  const data = useDetailStatuss(prediction);
+  const data = useDetailStatus(prediction);
 
   return data.length ? (
     <DetailLayout icon={ChartIcon} title="유저 예측">

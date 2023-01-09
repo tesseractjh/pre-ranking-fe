@@ -3,6 +3,7 @@ import { css } from 'styled-components';
 import pxToRem from '@utils/pxToRem';
 import { ReactComponent as ScoreIcon } from '@assets/icons/score.svg';
 import { ReactComponent as CoinIcon } from '@assets/icons/coin.svg';
+import { PREDICTION_CATEGORIES } from '@constants/predictionList';
 import getResult from './getResult';
 import getTypedModelAndDetail from './getTypedModelAndDetail';
 
@@ -44,7 +45,13 @@ const getRewardStyle = (score: number | null, coin: number | null) => css`
 const normalizeData = (records: Model.PredictionRecord[]) =>
   records.map((record) => {
     const { typed, Detail } = getTypedModelAndDetail(record, record.category);
-    const { prediction_id: id, prediction_result: result, coin, score } = typed;
+    const {
+      prediction_id: id,
+      prediction_result: result,
+      coin,
+      score,
+      category
+    } = typed;
 
     return {
       id,
@@ -53,7 +60,14 @@ const normalizeData = (records: Model.PredictionRecord[]) =>
           value: <Link to={`/predict/detail/${id}`}>{id}</Link>
         },
         {
-          value: <Link to={`/predict/detail/${id}`}>주식 종가 등락</Link>
+          value: (
+            <Link to={`/predict/detail/${id}`}>
+              {
+                PREDICTION_CATEGORIES.find(({ link }) => link === category)
+                  ?.content
+              }
+            </Link>
+          )
         },
         { value: getResult(result) },
         {
