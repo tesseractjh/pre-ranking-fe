@@ -1,4 +1,6 @@
 import withErrorBoundary from '@components/hoc/withErrorBoundary';
+import { ReactComponent as CoinIcon } from '@assets/icons/coin.svg';
+import { ReactComponent as ScoreIcon } from '@assets/icons/score.svg';
 import PredictFilter from '../../Filter';
 import Checkbox from '../../Filter/Checkbox';
 import PredictComment from '../../PredictComment';
@@ -17,6 +19,10 @@ function StockFluctuation() {
         대상으로 시작됩니다.
         <br />- 현재 종가는 실시간 가격이 아니며, 예측이 시작된 시각에
         한국거래소에서 제공하는 API의 최신 종가를 나타냅니다.
+        <br />- 예측 보상: (경과 일 수) X 12
+        <CoinIcon className="svg-coin" />, +5
+        <ScoreIcon className="svg-score" /> (적중 실패시 -1
+        <ScoreIcon className="svg-score" />)
       </PredictComment>
       <PredictFilter>
         <Checkbox

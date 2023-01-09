@@ -23,9 +23,30 @@ const Container = styled.button`
     background-color: ${({ theme }) => theme.color.GRAY_100};
   }
 
+  & svg {
+    transform: translateY(${pxToRem(1)});
+    width: ${pxToRem(12)};
+    height: ${pxToRem(12)};
+    margin: ${pxToRem(0, 4)};
+
+    &.svg-coin {
+      fill: ${({ theme }) => theme.color.YELLOW_500};
+      stroke: ${({ theme }) => theme.color.BLACK};
+    }
+
+    &.svg-score {
+      fill: ${({ theme }) => theme.color.PURPLE_500};
+    }
+  }
+
   ${({ theme }) =>
     theme.media.tablet(`
       font-size: ${pxToRem(12)};
+      & svg {
+        width: ${pxToRem(10)};
+        height: ${pxToRem(10)};
+        margin: ${pxToRem(0, 2)};
+      }
   `)}
 `;
 
