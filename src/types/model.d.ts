@@ -82,4 +82,6 @@ declare namespace Model {
     fluctuation_rate: number;
     created_at: string;
   }
+
+  type StockPrice = StockFluctuation;
 }

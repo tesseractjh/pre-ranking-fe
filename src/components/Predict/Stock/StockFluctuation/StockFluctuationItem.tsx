@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import PredictForm from './PredictForm';
-import PredictInfo from './PredictInfo';
+import StockFluctuationForm from './StockFluctuationForm';
+import StockPredictionInfo from '../StockPredictionInfo';
+import StockPredictionForm from '../StockPredictionForm';
 
 interface Props {
   prediction: Model.PredictionDetail;
@@ -23,8 +24,10 @@ function StockFluctuationItem({ prediction, endDate }: Props) {
 
   return (
     <Container>
-      <PredictInfo prediction={typedPrediction} endDate={endDate} />
-      <PredictForm prediction={typedPrediction} endDate={endDate} />
+      <StockPredictionInfo prediction={typedPrediction} endDate={endDate} />
+      <StockPredictionForm prediction={typedPrediction} endDate={endDate}>
+        <StockFluctuationForm />
+      </StockPredictionForm>
     </Container>
   );
 }

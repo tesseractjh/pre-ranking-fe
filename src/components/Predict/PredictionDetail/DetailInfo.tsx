@@ -1,6 +1,7 @@
 import React from 'react';
 import PredictWrapper from '../PredictWrapper';
-import StockFluctuationItem from '../StockFluctuation/StockFluctuationItem';
+import StockFluctuationItem from '../Stock/StockFluctuation/StockFluctuationItem';
+import StockPriceItem from '../Stock/StockPrice/StockPriceItem';
 
 interface Props {
   prediction: Model.PredictionDetail;
@@ -16,6 +17,9 @@ function DetailInfo({ prediction, endDate }: Props) {
   switch (prediction.prediction_category) {
     case 'info_stock_fluctuation':
       Component = StockFluctuationItem;
+      break;
+    case 'info_stock_price':
+      Component = StockPriceItem;
       break;
     default:
       return null;

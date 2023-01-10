@@ -58,7 +58,7 @@ const Fallback = styled.p`
   font-size: ${pxToRem(16)};
 `;
 
-function StockFluctuationDetail({ record, table }: Props) {
+function StockDetail({ record, table }: Props) {
   const {
     last_date: lastDate,
     result_date: resultDate,
@@ -99,4 +99,4 @@ function StockFluctuationDetail({ record, table }: Props) {
   return <Container>{content}</Container>;
 }
 
-export default StockFluctuationDetail;
+export default StockDetail;

@@ -1,11 +1,11 @@
 import dateFormatter from '@utils/dateFormatter';
-import PredictContainer from '../PredictContainer';
-import StockFluctuationItem from './StockFluctuationItem';
-import PredictWrapper from '../PredictWrapper';
-import usePredictionList from '../hooks/usePredictionList';
+import PredictContainer from '../../PredictContainer';
+import StockPriceItem from './StockPriceItem';
+import PredictWrapper from '../../PredictWrapper';
+import usePredictionList from '../../hooks/usePredictionList';
 
-function StockFluctuationList() {
-  const { data, handleIntersect } = usePredictionList('stock_fluctuation');
+function StockPriceList() {
+  const { data, handleIntersect } = usePredictionList('stock_price');
 
   return (
     <PredictContainer data={data} onIntersect={handleIntersect}>
@@ -17,7 +17,7 @@ function StockFluctuationList() {
             predictionValue={prediction.prediction_value}
             endDate={endDate}
           >
-            <StockFluctuationItem prediction={prediction} endDate={endDate} />
+            <StockPriceItem prediction={prediction} endDate={endDate} />
           </PredictWrapper>
         );
       })}
@@ -25,4 +25,4 @@ function StockFluctuationList() {
   );
 }
 
-export default StockFluctuationList;
+export default StockPriceList;

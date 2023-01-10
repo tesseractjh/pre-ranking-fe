@@ -6,10 +6,10 @@ interface Props {
   endDate: number;
   coin: number | undefined;
   inputValue: string;
-  category: keyof typeof COIN_REQUIREMENTS;
+  category: string;
 }
 
-function usePredictForm({
+function usePredictionForm({
   prediction,
   endDate,
   coin,
@@ -45,4 +45,4 @@ function usePredictForm({
   };
 }
 
-export default usePredictForm;
+export default usePredictionForm;

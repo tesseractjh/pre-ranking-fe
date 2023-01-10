@@ -8,10 +8,10 @@ function MyPagePage() {
   return (
     <Routes>
       <Route element={<MyPageLayout />}>
-        {['all', 'stock_fluctuation'].map((path) => (
+        {['all', 'stock_fluctuation', 'stock_price'].map((path) => (
           <Route key={path} path={path} element={<MyPage />} />
         ))}
-        {['stock_price', 'lotto'].map((path) => (
+        {['lotto'].map((path) => (
           <Route key={path} path={path} element={<Preparation />} />
         ))}
         <Route path="*" element={<NotFound fullScreen={false} />} />
