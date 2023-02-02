@@ -15,7 +15,7 @@ const Sticky = styled.div`
   ${({ theme }) => theme.mixin.flex('space-between')}
   position: sticky;
   top: ${pxToRem(HEADER_HEIGHT)};
-  z-index: 10;
+  z-index: 20;
   border-bottom: 1px solid ${({ theme }) => theme.color.GRAY_300};
   margin-bottom: ${pxToRem(20)};
   background-color: ${({ theme }) => theme.color.WHITE};
